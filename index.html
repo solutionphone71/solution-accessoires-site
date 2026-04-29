@@ -624,28 +624,34 @@ nav.main {
   display: flex; align-items: center; justify-content: center;
   margin: 8px 0 14px;
   position: relative;
+  overflow: hidden;
+  border-radius: 16px;
 }
 .card .ph::before {
-  /* Skeleton placeholder pendant le chargement */
+  /* Skeleton placeholder pendant le chargement (caché dès qu'une image est loaded) */
   content: "";
   position: absolute; inset: 0;
-  border-radius: 18px;
+  border-radius: 16px;
   background: linear-gradient(120deg, #eaeaef 0%, #f5f5f7 50%, #eaeaef 100%);
   background-size: 200% 100%;
   animation: skel 1.4s ease-in-out infinite;
   z-index: 0;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
-.card .ph img, .card .ph .noimg { position: relative; z-index: 1; }
+.card .ph.has-loaded::before { opacity: 0; }
+.card .ph .noimg { position: relative; z-index: 1; }
 .card .ph img {
   max-width: 100%; max-height: 100%;
+  width: auto; height: auto;
   object-fit: contain;
+  position: relative; z-index: 1;
   filter: drop-shadow(0 16px 24px rgba(0,0,0,0.12));
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
   opacity: 0;
 }
 .card .ph img.loaded { opacity: 1; }
-.card .ph img.loaded ~ ::before, .card .ph:has(img.loaded)::before { display: none; }
-.card:has(.noimg) .ph::before { display: none; }
 .card:hover .ph img.loaded { transform: translateY(-4px) rotate(-2deg); }
 @keyframes skel {
   0% { background-position: 200% 0; }
@@ -730,7 +736,11 @@ nav.main {
   background-size: 200% 100%;
   animation: skel 1.4s ease-in-out infinite;
   z-index: 0;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
+.acc-card .img-wrap.has-loaded::before { opacity: 0; }
 .acc-card .img-wrap img {
   width: 100%; height: 100%; object-fit: cover;
   position: relative; z-index: 1;
@@ -1867,9 +1877,14 @@ function cardHtml(item){
   else if(item.grade && item.grade.charAt(0)==='A') gradeClass = 'gA';
   else if(item.grade==='B') gradeClass = 'gB';
   
-  var imgBlock = item.image_url
-    ? '<img src="' + optimizeImageUrl(item.image_url, 400) + '" alt="' + escapeHtml(item.model) + '" width="140" height="200" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\')">'
-    : '<div class="noimg">📱</div>';
+  var imgBlock, phClass;
+  if(item.image_url){
+    imgBlock = '<img src="' + optimizeImageUrl(item.image_url, 400) + '" alt="' + escapeHtml(item.model) + '" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')" onerror="this.parentElement.classList.add(\'has-loaded\');this.style.display=\'none\'">';
+    phClass = 'ph';
+  } else {
+    imgBlock = '<div class="noimg">📱</div>';
+    phClass = 'ph has-loaded';
+  }
   var colorDot = item.color_hex ? '<span class="color-dot" style="background:' + item.color_hex + '"></span>' : '';
   var battery = item.battery_pct ? ' · 🔋 ' + item.battery_pct + '%' : '';
   var isNeuf = (item.condition||'').toLowerCase() === 'neuf';
@@ -1879,7 +1894,7 @@ function cardHtml(item){
   var waMsg = encodeURIComponent('Bonjour, je suis intéressé par le ' + item.model + ' ' + (item.storage||'') + ' ' + (item.color||'') + ' à ' + item.price + '€. Est-il toujours disponible ?');
   return '<article class="card' + (item.sold ? ' sold' : '') + '">'
     + badge
-    + '<div class="ph">' + imgBlock + '</div>'
+    + '<div class="' + phClass + '">' + imgBlock + '</div>'
     + '<div class="model">' + escapeHtml(item.model) + '</div>'
     + '<div class="meta">' + escapeHtml(item.storage || '') + (item.color ? ' · ' + colorDot + escapeHtml(item.color) : '') + battery + '</div>'
     + '<div class="price">' + item.price + '<small>&nbsp;€</small></div>'
@@ -2305,7 +2320,7 @@ function renderAccessoires(){
     return '<article class="acc-card" data-product="' + pData + '" onclick="openOrderModal(this)">'
       + badge
       + '<span class="order-hint">💬 COMMANDER →</span>'
-      + '<div class="img-wrap"><img src="' + p.img + '" alt="' + escapeHtml(p.name) + '" width="280" height="280" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\')" onerror="this.onerror=null;this.src=\'' + fb + '\';this.classList.add(\'loaded\')"></div>'
+      + '<div class="img-wrap"><img src="' + p.img + '" alt="' + escapeHtml(p.name) + '" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')" onerror="this.onerror=null;this.src=\'' + fb + '\';this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')"></div>'
       + '<div class="info">'
       + '<div class="acc-name">' + escapeHtml(p.name) + '</div>'
       + '<div class="acc-brand">// ' + escapeHtml(p.brand) + '</div>'
