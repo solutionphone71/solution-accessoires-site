@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://solution-accessoires.fr/sitemap.xml
