@@ -1,16 +1,16 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Solution Accessoires â€” Smartphones reconditionnÃ©s & accessoires premium Ã  MÃ¢con</title>
-<meta name="description" content="Smartphones reconditionnÃ©s certifiÃ©s et accessoires premium au cÅ“ur de MÃ¢con. +100 smartphones en stock, garantie 12 mois, +5000 rÃ©fÃ©rences accessoires. Boutique depuis 2014.">
+<title>Solution Accessoires — Smartphones reconditionnés & accessoires premium à Mâcon</title>
+<meta name="description" content="Smartphones reconditionnés certifiés et accessoires premium au cœur de Mâcon. +100 smartphones en stock, garantie 12 mois, +5000 références accessoires. Boutique depuis 2014.">
 <meta name="theme-color" content="#ffffff">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Solution Accessoires â€” ReconditionnÃ©s & accessoires premium Ã  MÃ¢con">
-<meta property="og:description" content="Smartphones reconditionnÃ©s certifiÃ©s. +5000 accessoires sÃ©lectionnÃ©s. Garantie 12 mois. MÃ¢con (71).">
+<meta property="og:title" content="Solution Accessoires — Reconditionnés & accessoires premium à Mâcon">
+<meta property="og:description" content="Smartphones reconditionnés certifiés. +5000 accessoires sélectionnés. Garantie 12 mois. Mâcon (71).">
 <meta property="og:locale" content="fr_FR">
 
 <!-- Schema.org Store -->
@@ -19,17 +19,17 @@
   "@context": "https://schema.org",
   "@type": "Store",
   "name": "Solution Accessoires",
-  "description": "Boutique de smartphones reconditionnÃ©s et accessoires premium",
+  "description": "Boutique de smartphones reconditionnés et accessoires premium",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "21 Rue Gambetta",
-    "addressLocality": "MÃ¢con",
+    "addressLocality": "Mâcon",
     "postalCode": "71000",
     "addressCountry": "FR"
   },
   "openingHours": ["Tu-Sa 10:00-12:00", "Tu-Sa 14:00-19:00"],
   "telephone": "+33602849953",
-  "priceRange": "â‚¬â‚¬",
+  "priceRange": "€€",
   "aggregateRating": {
     "@type": "AggregateRating",
     "ratingValue": "5.0",
@@ -361,7 +361,7 @@ nav.main {
 .bp-photo-wrap img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 30%;
   display: block;
   transition: transform 8s ease;
 }
@@ -543,7 +543,7 @@ nav.main {
   color: var(--muted); font-weight: 600;
 }
 
-/* PRODUCT GRID â€” RECONDITIONNÃ‰S */
+/* PRODUCT GRID — RECONDITIONNÉS */
 .products-wrap { max-width: 1440px; margin: 0 auto; padding: 0 32px 80px; }
 .series-group { margin-bottom: 40px; }
 .series-header {
@@ -620,13 +620,13 @@ nav.main {
 .card .grade.gN { background: var(--neuf-bg); color: var(--neuf); border-color: var(--neuf-border); }
 
 .card .ph {
-  width: 100%; aspect-ratio: 1/1;
+  width: 140px; height: 190px;
   display: flex; align-items: center; justify-content: center;
   margin: 6px 0 12px;
   position: relative;
 }
 .card .ph::before {
-  /* Skeleton placeholder pendant le chargement (cachÃ© dÃ¨s que l'image est loaded) */
+  /* Skeleton placeholder pendant le chargement (caché dès que l'image est loaded) */
   content: "";
   position: absolute; inset: 0;
   border-radius: 16px;
@@ -642,7 +642,6 @@ nav.main {
 .card .ph img {
   max-width: 100%; max-height: 100%;
   object-fit: contain;
-  padding: 5%;
   filter: drop-shadow(0 16px 24px rgba(0,0,0,0.12));
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
   opacity: 0;
@@ -738,8 +737,7 @@ nav.main {
 }
 .acc-card .img-wrap.has-loaded::before { opacity: 0; }
 .acc-card .img-wrap img {
-  width: 100%; height: 100%; object-fit: contain;
-  padding: 10px;
+  width: 100%; height: 100%; object-fit: cover;
   position: relative; z-index: 1;
   transition: transform 0.4s ease, opacity 0.5s ease;
   opacity: 0;
@@ -1200,7 +1198,7 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 .reveal.in { opacity: 1; transform: none; }
 
 /* ============ GOOGLE ADS SAFE MODE ============ */
-/* Cache les Ã©lÃ©ments mentionnant "cassÃ©" / rÃ©paration pour les visiteurs Google Ads */
+/* Cache les éléments mentionnant "cassé" / réparation pour les visiteurs Google Ads */
 .gads-mode .casseurs { display: none !important; }
 .gads-mode .partner-strip { display: none !important; }
 
@@ -1242,11 +1240,6 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   .engagements { padding: 60px 20px; }
   .eng-grid { grid-template-columns: 1fr; gap: 32px; }
   .boutique { padding: 60px 20px; }
-  .bp-photo-wrap { height: auto; max-height: 420px; }
-  .bp-photo-wrap img { object-position: center top; }
-  .card .ph { aspect-ratio: 1/1; }
-  .card .ph img { padding: 5%; }
-  .acc-card .img-wrap { aspect-ratio: 1/1; }
   .partner-strip { flex-direction: column; padding: 24px; gap: 20px; text-align: center; }
   .partner-strip .text { flex-direction: column; gap: 12px; }
   .footer-cols { grid-template-columns: 1fr; gap: 32px; }
@@ -1260,20 +1253,20 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-track">
-    <span><span class="dot">â—</span> RECONDITIONNÃ‰S CERTIFIÃ‰S â€” TESTÃ‰S 30 POINTS</span>
-    <span><span class="pill">STOCK EN TEMPS RÃ‰EL</span></span>
+    <span><span class="dot">●</span> RECONDITIONNÉS CERTIFIÉS — TESTÉS 30 POINTS</span>
+    <span><span class="pill">STOCK EN TEMPS RÉEL</span></span>
     <span>GARANTIE 12 MOIS INCLUSE</span>
-    <span><span class="dot">â—</span> RETRAIT IMMÃ‰DIAT EN BOUTIQUE</span>
+    <span><span class="dot">●</span> RETRAIT IMMÉDIAT EN BOUTIQUE</span>
     <span>+100 SMARTPHONES EN STOCK PERMANENT</span>
-    <span><span class="pill">+5000 RÃ‰FÃ‰RENCES EN STOCK</span></span>
-    <span><span class="dot">â—</span> BOUTIQUE OUVERTE â€” MÃ‚CON 71</span>
-    <span><span class="dot">â—</span> RECONDITIONNÃ‰S CERTIFIÃ‰S â€” TESTÃ‰S 30 POINTS</span>
-    <span><span class="pill">STOCK EN TEMPS RÃ‰EL</span></span>
+    <span><span class="pill">+5000 RÉFÉRENCES EN STOCK</span></span>
+    <span><span class="dot">●</span> BOUTIQUE OUVERTE — MÂCON 71</span>
+    <span><span class="dot">●</span> RECONDITIONNÉS CERTIFIÉS — TESTÉS 30 POINTS</span>
+    <span><span class="pill">STOCK EN TEMPS RÉEL</span></span>
     <span>GARANTIE 12 MOIS INCLUSE</span>
-    <span><span class="dot">â—</span> RETRAIT IMMÃ‰DIAT EN BOUTIQUE</span>
+    <span><span class="dot">●</span> RETRAIT IMMÉDIAT EN BOUTIQUE</span>
     <span>+100 SMARTPHONES EN STOCK PERMANENT</span>
-    <span><span class="pill">+5000 RÃ‰FÃ‰RENCES EN STOCK</span></span>
-    <span><span class="dot">â—</span> BOUTIQUE OUVERTE â€” MÃ‚CON 71</span>
+    <span><span class="pill">+5000 RÉFÉRENCES EN STOCK</span></span>
+    <span><span class="dot">●</span> BOUTIQUE OUVERTE — MÂCON 71</span>
   </div>
 </div>
 
@@ -1282,17 +1275,17 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   <div class="nav-inner">
     <a href="#" class="logo">
       Solution<span class="red">Accessoires</span>
-      <span class="meta">// MÃ¢con 71</span>
+      <span class="meta">// Mâcon 71</span>
     </a>
     <div class="nav-links">
-      <a href="#reconditionnes" class="active">ReconditionnÃ©s</a>
+      <a href="#reconditionnes" class="active">Reconditionnés</a>
       <a href="#accessoires">Accessoires</a>
       <a href="/hydrogel.html">Hydrogel</a>
       <a href="#boutique">Boutique</a>
     </div>
     <div class="nav-actions">
       <a href="tel:+33602849953" class="btn btn-ghost">06 02 84 99 53</a>
-      <a href="https://wa.me/33783921884" target="_blank" class="cart-pill">ðŸ’¬ WhatsApp</a>
+      <a href="https://wa.me/33783921884" target="_blank" class="cart-pill">💬 WhatsApp</a>
     </div>
   </div>
 </nav>
@@ -1302,7 +1295,7 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-eyebrow">// LE PLUS GROS STOCK DE MÃ‚CON Â· MIS Ã€ JOUR EN TEMPS RÃ‰EL</div>
+    <div class="hero-eyebrow">// LE PLUS GROS STOCK DE MÂCON · MIS À JOUR EN TEMPS RÉEL</div>
     <h1 class="display">
       EN VRAI,<br>
       <span class="strike">PAS UN E-COMMERCE</span><br>
@@ -1311,11 +1304,11 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
     </h1>
     <div class="hero-grid-bottom">
       <p class="hero-lede">
-        Le plus gros stock de smartphones <strong>reconditionnÃ©s</strong> Ã  MÃ¢con.
+        Le plus gros stock de smartphones <strong>reconditionnés</strong> à Mâcon.
         iPhone, Samsung, Pixel, Xiaomi. Tu choisis, tu repars. Garantie 12 mois incluse.
       </p>
       <div class="hero-cta">
-        <a href="#reconditionnes" class="btn btn-red btn-large">Voir les reconditionnÃ©s <span>â†’</span></a>
+        <a href="#reconditionnes" class="btn btn-red btn-large">Voir les reconditionnés <span>→</span></a>
         <a href="#accessoires" class="btn btn-ghost btn-large">Accessoires</a>
       </div>
     </div>
@@ -1327,19 +1320,19 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   <div class="casseurs-inner">
     <div class="casseurs-left">
       <div class="casseurs-photo">
-        <img src="avant-apres-vignette.jpg" alt="Avant / AprÃ¨s rÃ©paration d'Ã©cran iPhone par Solution Phone Ã  MÃ¢con" loading="lazy">
-        <div class="photo-tag">AVANT / APRÃˆS</div>
+        <img src="avant-apres-vignette.jpg" alt="Avant / Après réparation d'écran iPhone par Solution Phone à Mâcon" loading="lazy">
+        <div class="photo-tag">AVANT / APRÈS</div>
       </div>
       <div class="casseurs-text">
-        <div class="casseurs-icon">âš¡</div>
+        <div class="casseurs-icon">⚡</div>
         <div class="casseurs-msg">
           <div class="small">// MESSAGE POUR LES CASSEURS</div>
-          <div class="big">Tel cassÃ© ? C'est par ici que Ã§a se passe.</div>
+          <div class="big">Tel cassé ? C'est par ici que ça se passe.</div>
         </div>
       </div>
     </div>
     <a href="https://solution-phone.fr" target="_blank" rel="noopener">
-      Solution Phone <span class="arrow">â†’</span>
+      Solution Phone <span class="arrow">→</span>
     </a>
   </div>
 </section>
@@ -1348,9 +1341,9 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 <section class="trust">
   <div class="trust-grid">
     <div class="trust-item"><div class="num">5,0<span class="red">/5</span></div><div class="lbl">20 avis Google</div></div>
-    <div class="trust-item"><div class="num">12<span class="red">Â·MOIS</span></div><div class="lbl">Garantie incluse</div></div>
-    <div class="trust-item"><div class="num">12<span class="red">Â·ANS</span></div><div class="lbl">Boutique Ã  MÃ¢con</div></div>
-    <div class="trust-item"><div class="num">+100<span class="red">Â·TELS</span></div><div class="lbl">En stock permanent</div></div>
+    <div class="trust-item"><div class="num">12<span class="red">·MOIS</span></div><div class="lbl">Garantie incluse</div></div>
+    <div class="trust-item"><div class="num">12<span class="red">·ANS</span></div><div class="lbl">Boutique à Mâcon</div></div>
+    <div class="trust-item"><div class="num">+100<span class="red">·TELS</span></div><div class="lbl">En stock permanent</div></div>
   </div>
 </section>
 
@@ -1359,42 +1352,42 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   <a href="#reconditionnes" class="dual-block recond">
     <div class="num-tag">
       <span>// SECTION 01</span>
-      <span class="badge">DÃˆS 120â‚¬</span>
+      <span class="badge">DÈS 120€</span>
     </div>
-    <h2>Recondi-<br>tionnÃ©s.<br><em>Garantis 12 mois.</em></h2>
-    <p>iPhone, Samsung, Pixel, Xiaomi. TestÃ©s 30 points, batterie certifiÃ©e, grade transparent. Stock mis Ã  jour en temps rÃ©el.</p>
-    <div class="cta-arrow">Voir le stock <span>â†’</span></div>
+    <h2>Recondi-<br>tionnés.<br><em>Garantis 12 mois.</em></h2>
+    <p>iPhone, Samsung, Pixel, Xiaomi. Testés 30 points, batterie certifiée, grade transparent. Stock mis à jour en temps réel.</p>
+    <div class="cta-arrow">Voir le stock <span>→</span></div>
   </a>
   <a href="#accessoires" class="dual-block access">
     <div class="num-tag">
       <span>// SECTION 02</span>
-      <span class="badge access-badge">+5000 RÃ‰FS</span>
+      <span class="badge access-badge">+5000 RÉFS</span>
     </div>
-    <h2>Acces-<br>soires.<br><em>SÃ©lectionnÃ©s.</em></h2>
-    <p>Coques, chargeurs, Ã©couteurs, protections. FAIRPLAY, BELKIN, COVERME, RHINOSHIELD, OCADIA. Marques Ã©prouvÃ©es.</p>
-    <div class="cta-arrow">Voir le catalogue <span>â†’</span></div>
+    <h2>Acces-<br>soires.<br><em>Sélectionnés.</em></h2>
+    <p>Coques, chargeurs, écouteurs, protections. FAIRPLAY, BELKIN, COVERME, RHINOSHIELD, OCADIA. Marques éprouvées.</p>
+    <div class="cta-arrow">Voir le catalogue <span>→</span></div>
   </a>
 </section>
 
 <!-- ============================ BOUTIQUE PHOTO ============================ -->
 <section class="boutique-photo">
   <div class="bp-tag">
-    <span>// LA BOUTIQUE Â· 21 RUE GAMBETTA Â· MÃ‚CON 71</span>
+    <span>// LA BOUTIQUE · 21 RUE GAMBETTA · MÂCON 71</span>
     <span class="right">BY SOLUTION PHONE</span>
   </div>
   <div class="bp-photo-wrap">
-    <img src="boutique-solution-accessoires.jpg" alt="Solution Accessoires - Boutique au 21 Rue Gambetta Ã  MÃ¢con : smartphones reconditionnÃ©s, neufs, et mur de coques" loading="lazy">
+    <img src="boutique-solution-accessoires.jpg" alt="Solution Accessoires - Boutique au 21 Rue Gambetta à Mâcon : smartphones reconditionnés, neufs, et mur de coques" loading="lazy">
     <div class="bp-overlay">
       <div class="bp-text">
         <div class="bp-eyebrow">// EN STOCK MAINTENANT</div>
         <h2>
           <span style="color:var(--red)">+100</span> SMARTPHONES<br>
-          RECONDITIONNÃ‰S.<br>
+          RECONDITIONNÉS.<br>
           <span style="color:var(--red)">+5000</span> COQUES.<br>
           TROUVEZ VOTRE <span class="red-bg">BONHEUR.</span>
         </h2>
         <div class="bp-cta-row">
-          <a href="#reconditionnes" class="btn btn-red">Voir les reconditionnÃ©s <span>â†’</span></a>
+          <a href="#reconditionnes" class="btn btn-red">Voir les reconditionnés <span>→</span></a>
           <a href="#accessoires" class="btn btn-ghost" style="background:rgba(255,255,255,0.08);color:var(--white);border-color:rgba(255,255,255,0.4);">Voir les accessoires</a>
         </div>
       </div>
@@ -1402,43 +1395,43 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   </div>
 </section>
 
-<!-- ============================ RECONDITIONNÃ‰S ============================ -->
+<!-- ============================ RECONDITIONNÉS ============================ -->
 <section id="reconditionnes">
   <div class="section-header">
     <div class="left">
       <div class="eyebrow">
-        <span class="num">[01]</span> ReconditionnÃ©s
+        <span class="num">[01]</span> Reconditionnés
         <span class="live-dot">Stock live</span>
       </div>
-      <h2>Une seconde vie,<br><em>plus belle</em> que la premiÃ¨re.</h2>
+      <h2>Une seconde vie,<br><em>plus belle</em> que la première.</h2>
     </div>
     <div class="right">
-      Mise Ã  jour temps rÃ©el<br>
-      <span id="stockCount">â€”</span> appareils en stock
+      Mise à jour temps réel<br>
+      <span id="stockCount">—</span> appareils en stock
     </div>
   </div>
 
-  <!-- TABS catÃ©gories -->
+  <!-- TABS catégories -->
   <div class="tabs" id="tabs">
-    <button class="tab active" data-cat="iphone"><span class="tab-ic">ðŸ“±</span> iPhone <span class="tab-n" id="nIphone">0</span></button>
-    <button class="tab" data-cat="samsung"><span class="tab-ic">â­</span> Samsung <span class="tab-n" id="nSamsung">0</span></button>
-    <button class="tab" data-cat="autre"><span class="tab-ic">ðŸ”¥</span> Pixel Â· Xiaomi Â· Autres <span class="tab-n" id="nAutre">0</span></button>
-    <button class="tab" data-cat="neuf"><span class="tab-ic">âœ¨</span> Neufs <span class="tab-n" id="nNeuf">0</span></button>
+    <button class="tab active" data-cat="iphone"><span class="tab-ic">📱</span> iPhone <span class="tab-n" id="nIphone">0</span></button>
+    <button class="tab" data-cat="samsung"><span class="tab-ic">⭐</span> Samsung <span class="tab-n" id="nSamsung">0</span></button>
+    <button class="tab" data-cat="autre"><span class="tab-ic">🔥</span> Pixel · Xiaomi · Autres <span class="tab-n" id="nAutre">0</span></button>
+    <button class="tab" data-cat="neuf"><span class="tab-ic">✨</span> Neufs <span class="tab-n" id="nNeuf">0</span></button>
   </div>
 
-  <!-- Filtres sÃ©ries dynamiques -->
+  <!-- Filtres séries dynamiques -->
   <div class="filters" id="filters"></div>
 
   <!-- Sort bar -->
   <div class="sort-bar">
     <label for="sortSel">// TRIER PAR</label>
     <select id="sortSel">
-      <option value="series">Par sÃ©rie</option>
+      <option value="series">Par série</option>
       <option value="price_asc">Prix croissant</option>
-      <option value="price_desc">Prix dÃ©croissant</option>
+      <option value="price_desc">Prix décroissant</option>
       <option value="grade">Meilleur grade</option>
     </select>
-    <span class="result-count" id="resultCount">â€” produits</span>
+    <span class="result-count" id="resultCount">— produits</span>
   </div>
 
   <!-- Grille produits -->
@@ -1453,92 +1446,92 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
       <h2>Choisis comme on choisit<br><em>une montre</em>.</h2>
     </div>
     <div class="right">
-      Catalogue Â· +5000 rÃ©fÃ©rences<br>
-      Marques sÃ©lectionnÃ©es
+      Catalogue · +5000 références<br>
+      Marques sélectionnées
     </div>
   </div>
 
-  <!-- CatÃ©gories accessoires -->
+  <!-- Catégories accessoires -->
   <div class="filters" id="accCats" style="padding-bottom: 8px;">
-    <button class="chip active" data-acc="coques">ðŸ“± Coques & Ã‰tuis</button>
-    <button class="chip" data-acc="verres">ðŸ›¡ï¸ Verres trempÃ©s</button>
-    <button class="chip" data-acc="chargeurs">âš¡ Chargeurs</button>
-    <button class="chip" data-acc="batteries">ðŸ”‹ Batteries externes</button>
-    <button class="chip" data-acc="cables">ðŸ”Œ CÃ¢bles</button>
-    <button class="chip" data-acc="audio">ðŸŽ§ Audio</button>
-    <button class="chip" data-acc="supports">ðŸ“ Supports</button>
-    <button class="chip" data-acc="accessoires">âœ¨ Autres</button>
+    <button class="chip active" data-acc="coques">📱 Coques & Étuis</button>
+    <button class="chip" data-acc="verres">🛡️ Verres trempés</button>
+    <button class="chip" data-acc="chargeurs">⚡ Chargeurs</button>
+    <button class="chip" data-acc="batteries">🔋 Batteries externes</button>
+    <button class="chip" data-acc="cables">🔌 Câbles</button>
+    <button class="chip" data-acc="audio">🎧 Audio</button>
+    <button class="chip" data-acc="supports">📐 Supports</button>
+    <button class="chip" data-acc="accessoires">✨ Autres</button>
   </div>
 
-  <!-- Filtre par modÃ¨le -->
-  <div class="acc-models-label">// FILTRER PAR MODÃˆLE DE SMARTPHONE</div>
+  <!-- Filtre par modèle -->
+  <div class="acc-models-label">// FILTRER PAR MODÈLE DE SMARTPHONE</div>
   <div class="acc-models" id="accModels">
-    <button class="chip active" data-model="all">Tous les modÃ¨les</button>
-    <button class="chip" data-model="iphone16pro"><span class="ic">â—</span>iPhone 16 Pro</button>
-    <button class="chip" data-model="iphone16"><span class="ic">â—</span>iPhone 16</button>
-    <button class="chip" data-model="iphone15"><span class="ic">â—</span>iPhone 15</button>
-    <button class="chip" data-model="iphone14"><span class="ic">â—</span>iPhone 14</button>
-    <button class="chip" data-model="iphone13"><span class="ic">â—</span>iPhone 13</button>
-    <button class="chip" data-model="galaxy-s25"><span class="ic">â—</span>Galaxy S25</button>
-    <button class="chip" data-model="galaxy-s24"><span class="ic">â—</span>Galaxy S24</button>
-    <button class="chip" data-model="galaxy-a55"><span class="ic">â—</span>Galaxy A55</button>
-    <button class="chip" data-model="galaxy-a15"><span class="ic">â—</span>Galaxy A15</button>
-    <button class="chip" data-model="xiaomi15"><span class="ic">â—</span>Xiaomi 15</button>
-    <button class="chip" data-model="redmi13c"><span class="ic">â—</span>Redmi 13C</button>
+    <button class="chip active" data-model="all">Tous les modèles</button>
+    <button class="chip" data-model="iphone16pro"><span class="ic">●</span>iPhone 16 Pro</button>
+    <button class="chip" data-model="iphone16"><span class="ic">●</span>iPhone 16</button>
+    <button class="chip" data-model="iphone15"><span class="ic">●</span>iPhone 15</button>
+    <button class="chip" data-model="iphone14"><span class="ic">●</span>iPhone 14</button>
+    <button class="chip" data-model="iphone13"><span class="ic">●</span>iPhone 13</button>
+    <button class="chip" data-model="galaxy-s25"><span class="ic">●</span>Galaxy S25</button>
+    <button class="chip" data-model="galaxy-s24"><span class="ic">●</span>Galaxy S24</button>
+    <button class="chip" data-model="galaxy-a55"><span class="ic">●</span>Galaxy A55</button>
+    <button class="chip" data-model="galaxy-a15"><span class="ic">●</span>Galaxy A15</button>
+    <button class="chip" data-model="xiaomi15"><span class="ic">●</span>Xiaomi 15</button>
+    <button class="chip" data-model="redmi13c"><span class="ic">●</span>Redmi 13C</button>
   </div>
 
   <!-- Bandeau filtre actif -->
   <div class="acc-active-filter" id="accActiveFilter">
-    <span>ðŸŽ¯ FiltrÃ© pour : <span id="accFilterLabel">â€”</span></span>
-    <button class="clear" onclick="clearAccModel()">âœ• Tout afficher</button>
+    <span>🎯 Filtré pour : <span id="accFilterLabel">—</span></span>
+    <button class="clear" onclick="clearAccModel()">✕ Tout afficher</button>
   </div>
 
   <!-- Grille accessoires -->
   <div class="acc-grid" id="accGrid"></div>
 
-  <!-- Encart "plus en boutique" â€” adaptatif selon le filtre -->
+  <!-- Encart "plus en boutique" — adaptatif selon le filtre -->
   <div class="acc-more" style="margin-left:32px; margin-right:32px;">
     <div class="acc-more-icon">+</div>
     <div class="acc-more-text">
       <div class="acc-more-eyebrow">// EN BOUTIQUE</div>
-      <h3 id="accMoreTitle">Et plein d'autres pÃ©pites <em>en boutique.</em></h3>
-      <p id="accMoreText">+5000 rÃ©fÃ©rences au mur, +100 smartphones reconditionnÃ©s, des modÃ¨les en exclusivitÃ© physique. Passe nous voir au 21 Rue Gambetta.</p>
+      <h3 id="accMoreTitle">Et plein d'autres pépites <em>en boutique.</em></h3>
+      <p id="accMoreText">+5000 références au mur, +100 smartphones reconditionnés, des modèles en exclusivité physique. Passe nous voir au 21 Rue Gambetta.</p>
     </div>
     <div class="acc-more-actions">
       <a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20cherche%20un%20accessoire%2C%20pouvez-vous%20m%27aider%20%3F" target="_blank" rel="noopener" class="btn btn-wa-light">
-        ðŸ’¬ WhatsApp
+        💬 WhatsApp
       </a>
-      <a href="#boutique" class="btn btn-shop-light">ðŸ“ Voir la boutique</a>
+      <a href="#boutique" class="btn btn-shop-light">📍 Voir la boutique</a>
     </div>
   </div>
 
   <p class="acc-disclaimer">
-    // Clique sur un produit pour commander par WhatsApp ou par mail Â· Prix disponibles en boutique
+    // Clique sur un produit pour commander par WhatsApp ou par mail · Prix disponibles en boutique
   </p>
 </section>
 
 <!-- ============================ ORDER MODAL ============================ -->
 <div class="order-modal" id="orderModal" onclick="if(event.target===this)closeOrderModal()">
   <div class="order-card">
-    <button class="close-btn" onclick="closeOrderModal()" aria-label="Fermer">âœ•</button>
+    <button class="close-btn" onclick="closeOrderModal()" aria-label="Fermer">✕</button>
     <div class="om-img"><img id="omImg" src="" alt=""></div>
     <div class="om-body">
       <div class="om-tag">// COMMANDE EXPRESS</div>
-      <div class="om-name" id="omName">â€”</div>
-      <div class="om-brand" id="omBrand">â€”</div>
-      <div class="om-model" id="omModel" style="display:none">Pour : <b id="omModelLabel">â€”</b></div>
+      <div class="om-name" id="omName">—</div>
+      <div class="om-brand" id="omBrand">—</div>
+      <div class="om-model" id="omModel" style="display:none">Pour : <b id="omModelLabel">—</b></div>
       <div class="om-actions">
         <a id="omWa" href="#" target="_blank" rel="noopener" class="btn btn-wa">
-          ðŸ’¬ Commander par WhatsApp
+          💬 Commander par WhatsApp
         </a>
         <a id="omMail" href="#" class="btn btn-mail">
-          âœ‰ï¸ Commander par mail
+          ✉️ Commander par mail
         </a>
         <a href="#boutique" onclick="closeOrderModal()" class="btn btn-shop">
-          ðŸ“ Voir en boutique (21 Rue Gambetta)
+          📍 Voir en boutique (21 Rue Gambetta)
         </a>
       </div>
-      <div class="om-foot">// RÃ‰PONSE EN MOINS DE 30 MIN EN HEURES OUVRÃ‰ES</div>
+      <div class="om-foot">// RÉPONSE EN MOINS DE 30 MIN EN HEURES OUVRÉES</div>
     </div>
   </div>
 </div>
@@ -1547,25 +1540,25 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 <section id="qualite" class="quality">
   <div class="quality-inner">
     <div class="quality-eyebrow">// LE PROCESS RECONDITIONNEMENT</div>
-    <h2>TestÃ©s sur<br><em>30 points</em>.</h2>
+    <h2>Testés sur<br><em>30 points</em>.</h2>
     <p class="lede">
-      Chaque smartphone passe entre nos mains. Pas une Ã©tape nÃ©gligÃ©e. Pas un dÃ©tail oubliÃ©.
-      Pas de mystÃ¨re sur l'Ã©tat rÃ©el de l'appareil que tu reÃ§ois.
+      Chaque smartphone passe entre nos mains. Pas une étape négligée. Pas un détail oublié.
+      Pas de mystère sur l'état réel de l'appareil que tu reçois.
     </p>
 
     <div class="q-grid">
-      <div class="q-item"><span class="ico">ðŸ”‹</span><b>Batterie</b><span>CapacitÃ© &gt; 85%</span></div>
-      <div class="q-item"><span class="ico">ðŸ“±</span><b>Ã‰cran</b><span>Tactile, pixels, vitre</span></div>
-      <div class="q-item"><span class="ico">ðŸ“¸</span><b>CamÃ©ras</b><span>Photo, vidÃ©o, AF</span></div>
-      <div class="q-item"><span class="ico">ðŸ”Š</span><b>Audio</b><span>Haut-parleurs, micro</span></div>
-      <div class="q-item"><span class="ico">ðŸ“¡</span><b>RÃ©seaux</b><span>4G, 5G, Wi-Fi, BT</span></div>
-      <div class="q-item"><span class="ico">ðŸ”˜</span><b>Boutons</b><span>Volume, vibreur</span></div>
-      <div class="q-item"><span class="ico">ðŸ“²</span><b>Capteurs</b><span>Face ID, Touch ID</span></div>
-      <div class="q-item"><span class="ico">ðŸ”Œ</span><b>Charge</b><span>Filaire et sans fil</span></div>
-      <div class="q-item"><span class="ico">ðŸ›¡ï¸</span><b>Ã‰tanchÃ©itÃ©</b><span>Joints inspectÃ©s</span></div>
-      <div class="q-item"><span class="ico">ðŸ“</span><b>GPS</b><span>PrÃ©cision testÃ©e</span></div>
-      <div class="q-item"><span class="ico">âœ¨</span><b>ChÃ¢ssis</b><span>ContrÃ´le visuel</span></div>
-      <div class="q-item"><span class="ico">ðŸ§¹</span><b>Reset</b><span>DonnÃ©es 100% effacÃ©es</span></div>
+      <div class="q-item"><span class="ico">🔋</span><b>Batterie</b><span>Capacité &gt; 85%</span></div>
+      <div class="q-item"><span class="ico">📱</span><b>Écran</b><span>Tactile, pixels, vitre</span></div>
+      <div class="q-item"><span class="ico">📸</span><b>Caméras</b><span>Photo, vidéo, AF</span></div>
+      <div class="q-item"><span class="ico">🔊</span><b>Audio</b><span>Haut-parleurs, micro</span></div>
+      <div class="q-item"><span class="ico">📡</span><b>Réseaux</b><span>4G, 5G, Wi-Fi, BT</span></div>
+      <div class="q-item"><span class="ico">🔘</span><b>Boutons</b><span>Volume, vibreur</span></div>
+      <div class="q-item"><span class="ico">📲</span><b>Capteurs</b><span>Face ID, Touch ID</span></div>
+      <div class="q-item"><span class="ico">🔌</span><b>Charge</b><span>Filaire et sans fil</span></div>
+      <div class="q-item"><span class="ico">🛡️</span><b>Étanchéité</b><span>Joints inspectés</span></div>
+      <div class="q-item"><span class="ico">📍</span><b>GPS</b><span>Précision testée</span></div>
+      <div class="q-item"><span class="ico">✨</span><b>Châssis</b><span>Contrôle visuel</span></div>
+      <div class="q-item"><span class="ico">🧹</span><b>Reset</b><span>Données 100% effacées</span></div>
     </div>
   </div>
 </section>
@@ -1574,16 +1567,16 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 <section class="engagements">
   <div class="section-header" style="padding: 0 0 48px;">
     <div class="left">
-      <div class="eyebrow"><span class="num">[03]</span> La diffÃ©rence</div>
-      <h2>ConseillÃ©. Garanti.<br><em>Chez nous.</em></h2>
+      <div class="eyebrow"><span class="num">[03]</span> La différence</div>
+      <h2>Conseillé. Garanti.<br><em>Chez nous.</em></h2>
     </div>
   </div>
 
   <div class="eng-grid">
-    <div class="eng"><div class="ico">âœ“</div><h3>SAV<br>Ã  MÃ¢con</h3><p>Pas de carton Ã  expÃ©dier en Pologne. Un souci ? Tu pousses la porte du 21 Rue Gambetta. <b>Une garantie qu'on peut regarder dans les yeux.</b></p></div>
-    <div class="eng"><div class="ico">â†’</div><h3>Transfert<br>inclus</h3><p>Contacts, photos, applis, <b>WhatsApp</b>. On migre tout depuis ton ancien tel, devant toi, en boutique. Trente minutes.</p></div>
-    <div class="eng"><div class="ico">â†º</div><h3>Reprise<br>directe</h3><p>On rachÃ¨te ton ancien smartphone et on dÃ©duit sa valeur <b>directement du prix neuf</b>. Pas d'attente, pas de virement Ã  relancer.</p></div>
-    <div class="eng"><div class="ico">â˜…</div><h3>Une Ã©quipe<br>nommÃ©e</h3><p>SÃ©bastien, Rahim, RaphaÃ«l et le stagiaire. Pas de chatbot, pas de hotline. <b>Tu reviens, on te reconnaÃ®t.</b></p></div>
+    <div class="eng"><div class="ico">✓</div><h3>SAV<br>à Mâcon</h3><p>Pas de carton à expédier en Pologne. Un souci ? Tu pousses la porte du 21 Rue Gambetta. <b>Une garantie qu'on peut regarder dans les yeux.</b></p></div>
+    <div class="eng"><div class="ico">→</div><h3>Transfert<br>inclus</h3><p>Contacts, photos, applis, <b>WhatsApp</b>. On migre tout depuis ton ancien tel, devant toi, en boutique. Trente minutes.</p></div>
+    <div class="eng"><div class="ico">↺</div><h3>Reprise<br>directe</h3><p>On rachète ton ancien smartphone et on déduit sa valeur <b>directement du prix neuf</b>. Pas d'attente, pas de virement à relancer.</p></div>
+    <div class="eng"><div class="ico">★</div><h3>Une équipe<br>nommée</h3><p>Sébastien, Rahim, Raphaël et le stagiaire. Pas de chatbot, pas de hotline. <b>Tu reviens, on te reconnaît.</b></p></div>
   </div>
 </section>
 
@@ -1592,15 +1585,15 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   <div class="boutique-inner">
     <div class="boutique-text">
       <div class="eyebrow">// NOTRE BOUTIQUE</div>
-      <h2>21 Rue Gambetta,<br><em>au cÅ“ur de MÃ¢con.</em></h2>
+      <h2>21 Rue Gambetta,<br><em>au cœur de Mâcon.</em></h2>
 
       <div class="boutique-info">
-        <div class="bi-block"><div class="lbl">Adresse</div><div class="val">21 Rue Gambetta<br>71000 MÃ¢con</div></div>
-        <div class="bi-block"><div class="lbl">Horaires</div><div class="val">Mardi Ã  samedi<br>10h00 â€” 12h00 / 14h00 â€” 19h00<br><span style="opacity:0.5">FermÃ© dimanche et lundi</span></div></div>
+        <div class="bi-block"><div class="lbl">Adresse</div><div class="val">21 Rue Gambetta<br>71000 Mâcon</div></div>
+        <div class="bi-block"><div class="lbl">Horaires</div><div class="val">Mardi à samedi<br>10h00 — 12h00 / 14h00 — 19h00<br><span style="opacity:0.5">Fermé dimanche et lundi</span></div></div>
         <div class="bi-block"><div class="lbl">Contact</div><div class="val">contact@solution-phone.fr<br>06 02 84 99 53</div></div>
       </div>
 
-      <a href="https://www.google.com/maps/dir/?api=1&destination=21+Rue+Gambetta+71000+Macon" target="_blank" rel="noopener" class="btn btn-red btn-large">ItinÃ©raire <span>â†’</span></a>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=21+Rue+Gambetta+71000+Macon" target="_blank" rel="noopener" class="btn btn-red btn-large">Itinéraire <span>→</span></a>
     </div>
 
     <div class="map-mock">
@@ -1612,8 +1605,8 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
-        title="Solution Accessoires - 21 Rue Gambetta, 71000 MÃ¢con"></iframe>
-      <div class="corner br">V26 Â· 46.30Â°N / 4.83Â°E</div>
+        title="Solution Accessoires - 21 Rue Gambetta, 71000 Mâcon"></iframe>
+      <div class="corner br">V26 · 46.30°N / 4.83°E</div>
     </div>
   </div>
 </section>
@@ -1625,29 +1618,29 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   <!-- Partner strip CASSEURS -->
   <div class="partner-strip">
     <div class="text">
-      <div class="ico">âš¡</div>
+      <div class="ico">⚡</div>
       <div class="copy">
-        <strong>Tu as cassÃ© ton tel ?</strong>
-        Notre boutique partenaire <strong style="color:var(--red);font-family:inherit;text-transform:none;font-size:inherit;display:inline">Solution Phone</strong> est juste Ã  cÃ´tÃ©. C'est leur mÃ©tier depuis 12 ans.
+        <strong>Tu as cassé ton tel ?</strong>
+        Notre boutique partenaire <strong style="color:var(--red);font-family:inherit;text-transform:none;font-size:inherit;display:inline">Solution Phone</strong> est juste à côté. C'est leur métier depuis 12 ans.
       </div>
     </div>
     <a href="https://solution-phone.fr" target="_blank" rel="noopener">
-      solution-phone.fr <span>â†’</span>
+      solution-phone.fr <span>→</span>
     </a>
   </div>
 
   <div class="footer-cols">
     <div class="f-brand">
       <div class="logo">Solution<span class="red">Accessoires</span></div>
-      <p>Smartphones reconditionnÃ©s certifiÃ©s et accessoires sÃ©lectionnÃ©s. Une boutique indÃ©pendante Ã  MÃ¢con depuis 2014.</p>
+      <p>Smartphones reconditionnés certifiés et accessoires sélectionnés. Une boutique indépendante à Mâcon depuis 2014.</p>
     </div>
     <div class="f-col">
       <h4>// BOUTIQUE</h4>
       <ul>
-        <li><a href="#reconditionnes">ReconditionnÃ©s</a></li>
+        <li><a href="#reconditionnes">Reconditionnés</a></li>
         <li><a href="#accessoires">Accessoires</a></li>
         <li><a href="#">Marques</a></li>
-        <li><a href="#">NouveautÃ©s</a></li>
+        <li><a href="#">Nouveautés</a></li>
       </ul>
     </div>
     <div class="f-col">
@@ -1660,20 +1653,20 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
       </ul>
     </div>
     <div class="f-col">
-      <h4>// LÃ‰GAL</h4>
+      <h4>// LÉGAL</h4>
       <ul>
-        <li><a href="#">Mentions lÃ©gales</a></li>
+        <li><a href="#">Mentions légales</a></li>
         <li><a href="#">CGV</a></li>
-        <li><a href="#">ConfidentialitÃ©</a></li>
+        <li><a href="#">Confidentialité</a></li>
         <li><a href="#">Cookies</a></li>
       </ul>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <div>Â© 2026 Solution Accessoires Â· SIRET 801 044 785 00021</div>
+    <div>© 2026 Solution Accessoires · SIRET 801 044 785 00021</div>
     <div class="legal">
-      <a href="#">Mentions lÃ©gales</a>
+      <a href="#">Mentions légales</a>
       <a href="#">// Version 2077</a>
     </div>
   </div>
@@ -1681,12 +1674,12 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 
 <!-- ============================ SCRIPTS ============================ -->
 <script>
-// ====== DÃ‰TECTION GOOGLE ADS â€” MODE SAFE ======
-// Quand un visiteur arrive depuis Google Ads (gclid prÃ©sent, ou utm_medium=cpc),
-// on cache automatiquement les Ã©lÃ©ments potentiellement risquÃ©s pour la compliance Ads :
-// - Le bandeau casseurs (mention "tel cassÃ©" + redirection vers solution-phone.fr)
-// - Le partner-strip dans le footer (mÃªme contenu)
-// Le visiteur normal voit tout, le bot Google Ads ne voit rien de risquÃ©.
+// ====== DÉTECTION GOOGLE ADS — MODE SAFE ======
+// Quand un visiteur arrive depuis Google Ads (gclid présent, ou utm_medium=cpc),
+// on cache automatiquement les éléments potentiellement risqués pour la compliance Ads :
+// - Le bandeau casseurs (mention "tel cassé" + redirection vers solution-phone.fr)
+// - Le partner-strip dans le footer (même contenu)
+// Le visiteur normal voit tout, le bot Google Ads ne voit rien de risqué.
 (function(){
   try {
     var p = new URLSearchParams(window.location.search);
@@ -1704,7 +1697,7 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   } catch(e){}
 })();
 
-// ====== CONFIG SUPABASE (mÃªmes credentials que reconditionnes.html) ======
+// ====== CONFIG SUPABASE (mêmes credentials que reconditionnes.html) ======
 var SU = 'https://kdvxcnjfrmvlnrymfyug.supabase.co';
 var SK = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
 var WHATSAPP = '33783921884';
@@ -1718,7 +1711,7 @@ var DEMO = [
   {brand:"iphone", condition:"reconditionne", model:"iPhone 12",     storage:"64 Go",  color:"Blanc",          color_hex:"#f5f5f7", grade:"B",  price:349, battery_pct:88,  sold:false},
   {brand:"iphone", condition:"reconditionne", model:"iPhone 11",     storage:"64 Go",  color:"Violet",         color_hex:"#d1cddb", grade:"B",  price:289, battery_pct:85,  sold:false},
   {brand:"iphone", condition:"reconditionne", model:"iPhone SE 2022",storage:"64 Go",  color:"Noir",           color_hex:"#1d1d1f", grade:"A+", price:259, battery_pct:100, sold:false},
-  {brand:"samsung", condition:"reconditionne", model:"Galaxy S23 Ultra", storage:"256 Go", color:"Noir FantÃ´me", color_hex:"#1d1d1f", grade:"A+", price:749, battery_pct:98, sold:false},
+  {brand:"samsung", condition:"reconditionne", model:"Galaxy S23 Ultra", storage:"256 Go", color:"Noir Fantôme", color_hex:"#1d1d1f", grade:"A+", price:749, battery_pct:98, sold:false},
   {brand:"samsung", condition:"reconditionne", model:"Galaxy S22",        storage:"128 Go", color:"Vert",          color_hex:"#4b5945", grade:"A",  price:429, battery_pct:90, sold:false},
   {brand:"samsung", condition:"reconditionne", model:"Galaxy A54",        storage:"128 Go", color:"Lilas",         color_hex:"#c9b5d4", grade:"A",  price:299, battery_pct:95, sold:false},
   {brand:"autre", condition:"reconditionne", model:"Xiaomi Redmi Note 12 Pro", storage:"256 Go", color:"Bleu",  color_hex:"#3a5b8c", grade:"A", price:239, battery_pct:92, sold:false},
@@ -1749,7 +1742,7 @@ function loadStock(){
       var neufs = (res[1]||[]).map(function(p){ return normalize(p, 'neuf'); });
       var items = recon.concat(neufs).filter(function(i){ return i.price > 0 && i.model; });
       if(!items.length){
-        console.info('[stock] aucune donnÃ©e en base, fallback dÃ©mo');
+        console.info('[stock] aucune donnée en base, fallback démo');
         allItems = DEMO;
       } else {
         allItems = items;
@@ -1790,8 +1783,8 @@ function normalize(p, cond){
 function colorToHex(c){
   if(!c) return '';
   var map = {
-    'noir':'#1d1d1f','minuit':'#2c2c2e','graphite':'#54524f','space gray':'#3a3a3c','sidÃ©ral':'#3a3a3c',
-    'blanc':'#f5f5f7','argent':'#d9d9dc','silver':'#d9d9dc','nacrÃ©':'#ece8e1',
+    'noir':'#1d1d1f','minuit':'#2c2c2e','graphite':'#54524f','space gray':'#3a3a3c','sidéral':'#3a3a3c',
+    'blanc':'#f5f5f7','argent':'#d9d9dc','silver':'#d9d9dc','nacré':'#ece8e1',
     'or':'#e3c89d','gold':'#e3c89d','rose':'#f4c7c7','rose gold':'#e8b7a8',
     'rouge':'#b8050f','red':'#b8050f','(product)red':'#b8050f',
     'bleu':'#4c6fa1','bleu nuit':'#2a3a5c','bleu pacifique':'#2e4a6a','blue':'#4c6fa1',
@@ -1860,10 +1853,10 @@ function escapeHtml(s){
   });
 }
 
-// Optimise les URLs Supabase Storage : 2 Mo â†’ ~50 Ko en WebP
+// Optimise les URLs Supabase Storage : 2 Mo → ~50 Ko en WebP
 function optimizeImageUrl(url, width){
   if(!url) return url;
-  width = width || 600;
+  width = width || 400;
   // Supabase Storage : transforme via /render/image/ avec width + quality + webp
   if(url.indexOf('supabase.co/storage/v1/object/public/') !== -1){
     var transformed = url.replace('/object/public/', '/render/image/public/');
@@ -1881,28 +1874,28 @@ function cardHtml(item){
   
   var imgBlock, phClass;
   if(item.image_url){
-    imgBlock = '<img src="' + optimizeImageUrl(item.image_url, 600) + '" alt="' + escapeHtml(item.model) + '" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')" onerror="this.parentElement.classList.add(\'has-loaded\');this.style.display=\'none\'">';
+    imgBlock = '<img src="' + optimizeImageUrl(item.image_url, 400) + '" alt="' + escapeHtml(item.model) + '" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')" onerror="this.parentElement.classList.add(\'has-loaded\');this.style.display=\'none\'">';
     phClass = 'ph';
   } else {
-    imgBlock = '<div class="noimg">ðŸ“±</div>';
+    imgBlock = '<div class="noimg">📱</div>';
     phClass = 'ph has-loaded';
   }
   var colorDot = item.color_hex ? '<span class="color-dot" style="background:' + item.color_hex + '"></span>' : '';
-  var battery = item.battery_pct ? ' Â· ðŸ”‹ ' + item.battery_pct + '%' : '';
+  var battery = item.battery_pct ? ' · 🔋 ' + item.battery_pct + '%' : '';
   var isNeuf = (item.condition||'').toLowerCase() === 'neuf';
   var badge = isNeuf
     ? '<span class="grade gN">NEUF</span>'
     : (item.grade ? '<span class="grade ' + gradeClass + '">GRADE ' + item.grade + '</span>' : '');
-  var waMsg = encodeURIComponent('Bonjour, je suis intÃ©ressÃ© par le ' + item.model + ' ' + (item.storage||'') + ' ' + (item.color||'') + ' Ã  ' + item.price + 'â‚¬. Est-il toujours disponible ?');
+  var waMsg = encodeURIComponent('Bonjour, je suis intéressé par le ' + item.model + ' ' + (item.storage||'') + ' ' + (item.color||'') + ' à ' + item.price + '€. Est-il toujours disponible ?');
   return '<article class="card' + (item.sold ? ' sold' : '') + '">'
     + badge
     + '<div class="' + phClass + '">' + imgBlock + '</div>'
     + '<div class="model">' + escapeHtml(item.model) + '</div>'
-    + '<div class="meta">' + escapeHtml(item.storage || '') + (item.color ? ' Â· ' + colorDot + escapeHtml(item.color) : '') + battery + '</div>'
-    + '<div class="price">' + item.price + '<small>&nbsp;â‚¬</small></div>'
+    + '<div class="meta">' + escapeHtml(item.storage || '') + (item.color ? ' · ' + colorDot + escapeHtml(item.color) : '') + battery + '</div>'
+    + '<div class="price">' + item.price + '<small>&nbsp;€</small></div>'
     + (item.sold
         ? '<span class="cta" style="background:#9ca3af;pointer-events:none">Vendu</span>'
-        : '<a class="cta" href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" target="_blank" rel="noopener">RÃ©server via WhatsApp â†’</a>')
+        : '<a class="cta" href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" target="_blank" rel="noopener">Réserver via WhatsApp →</a>')
     + '</article>';
 }
 
@@ -1951,7 +1944,7 @@ function render(){
   document.getElementById('resultCount').textContent = filtered.length + ' PRODUIT' + (filtered.length>1?'S':'');
 
   if(!filtered.length){
-    wrap.innerHTML = '<div class="empty"><h3>Aucun modÃ¨le dans cette catÃ©gorie pour le moment</h3><p>Passez-nous voir en boutique, on a souvent des arrivages.</p></div>';
+    wrap.innerHTML = '<div class="empty"><h3>Aucun modèle dans cette catégorie pour le moment</h3><p>Passez-nous voir en boutique, on a souvent des arrivages.</p></div>';
     return;
   }
 
@@ -1969,7 +1962,7 @@ function render(){
       var items = groups[s];
       var minPrice = items.reduce(function(m,i){ return Math.min(m,i.price); }, Infinity);
       html += '<div class="series-group">';
-      html += '<div class="series-header"><h3>'+escapeHtml(s)+'</h3><span class="series-count">'+items.length+' EN STOCK</span><span class="series-from">Ã€ PARTIR DE '+minPrice+' â‚¬</span></div>';
+      html += '<div class="series-header"><h3>'+escapeHtml(s)+'</h3><span class="series-count">'+items.length+' EN STOCK</span><span class="series-from">À PARTIR DE '+minPrice+' €</span></div>';
       html += '<div class="pgrid">'+items.map(cardHtml).join('')+'</div>';
       html += '</div>';
     });
@@ -1995,7 +1988,7 @@ document.getElementById('sortSel').addEventListener('change', function(e){
   render();
 });
 
-// ====== INIT RECONDITIONNÃ‰S ======
+// ====== INIT RECONDITIONNÉS ======
 loadStock();
 setInterval(loadStock, 60000);
 
@@ -2019,7 +2012,7 @@ var CHARGEURS = [
   {img:U+'b/e/belkk11.jpeg',name:'BELKIN Chargeur Secteur 25W',brand:'BELKIN'},
   {img:U+'b/e/belkk12.jpeg',name:'BELKIN Chargeur Secteur 25W Noir',brand:'BELKIN'},
   {img:U+'8/4/848--wca008kq1mwh-b6_1.jpg',name:'BELKIN Chargeur USB-C 30W',brand:'BELKIN'},
-  {img:U+'b/e/belkk.jpeg',name:'BELKIN Chargeur 30W + CÃ¢ble',brand:'BELKIN'},
+  {img:U+'b/e/belkk.jpeg',name:'BELKIN Chargeur 30W + Câble',brand:'BELKIN'},
   {img:U+'0/1/01-wch019kqwh.jpg',name:'BELKIN Chargeur GaN 50W Blanc',brand:'BELKIN'},
   {img:U+'0/1/01-wch019kqbk.jpg',name:'BELKIN Chargeur GaN 50W Noir',brand:'BELKIN'},
   {img:U+'0/1/01-wca013kqwh_front.jpg',name:'BELKIN Chargeur USB-C 45W Blanc',brand:'BELKIN'},
@@ -2044,16 +2037,16 @@ var BATTERIES = [
   {img:U+'9/1/919--bpb024hqpk.jpg',name:'BELKIN PowerBank 20 000mAh Rose',brand:'BELKIN'}
 ];
 var CABLES = [
-  {img:U+'c/a/caa001bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web.jpg',name:'BELKIN CÃ¢ble Lightning 2m',brand:'BELKIN'},
-  {img:U+'l/d/ld0005699966_1.jpeg',name:'BELKIN CÃ¢ble Lightning 1m Noir',brand:'BELKIN'},
-  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_5.jpg',name:'BELKIN CÃ¢ble TressÃ© Lightning Noir',brand:'BELKIN'},
-  {img:U+'c/a/caa002bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_3.jpg',name:'BELKIN CÃ¢ble TressÃ© Lightning Blanc',brand:'BELKIN'},
-  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_1.jpg',name:'BELKIN CÃ¢ble TressÃ© Lightning 2m',brand:'BELKIN'},
-  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web_2.jpg',name:'BELKIN CÃ¢ble USB-C 1m Noir',brand:'BELKIN'},
-  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web.jpg',name:'BELKIN CÃ¢ble USB-C 2m Noir',brand:'BELKIN'},
-  {img:U+'h/d/hdmi0018g-1m.jpeg',name:'BELKIN CÃ¢ble HDMI 4K 1m',brand:'BELKIN'},
-  {img:U+'9/2/926--inz002bt2mbk.jpg',name:'BELKIN CÃ¢ble Thunderbolt 4 2m',brand:'BELKIN'},
-  {img:U+'b/b/bblk1.jpeg',name:'BELKIN CÃ¢ble DisplayPort 1.8m',brand:'BELKIN'}
+  {img:U+'c/a/caa001bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web.jpg',name:'BELKIN Câble Lightning 2m',brand:'BELKIN'},
+  {img:U+'l/d/ld0005699966_1.jpeg',name:'BELKIN Câble Lightning 1m Noir',brand:'BELKIN'},
+  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_5.jpg',name:'BELKIN Câble Tressé Lightning Noir',brand:'BELKIN'},
+  {img:U+'c/a/caa002bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_3.jpg',name:'BELKIN Câble Tressé Lightning Blanc',brand:'BELKIN'},
+  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_1.jpg',name:'BELKIN Câble Tressé Lightning 2m',brand:'BELKIN'},
+  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web_2.jpg',name:'BELKIN Câble USB-C 1m Noir',brand:'BELKIN'},
+  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web.jpg',name:'BELKIN Câble USB-C 2m Noir',brand:'BELKIN'},
+  {img:U+'h/d/hdmi0018g-1m.jpeg',name:'BELKIN Câble HDMI 4K 1m',brand:'BELKIN'},
+  {img:U+'9/2/926--inz002bt2mbk.jpg',name:'BELKIN Câble Thunderbolt 4 2m',brand:'BELKIN'},
+  {img:U+'b/b/bblk1.jpeg',name:'BELKIN Câble DisplayPort 1.8m',brand:'BELKIN'}
 ];
 var AUDIO = [
   {img:U+'9/0/902--twscaliforniablanc.jpg',name:'FAIRPLAY CALIFORNIA TWS Blanc',brand:'FAIRPLAY'},
@@ -2062,13 +2055,13 @@ var AUDIO = [
   {img:U+'8/6/861--112403_1.jpg',name:'FAIRPLAY OREGON TWS Noir',brand:'FAIRPLAY'},
   {img:U+'_/5/_54a7842.jpg',name:'FAIRPLAY ALASKA TWS Noir',brand:'FAIRPLAY'},
   {img:U+'h/e/he-0441-9.jpg',name:'FAIRPLAY ALASKA TWS Blanc',brand:'FAIRPLAY'},
-  {img:U+'_/5/_54a1923.jpg',name:'FAIRPLAY Ã‰couteurs Jack 3.5mm',brand:'FAIRPLAY'},
-  {img:U+'_/5/_54a.jpg',name:'FAIRPLAY Ã‰couteurs Lightning',brand:'FAIRPLAY'},
-  {img:U+'9/2/920--test.jpg',name:'FAIRPLAY Ã‰couteurs USB-C',brand:'FAIRPLAY'},
-  {img:U+'1/3/133--f8z274bt.jpg',name:'BELKIN RÃ©partiteur Audio Jack',brand:'BELKIN'}
+  {img:U+'_/5/_54a1923.jpg',name:'FAIRPLAY Écouteurs Jack 3.5mm',brand:'FAIRPLAY'},
+  {img:U+'_/5/_54a.jpg',name:'FAIRPLAY Écouteurs Lightning',brand:'FAIRPLAY'},
+  {img:U+'9/2/920--test.jpg',name:'FAIRPLAY Écouteurs USB-C',brand:'FAIRPLAY'},
+  {img:U+'1/3/133--f8z274bt.jpg',name:'BELKIN Répartiteur Audio Jack',brand:'BELKIN'}
 ];
 var SUPPORTS = [
-  {img:U+'1/3/135--556536.jpg',name:'FAIRPLAY Support Voiture MagnÃ©tique',brand:'FAIRPLAY'},
+  {img:U+'1/3/135--556536.jpg',name:'FAIRPLAY Support Voiture Magnétique',brand:'FAIRPLAY'},
   {img:U+'2/8/286--support-ordi.jpg',name:'FAIRPLAY Support Ordinateur',brand:'FAIRPLAY'},
   {img:U+'0/1/01-f7u017bt_.jpg',name:'BELKIN Support Voiture',brand:'BELKIN'},
   {img:U+'1/-/1-avc024hqbk.jpg',name:'BELKIN Adaptateur HDMI sans Fil',brand:'BELKIN'},
@@ -2076,13 +2069,13 @@ var SUPPORTS = [
   {img:U+'b/s/bsv603ca2m_angled_3.jpg',name:'BELKIN Multiprise Parafoudre 6',brand:'BELKIN'}
 ];
 var ACCESSOIRES = [
-  {img:U+'6/1/617--perla.jpg',name:'FAIRPLAY ChaÃ®ne 120cm PERLA',brand:'FAIRPLAY'},
-  {img:U+'6/2/623--arla.jpg',name:'FAIRPLAY ChaÃ®ne 120cm ARLA',brand:'FAIRPLAY'},
-  {img:U+'6/2/629--ciala.jpg',name:'FAIRPLAY ChaÃ®ne 120cm CIALA',brand:'FAIRPLAY'},
-  {img:U+'6/3/635--flavia.jpg',name:'FAIRPLAY ChaÃ®ne 120cm FLAVIA',brand:'FAIRPLAY'},
-  {img:U+'1/0/100--luana_1.jpg',name:'FAIRPLAY ChaÃ®ne 120cm LUANA',brand:'FAIRPLAY'},
-  {img:U+'9/4/94-rer_22-aura.jpg',name:'FAIRPLAY ChaÃ®ne 120cm OLIVIA',brand:'FAIRPLAY'},
-  {img:U+'8/9/894--sac-fp.jpg',name:'FAIRPLAY Sac MultimÃ©dia',brand:'FAIRPLAY'},
+  {img:U+'6/1/617--perla.jpg',name:'FAIRPLAY Chaîne 120cm PERLA',brand:'FAIRPLAY'},
+  {img:U+'6/2/623--arla.jpg',name:'FAIRPLAY Chaîne 120cm ARLA',brand:'FAIRPLAY'},
+  {img:U+'6/2/629--ciala.jpg',name:'FAIRPLAY Chaîne 120cm CIALA',brand:'FAIRPLAY'},
+  {img:U+'6/3/635--flavia.jpg',name:'FAIRPLAY Chaîne 120cm FLAVIA',brand:'FAIRPLAY'},
+  {img:U+'1/0/100--luana_1.jpg',name:'FAIRPLAY Chaîne 120cm LUANA',brand:'FAIRPLAY'},
+  {img:U+'9/4/94-rer_22-aura.jpg',name:'FAIRPLAY Chaîne 120cm OLIVIA',brand:'FAIRPLAY'},
+  {img:U+'8/9/894--sac-fp.jpg',name:'FAIRPLAY Sac Multimédia',brand:'FAIRPLAY'},
   {img:U+'2/m/2mma013hqbk.jpeg',name:'BELKIN Sacoche de Voyage',brand:'BELKIN'},
   {img:U+'h/o/housse_belkin_ordinateur.jpg',name:'BELKIN Sacoche Laptop 13"',brand:'BELKIN'},
   {img:U+'h/o/housse_belkin_ordinateur_1.jpg',name:'BELKIN Sacoche Laptop 14"',brand:'BELKIN'},
@@ -2100,7 +2093,7 @@ var FP_IP = [
   {img:U+'1/_/1_7_5.jpg',name:'FAIRPLAY PAVONE Rouge',brand:'FAIRPLAY'},
   {img:U+'1/_/1_-pavone_1_noir_16_25.jpg',name:'FAIRPLAY PAVONE Noir',brand:'FAIRPLAY'},
   {img:U+'1/-/1--pavone_rose_fushia_6_1.jpg',name:'FAIRPLAY PAVONE Rose Fuschia',brand:'FAIRPLAY'},
-  {img:U+'1/_/1_pavone_bleu_givre_6_1.jpg',name:'FAIRPLAY PAVONE Bleu GivrÃ©',brand:'FAIRPLAY'},
+  {img:U+'1/_/1_pavone_bleu_givre_6_1.jpg',name:'FAIRPLAY PAVONE Bleu Givré',brand:'FAIRPLAY'},
   {img:U+'1/_/1_pavone_plum_2_1_1.jpg',name:'FAIRPLAY PAVONE Plum',brand:'FAIRPLAY'},
   {img:U+'2/_/2_10_1_2_3.jpg',name:'FAIRPLAY CAPELLA iPhone 16',brand:'FAIRPLAY'},
   {img:U+'2/_/2_10_1_2_4.jpg',name:'FAIRPLAY CAPELLA iPhone 16 Plus',brand:'FAIRPLAY'},
@@ -2116,10 +2109,10 @@ var CM = [
   {img:U+'c/o/copie_de_2phantom_3.jpeg',name:'COVERME PHANTOM Violet',brand:'COVERME'},
   {img:U+'c/o/copie_de_5phantom_6.jpeg',name:'COVERME PHANTOM Bleu Roi',brand:'COVERME'},
   {img:U+'c/o/copie_de_phantom_6.jpeg',name:'COVERME PHANTOM Noir',brand:'COVERME'},
-  {img:U+'1/-/1--walletbleu_10_1.jpg',name:'COVERME Ã‰tui Wallet Bleu',brand:'COVERME'},
-  {img:U+'1/-/1--walletmarron_1_4_1.jpg',name:'COVERME Ã‰tui Wallet Marron',brand:'COVERME'},
-  {img:U+'1/-/1--walletrouge_1_4_1.jpg',name:'COVERME Ã‰tui Wallet Rouge',brand:'COVERME'},
-  {img:U+'1/-/1--walletnoir_8_1.jpg',name:'COVERME Ã‰tui Wallet Noir',brand:'COVERME'},
+  {img:U+'1/-/1--walletbleu_10_1.jpg',name:'COVERME Étui Wallet Bleu',brand:'COVERME'},
+  {img:U+'1/-/1--walletmarron_1_4_1.jpg',name:'COVERME Étui Wallet Marron',brand:'COVERME'},
+  {img:U+'1/-/1--walletrouge_1_4_1.jpg',name:'COVERME Étui Wallet Rouge',brand:'COVERME'},
+  {img:U+'1/-/1--walletnoir_8_1.jpg',name:'COVERME Étui Wallet Noir',brand:'COVERME'},
   {img:U+'0/1/01-cskinmagbleu00_1.jpg',name:'COVERME Skin MagSafe Bleu',brand:'COVERME'},
   {img:U+'0/1/01-ckinmagpastel_5.jpg',name:'COVERME Skin MagSafe Rose',brand:'COVERME'},
   {img:U+'0/1/01-ckinmaglilas_1_3.jpg',name:'COVERME Skin MagSafe Lilas',brand:'COVERME'},
@@ -2139,7 +2132,7 @@ var RS = [
   {img:U+'0/-/0--solmagveal_2_10.jpeg',name:'RHINOSHIELD SolidX MagSafe Vert',brand:'RHINOSHIELD'},
   {img:U+'0/-/0--solmagbleugla_5.jpeg',name:'RHINOSHIELD SolidX MagSafe Glacier',brand:'RHINOSHIELD'},
   {img:U+'6/9/697--4711502653248.jpg',name:'RHINOSHIELD SolidSuit Rose Sorbet',brand:'RHINOSHIELD'},
-  {img:U+'6/9/698--4711502653217.jpg',name:'RHINOSHIELD SolidSuit Bleu OcÃ©an',brand:'RHINOSHIELD'},
+  {img:U+'6/9/698--4711502653217.jpg',name:'RHINOSHIELD SolidSuit Bleu Océan',brand:'RHINOSHIELD'},
   {img:U+'6/9/699--4711502653187.jpg',name:'RHINOSHIELD SolidSuit Gris',brand:'RHINOSHIELD'}
 ];
 // COQUES Samsung
@@ -2150,9 +2143,9 @@ var FP_PAVONE_SS = [
   {img:U+'p/a/pavone_1_noir_15_27.jpg',name:'FAIRPLAY PAVONE S24+ Noir',brand:'FAIRPLAY'}
 ];
 var CM_SS = [
-  {img:U+'1/-/1--walletbleu_3_4.jpg',name:'COVERME Ã‰tui Wallet Galaxy Bleu',brand:'COVERME'},
-  {img:U+'1/-/1--walletrouge_5_2.jpg',name:'COVERME Ã‰tui Wallet Galaxy Rouge',brand:'COVERME'},
-  {img:U+'1/-/1--walletnoir_12.jpg',name:'COVERME Ã‰tui Wallet Galaxy Noir',brand:'COVERME'},
+  {img:U+'1/-/1--walletbleu_3_4.jpg',name:'COVERME Étui Wallet Galaxy Bleu',brand:'COVERME'},
+  {img:U+'1/-/1--walletrouge_5_2.jpg',name:'COVERME Étui Wallet Galaxy Rouge',brand:'COVERME'},
+  {img:U+'1/-/1--walletnoir_12.jpg',name:'COVERME Étui Wallet Galaxy Noir',brand:'COVERME'},
   {img:U+'o/n/onyxgris4_6.jpeg',name:'COVERME ONYX Gris Titane',brand:'COVERME'},
   {img:U+'o/n/onyxgold4_9.jpeg',name:'COVERME ONYX Gold',brand:'COVERME'}
 ];
@@ -2173,10 +2166,10 @@ var FP_VERRE = [
   {img:U+'f/a/fairplay_12.jpg',name:'FAIRPLAY IMPACT Verre iPhone 14 Pro',brand:'FAIRPLAY'},
   {img:U+'f/a/fairplay.jpg',name:'FAIRPLAY IMPACT Verre iPhone XR/11',brand:'FAIRPLAY'},
   {img:U+'f/a/fairplay_5.jpg',name:'FAIRPLAY IMPACT Verre iPhone 12/12 Pro',brand:'FAIRPLAY'},
-  {img:U+'c/h/chatgpt_image_6_ao_t_2025_10_37_13.png',name:'BELKIN Protection CamÃ©ra iPhone',brand:'BELKIN'},
-  {img:U+'0/1/01-lpa01363m8-000.jpg',name:'RHINOSHIELD Protection CamÃ©ra Gris',brand:'RHINOSHIELD'},
-  {img:U+'0/1/01-lpa013634w-000.jpg',name:'RHINOSHIELD Protection CamÃ©ra Violet',brand:'RHINOSHIELD'},
-  {img:U+'0/1/01-lpa013634v-000.jpg',name:'RHINOSHIELD Protection CamÃ©ra Bleu',brand:'RHINOSHIELD'}
+  {img:U+'c/h/chatgpt_image_6_ao_t_2025_10_37_13.png',name:'BELKIN Protection Caméra iPhone',brand:'BELKIN'},
+  {img:U+'0/1/01-lpa01363m8-000.jpg',name:'RHINOSHIELD Protection Caméra Gris',brand:'RHINOSHIELD'},
+  {img:U+'0/1/01-lpa013634w-000.jpg',name:'RHINOSHIELD Protection Caméra Violet',brand:'RHINOSHIELD'},
+  {img:U+'0/1/01-lpa013634v-000.jpg',name:'RHINOSHIELD Protection Caméra Bleu',brand:'RHINOSHIELD'}
 ];
 var VERRE_SS = [
   {img:U+'f/a/fairplay_1_1.jpg',name:'FAIRPLAY IMPACT Verre Galaxy S25',brand:'FAIRPLAY'},
@@ -2185,9 +2178,9 @@ var VERRE_SS = [
   {img:U+'3/6/3667075118817-1.jpg',name:'FAIRPLAY INTEGRAL Verre S25+',brand:'FAIRPLAY'},
   {img:U+'f/a/fairplay_36.jpg',name:'FAIRPLAY IMPACT Verre Galaxy A54',brand:'FAIRPLAY'},
   {img:U+'f/a/fairplay_40.jpg',name:'FAIRPLAY IMPACT Verre Galaxy A35',brand:'FAIRPLAY'},
-  {img:U+'7/9/793--mobeen_10.jpg',name:'Verre TrempÃ© Galaxy Full Cover',brand:'Autres'},
-  {img:U+'5/8/587--privacy_3.jpg',name:'Verre TrempÃ© Galaxy Privacy',brand:'Autres'},
-  {img:U+'3/3/332--28962_1_4_29.jpg',name:'Verre TrempÃ© CamÃ©ra Galaxy',brand:'Autres'}
+  {img:U+'7/9/793--mobeen_10.jpg',name:'Verre Trempé Galaxy Full Cover',brand:'Autres'},
+  {img:U+'5/8/587--privacy_3.jpg',name:'Verre Trempé Galaxy Privacy',brand:'Autres'},
+  {img:U+'3/3/332--28962_1_4_29.jpg',name:'Verre Trempé Caméra Galaxy',brand:'Autres'}
 ];
 
 var COQUES_IP = FP_IP.concat(CM).concat(RS);
@@ -2209,11 +2202,11 @@ var allAccessoires = {
 var currentAccCat = 'coques';
 var currentAccModel = 'all';
 
-// ====== MODEL FILTER (rÃ©cupÃ©rÃ© du fichier d'origine) ======
+// ====== MODEL FILTER (récupéré du fichier d'origine) ======
 function matchesModel(name, model){
   if(!model || model === 'all') return true;
   var n = (name || '').toLowerCase();
-  // produits universels (chargeurs USB-C gÃ©nÃ©riques, cÃ¢bles, audio sans modÃ¨le) â†’ toujours visibles
+  // produits universels (chargeurs USB-C génériques, câbles, audio sans modèle) → toujours visibles
   var hasModelKw = /iphone|galaxy|note|redmi|xiaomi|pixel|ipad|airpods|watch/.test(n);
   if(!hasModelKw) return true;
   var map = {
@@ -2244,11 +2237,11 @@ var modelLabels = {
 
 var catLabels = {
   'coques':'coques',
-  'verres':'verres trempÃ©s',
+  'verres':'verres trempés',
   'chargeurs':'chargeurs',
   'batteries':'batteries externes',
-  'cables':'cÃ¢bles',
-  'audio':'Ã©couteurs et casques',
+  'cables':'câbles',
+  'audio':'écouteurs et casques',
   'supports':'supports',
   'accessoires':'accessoires'
 };
@@ -2262,10 +2255,10 @@ function updateMoreMessage(){
 
   if(currentAccModel === 'all'){
     titleEl.innerHTML = 'Et plein d\'autres ' + cat + ' <em>en boutique.</em>';
-    textEl.textContent = '+5000 rÃ©fÃ©rences au mur, marques exclusives, modÃ¨les introuvables en ligne. Tu trouveras forcÃ©ment ton bonheur au 21 Rue Gambetta.';
+    textEl.textContent = '+5000 références au mur, marques exclusives, modèles introuvables en ligne. Tu trouveras forcément ton bonheur au 21 Rue Gambetta.';
   } else {
     titleEl.innerHTML = 'D\'autres ' + cat + ' pour <em>' + modelName + '.</em>';
-    textEl.textContent = 'Et plein d\'autres modÃ¨les, marques et accessoires en boutique. Passe nous voir, on a probablement ce qu\'il te faut.';
+    textEl.textContent = 'Et plein d\'autres modèles, marques et accessoires en boutique. Passe nous voir, on a probablement ce qu\'il te faut.';
   }
 }
 
@@ -2306,22 +2299,22 @@ function renderAccessoires(){
   var label = document.getElementById('accFilterLabel');
   if(currentAccModel !== 'all'){
     banner.classList.add('on');
-    label.textContent = (modelLabels[currentAccModel] || currentAccModel) + ' Â· ' + products.length + ' produit' + (products.length>1?'s':'') + ' compatible' + (products.length>1?'s':'');
+    label.textContent = (modelLabels[currentAccModel] || currentAccModel) + ' · ' + products.length + ' produit' + (products.length>1?'s':'') + ' compatible' + (products.length>1?'s':'');
   } else {
     banner.classList.remove('on');
   }
 
   if(!products.length){
-    grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><h3>Aucun accessoire pour ce filtre</h3><p>Essaie une autre catÃ©gorie ou dÃ©sactive le filtre modÃ¨le.</p></div>';
+    grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><h3>Aucun accessoire pour ce filtre</h3><p>Essaie une autre catégorie ou désactive le filtre modèle.</p></div>';
     return;
   }
   var html = products.map(function(p, i){
     var fb = accFallback(currentAccCat, p.name, p.brand);
-    var badge = i < 6 ? '<span class="badge-top">â­ TOP</span>' : '';
+    var badge = i < 6 ? '<span class="badge-top">⭐ TOP</span>' : '';
     var pData = encodeURIComponent(JSON.stringify({n: p.name, b: p.brand, i: p.img}));
     return '<article class="acc-card" data-product="' + pData + '" onclick="openOrderModal(this)">'
       + badge
-      + '<span class="order-hint">ðŸ’¬ COMMANDER â†’</span>'
+      + '<span class="order-hint">💬 COMMANDER →</span>'
       + '<div class="img-wrap"><img src="' + p.img + '" alt="' + escapeHtml(p.name) + '" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')" onerror="this.onerror=null;this.src=\'' + fb + '\';this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')"></div>'
       + '<div class="info">'
       + '<div class="acc-name">' + escapeHtml(p.name) + '</div>'
@@ -2333,9 +2326,103 @@ function renderAccessoires(){
   updateMoreMessage();
 }
 
-// CatÃ©gories accessoires
+// Catégories accessoires
 document.querySelectorAll('#accCats .chip').forEach(function(btn){
   btn.addEventListener('click', function(){
     document.querySelectorAll('#accCats .chip').forEach(function(c){ c.classList.remove('active'); });
     btn.classList.add('active');
- 
+    currentAccCat = btn.dataset.acc;
+    renderAccessoires();
+  });
+});
+
+// Filtre modèle
+document.querySelectorAll('#accModels .chip').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('#accModels .chip').forEach(function(c){ c.classList.remove('active'); });
+    btn.classList.add('active');
+    currentAccModel = btn.dataset.model;
+    renderAccessoires();
+  });
+});
+
+function clearAccModel(){
+  currentAccModel = 'all';
+  document.querySelectorAll('#accModels .chip').forEach(function(c){ c.classList.remove('active'); });
+  var allBtn = document.querySelector('#accModels .chip[data-model="all"]');
+  if(allBtn) allBtn.classList.add('active');
+  renderAccessoires();
+}
+
+// ====== ORDER MODAL ======
+var ORDER_EMAIL = 'contact@solution-phone.fr';
+
+function openOrderModal(cardEl){
+  var data = {};
+  try { data = JSON.parse(decodeURIComponent(cardEl.getAttribute('data-product'))); } catch(e){}
+  if(!data.n) return;
+
+  var modelSuffix = '';
+  if(currentAccModel !== 'all'){
+    modelSuffix = ' (pour ' + (modelLabels[currentAccModel] || currentAccModel) + ')';
+  }
+
+  // Fill modal
+  document.getElementById('omImg').src = data.i || '';
+  document.getElementById('omImg').alt = data.n;
+  document.getElementById('omName').textContent = data.n;
+  document.getElementById('omBrand').textContent = '// ' + (data.b || '');
+
+  var modelBlock = document.getElementById('omModel');
+  if(currentAccModel !== 'all'){
+    modelBlock.style.display = 'block';
+    document.getElementById('omModelLabel').textContent = modelLabels[currentAccModel] || currentAccModel;
+  } else {
+    modelBlock.style.display = 'none';
+  }
+
+  // WhatsApp link
+  var waText = 'Bonjour, je suis intéressé par cet accessoire : ' + data.n + ' (' + (data.b || '') + ')' + modelSuffix + '. Est-il disponible et à quel prix ?';
+  document.getElementById('omWa').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(waText);
+
+  // Mail link
+  var mailSubject = 'Commande accessoire : ' + data.n;
+  var mailBody = 'Bonjour,\n\nJe suis intéressé par cet accessoire :\n\n• ' + data.n + '\n• Marque : ' + (data.b || '') + (currentAccModel !== 'all' ? '\n• Pour : ' + (modelLabels[currentAccModel] || currentAccModel) : '') + '\n\nPourriez-vous me confirmer la disponibilité et le prix ?\n\nMerci.';
+  document.getElementById('omMail').href = 'mailto:' + ORDER_EMAIL + '?subject=' + encodeURIComponent(mailSubject) + '&body=' + encodeURIComponent(mailBody);
+
+  document.getElementById('orderModal').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOrderModal(){
+  document.getElementById('orderModal').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+// Fermeture par touche Échap
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeOrderModal();
+});
+
+// Init accessoires
+renderAccessoires();
+
+// ====== REVEAL ======
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.eng, .q-item, .trust-item').forEach(function(el, i){
+  el.classList.add('reveal');
+  el.style.transitionDelay = (i * 50) + 'ms';
+  io.observe(el);
+});
+</script>
+
+</body>
+</html>
