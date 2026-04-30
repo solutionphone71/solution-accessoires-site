@@ -361,7 +361,7 @@ nav.main {
 .bp-photo-wrap img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center top;
   display: block;
   transition: transform 8s ease;
 }
@@ -737,7 +737,8 @@ nav.main {
 }
 .acc-card .img-wrap.has-loaded::before { opacity: 0; }
 .acc-card .img-wrap img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 100%; height: 100%; object-fit: contain;
+  padding: 10px;
   position: relative; z-index: 1;
   transition: transform 0.4s ease, opacity 0.5s ease;
   opacity: 0;
@@ -1240,6 +1241,11 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   .engagements { padding: 60px 20px; }
   .eng-grid { grid-template-columns: 1fr; gap: 32px; }
   .boutique { padding: 60px 20px; }
+  .bp-photo-wrap { height: auto; max-height: 420px; }
+  .bp-photo-wrap img { object-position: center top; }
+  .card .ph { height: 200px; }
+  .card .ph img { max-height: 180px; }
+  .acc-card .img-wrap { aspect-ratio: 1/1; }
   .partner-strip { flex-direction: column; padding: 24px; gap: 20px; text-align: center; }
   .partner-strip .text { flex-direction: column; gap: 12px; }
   .footer-cols { grid-template-columns: 1fr; gap: 32px; }
@@ -2331,99 +2337,4 @@ document.querySelectorAll('#accCats .chip').forEach(function(btn){
   btn.addEventListener('click', function(){
     document.querySelectorAll('#accCats .chip').forEach(function(c){ c.classList.remove('active'); });
     btn.classList.add('active');
-    currentAccCat = btn.dataset.acc;
-    renderAccessoires();
-  });
-});
-
-// Filtre modÃ¨le
-document.querySelectorAll('#accModels .chip').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    document.querySelectorAll('#accModels .chip').forEach(function(c){ c.classList.remove('active'); });
-    btn.classList.add('active');
-    currentAccModel = btn.dataset.model;
-    renderAccessoires();
-  });
-});
-
-function clearAccModel(){
-  currentAccModel = 'all';
-  document.querySelectorAll('#accModels .chip').forEach(function(c){ c.classList.remove('active'); });
-  var allBtn = document.querySelector('#accModels .chip[data-model="all"]');
-  if(allBtn) allBtn.classList.add('active');
-  renderAccessoires();
-}
-
-// ====== ORDER MODAL ======
-var ORDER_EMAIL = 'contact@solution-phone.fr';
-
-function openOrderModal(cardEl){
-  var data = {};
-  try { data = JSON.parse(decodeURIComponent(cardEl.getAttribute('data-product'))); } catch(e){}
-  if(!data.n) return;
-
-  var modelSuffix = '';
-  if(currentAccModel !== 'all'){
-    modelSuffix = ' (pour ' + (modelLabels[currentAccModel] || currentAccModel) + ')';
-  }
-
-  // Fill modal
-  document.getElementById('omImg').src = data.i || '';
-  document.getElementById('omImg').alt = data.n;
-  document.getElementById('omName').textContent = data.n;
-  document.getElementById('omBrand').textContent = '// ' + (data.b || '');
-
-  var modelBlock = document.getElementById('omModel');
-  if(currentAccModel !== 'all'){
-    modelBlock.style.display = 'block';
-    document.getElementById('omModelLabel').textContent = modelLabels[currentAccModel] || currentAccModel;
-  } else {
-    modelBlock.style.display = 'none';
-  }
-
-  // WhatsApp link
-  var waText = 'Bonjour, je suis intÃ©ressÃ© par cet accessoire : ' + data.n + ' (' + (data.b || '') + ')' + modelSuffix + '. Est-il disponible et Ã  quel prix ?';
-  document.getElementById('omWa').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(waText);
-
-  // Mail link
-  var mailSubject = 'Commande accessoire : ' + data.n;
-  var mailBody = 'Bonjour,\n\nJe suis intÃ©ressÃ© par cet accessoire :\n\nâ€¢ ' + data.n + '\nâ€¢ Marque : ' + (data.b || '') + (currentAccModel !== 'all' ? '\nâ€¢ Pour : ' + (modelLabels[currentAccModel] || currentAccModel) : '') + '\n\nPourriez-vous me confirmer la disponibilitÃ© et le prix ?\n\nMerci.';
-  document.getElementById('omMail').href = 'mailto:' + ORDER_EMAIL + '?subject=' + encodeURIComponent(mailSubject) + '&body=' + encodeURIComponent(mailBody);
-
-  document.getElementById('orderModal').classList.add('on');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeOrderModal(){
-  document.getElementById('orderModal').classList.remove('on');
-  document.body.style.overflow = '';
-}
-
-// Fermeture par touche Ã‰chap
-document.addEventListener('keydown', function(e){
-  if(e.key === 'Escape') closeOrderModal();
-});
-
-// Init accessoires
-renderAccessoires();
-
-// ====== REVEAL ======
-var io = new IntersectionObserver(function(entries){
-  entries.forEach(function(entry){
-    if(entry.isIntersecting){
-      entry.target.classList.add('in');
-      io.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.08 });
-
-document.querySelectorAll('.eng, .q-item, .trust-item').forEach(function(el, i){
-  el.classList.add('reveal');
-  el.style.transitionDelay = (i * 50) + 'ms';
-  io.observe(el);
-});
-</script>
-
-</body>
-</html>
-
+ 
