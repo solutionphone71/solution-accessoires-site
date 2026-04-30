@@ -620,7 +620,7 @@ nav.main {
 .card .grade.gN { background: var(--neuf-bg); color: var(--neuf); border-color: var(--neuf-border); }
 
 .card .ph {
-  width: 100%; height: 220px;
+  width: 140px; height: 190px;
   display: flex; align-items: center; justify-content: center;
   margin: 6px 0 12px;
   position: relative;
@@ -640,7 +640,7 @@ nav.main {
 }
 .card .ph.has-loaded::before { opacity: 0; }
 .card .ph img {
-  max-width: 90%; max-height: 200px;
+  max-width: 100%; max-height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 16px 24px rgba(0,0,0,0.12));
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
@@ -2364,4 +2364,65 @@ function openOrderModal(cardEl){
 
   var modelSuffix = '';
   if(currentAccModel !== 'all'){
-    modelSu
+    modelSuffix = ' (pour ' + (modelLabels[currentAccModel] || currentAccModel) + ')';
+  }
+
+  // Fill modal
+  document.getElementById('omImg').src = data.i || '';
+  document.getElementById('omImg').alt = data.n;
+  document.getElementById('omName').textContent = data.n;
+  document.getElementById('omBrand').textContent = '// ' + (data.b || '');
+
+  var modelBlock = document.getElementById('omModel');
+  if(currentAccModel !== 'all'){
+    modelBlock.style.display = 'block';
+    document.getElementById('omModelLabel').textContent = modelLabels[currentAccModel] || currentAccModel;
+  } else {
+    modelBlock.style.display = 'none';
+  }
+
+  // WhatsApp link
+  var waText = 'Bonjour, je suis intéressé par cet accessoire : ' + data.n + ' (' + (data.b || '') + ')' + modelSuffix + '. Est-il disponible et à quel prix ?';
+  document.getElementById('omWa').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(waText);
+
+  // Mail link
+  var mailSubject = 'Commande accessoire : ' + data.n;
+  var mailBody = 'Bonjour,\n\nJe suis intéressé par cet accessoire :\n\n• ' + data.n + '\n• Marque : ' + (data.b || '') + (currentAccModel !== 'all' ? '\n• Pour : ' + (modelLabels[currentAccModel] || currentAccModel) : '') + '\n\nPourriez-vous me confirmer la disponibilité et le prix ?\n\nMerci.';
+  document.getElementById('omMail').href = 'mailto:' + ORDER_EMAIL + '?subject=' + encodeURIComponent(mailSubject) + '&body=' + encodeURIComponent(mailBody);
+
+  document.getElementById('orderModal').classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeOrderModal(){
+  document.getElementById('orderModal').classList.remove('on');
+  document.body.style.overflow = '';
+}
+
+// Fermeture par touche Échap
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeOrderModal();
+});
+
+// Init accessoires
+renderAccessoires();
+
+// ====== REVEAL ======
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.eng, .q-item, .trust-item').forEach(function(el, i){
+  el.classList.add('reveal');
+  el.style.transitionDelay = (i * 50) + 'ms';
+  io.observe(el);
+});
+</script>
+
+</body>
+</html>
