@@ -653,11 +653,21 @@ nav.main {
   100% { background-position: -200% 0; }
 }
 .card .ph .noimg {
-  width: 110px; height: 180px; border-radius: 24px;
-  background: linear-gradient(160deg, #e8e8ed, #d4d4d9);
+  width: 100%; height: 100%; border-radius: 18px;
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
   display: flex; align-items: center; justify-content: center;
-  font-size: 36px; color: #b0b0b5;
-  box-shadow: inset 0 0 0 4px rgba(0,0,0,0.05);
+  flex-direction: column; gap: 8px; padding: 20px;
+  font-size: 15px; font-weight: 700; color: rgba(255,255,255,0.85);
+  letter-spacing: -0.02em; text-align: center; line-height: 1.2;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+.card .ph .noimg::before {
+  content: "📱"; font-size: 48px; opacity: 0.6;
+}
+.card .ph .noimg::after {
+  content: "Photo bientôt disponible";
+  font-size: 10px; font-weight: 500; opacity: 0.5;
+  letter-spacing: 0.08em; text-transform: uppercase;
 }
 
 .card .model {
@@ -1877,7 +1887,7 @@ function cardHtml(item){
     imgBlock = '<img src="' + optimizeImageUrl(item.image_url, 600) + '" alt="' + escapeHtml(item.model) + '" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')" onerror="this.parentElement.classList.add(\'has-loaded\');this.style.display=\'none\'">';
     phClass = 'ph';
   } else {
-    imgBlock = '<div class="noimg">📱</div>';
+    imgBlock = '<div class="noimg">' + escapeHtml(item.model) + '</div>';
     phClass = 'ph has-loaded';
   }
   var colorDot = item.color_hex ? '<span class="color-dot" style="background:' + item.color_hex + '"></span>' : '';
