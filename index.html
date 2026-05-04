@@ -619,11 +619,9 @@ nav.main {
 .card .grade.gN { background: var(--neuf-bg); color: var(--neuf); border-color: var(--neuf-border); }
 
 .card .ph {
-  width: 100%; height: 220px;
+  width: 100%; height: 200px;
   display: flex; align-items: center; justify-content: center;
   margin: 6px 0 12px;
-  position: relative;
-  overflow: visible;
 }
 .card .ph::before {
   /* Skeleton placeholder pendant le chargement (caché dès que l'image est loaded) */
@@ -640,9 +638,9 @@ nav.main {
 }
 .card .ph.has-loaded::before { opacity: 0; }
 .card .ph img {
-  width: 100%; height: 100%;
-  object-fit: contain;
-  padding: 10px;
+  display: block;
+  max-height: 180px;
+  max-width: 70%;
   filter: drop-shadow(0 16px 24px rgba(0,0,0,0.12));
   transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
   opacity: 0;
