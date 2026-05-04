@@ -234,26 +234,25 @@ nav.main {
 }
 .casseurs-photo img {
   display: block;
-  width: 180px; height: 180px;
+  width: 200px; height: 160px;
   object-fit: cover;
   border-radius: 14px;
   border: 5px solid var(--white);
-  transform: rotate(-4deg);
+  transform: rotate(-3deg);
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.45),
-    0 6px 14px rgba(0, 0, 0, 0.28),
-    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
-  -webkit-box-reflect: below 4px linear-gradient(transparent 0%, transparent 70%, rgba(0,0,0,0.18) 100%);
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 8px 16px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
   transition: transform 0.5s cubic-bezier(0.2, 0.85, 0.3, 1.05),
               box-shadow 0.5s ease;
   cursor: pointer;
 }
 .casseurs-photo img:hover {
-  transform: rotate(0deg) scale(1.06);
+  transform: rotate(0deg) scale(1.08);
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.55),
-    0 8px 20px rgba(0, 0, 0, 0.35),
-    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    0 28px 70px rgba(0, 0, 0, 0.6),
+    0 10px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 .casseurs-photo .photo-tag {
   position: absolute;
@@ -1208,9 +1207,9 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 .reveal.in { opacity: 1; transform: none; }
 
 /* ============ GOOGLE ADS SAFE MODE ============ */
-/* Cache les éléments mentionnant "cassé" / réparation pour les visiteurs Google Ads */
-.gads-mode .casseurs { display: none !important; }
-.gads-mode .partner-strip { display: none !important; }
+/* Masque certains éléments pour les visiteurs Google Ads si nécessaire */
+/* .gads-mode .casseurs { display: none !important; } */
+/* .gads-mode .partner-strip { display: none !important; } */
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
@@ -1234,7 +1233,7 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   .casseurs { padding: 28px 20px; }
   .casseurs-text { flex-direction: column; gap: 12px; text-align: center; }
   .casseurs-icon { font-size: 40px; }
-  .casseurs-photo img { width: 140px; height: 140px; }
+  .casseurs-photo img { width: 160px; height: 120px; }
   .casseurs-photo .photo-tag { font-size: 8px; padding: 4px 7px; }
   .trust { padding: 28px 20px; }
   .trust-grid { gap: 16px; }
@@ -1314,8 +1313,8 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
     </h1>
     <div class="hero-grid-bottom">
       <p class="hero-lede">
-        Le plus gros stock de smartphones <strong>reconditionnés</strong> à Mâcon.
-        iPhone, Samsung, Pixel, Xiaomi. Tu choisis, tu repars. Garantie 12 mois incluse.
+        Vous connaissez <strong>Solution Phone</strong>, votre expert smartphone n°1 à Mâcon ?
+        Nous sommes juste à côté pour <strong>sublimer</strong> votre téléphone — coques, films, chargeurs et reconditionnés garantis 12 mois.
       </p>
       <div class="hero-cta">
         <a href="#reconditionnes" class="btn btn-red btn-large">Voir les reconditionnés <span>→</span></a>
@@ -1325,24 +1324,24 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
   </div>
 </section>
 
-<!-- CASSEURS BANNER -->
+<!-- NOS BOUTIQUES BANNER -->
 <section class="casseurs">
   <div class="casseurs-inner">
     <div class="casseurs-left">
       <div class="casseurs-photo">
-        <img src="avant-apres-vignette.jpg" alt="Avant / Après réparation d'écran iPhone par Solution Phone à Mâcon" loading="lazy">
-        <div class="photo-tag">AVANT / APRÈS</div>
+        <img src="boutique-solution-accessoires.jpg" alt="Boutique Solution Accessoires by Solution Phone à Mâcon" loading="lazy">
+        <div class="photo-tag">NOS BOUTIQUES</div>
       </div>
       <div class="casseurs-text">
-        <div class="casseurs-icon">⚡</div>
+        <div class="casseurs-icon">🤝</div>
         <div class="casseurs-msg">
-          <div class="small">// MESSAGE POUR LES CASSEURS</div>
-          <div class="big">Tel cassé ? C'est par ici que ça se passe.</div>
+          <div class="small">// SOLUTION PHONE × SOLUTION ACCESSOIRES</div>
+          <div class="big">Deux boutiques, une passion : le smartphone.</div>
         </div>
       </div>
     </div>
     <a href="https://solution-phone.fr" target="_blank" rel="noopener">
-      Solution Phone <span class="arrow">→</span>
+      Découvrir Solution Phone <span class="arrow">→</span>
     </a>
   </div>
 </section>
@@ -1625,13 +1624,13 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 
 <!-- FOOTER -->
 <footer>
-  <!-- Partner strip CASSEURS -->
+  <!-- Partner strip SOLUTION PHONE -->
   <div class="partner-strip">
     <div class="text">
-      <div class="ico">⚡</div>
+      <div class="ico">🤝</div>
       <div class="copy">
-        <strong>Tu as cassé ton tel ?</strong>
-        Notre boutique partenaire <strong style="color:var(--red);font-family:inherit;text-transform:none;font-size:inherit;display:inline">Solution Phone</strong> est juste à côté. C'est leur métier depuis 12 ans.
+        <strong>Besoin d'un expert smartphone ?</strong>
+        Notre boutique partenaire <strong style="color:var(--red);font-family:inherit;text-transform:none;font-size:inherit;display:inline">Solution Phone</strong> est juste à côté. Votre expert depuis 12 ans à Mâcon.
       </div>
     </div>
     <a href="https://solution-phone.fr" target="_blank" rel="noopener">
@@ -1686,10 +1685,7 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
 <script>
 // ====== DÉTECTION GOOGLE ADS — MODE SAFE ======
 // Quand un visiteur arrive depuis Google Ads (gclid présent, ou utm_medium=cpc),
-// on cache automatiquement les éléments potentiellement risqués pour la compliance Ads :
-// - Le bandeau casseurs (mention "tel cassé" + redirection vers solution-phone.fr)
-// - Le partner-strip dans le footer (même contenu)
-// Le visiteur normal voit tout, le bot Google Ads ne voit rien de risqué.
+// on ajoute la classe gads-mode pour permettre des ajustements si nécessaire.
 (function(){
   try {
     var p = new URLSearchParams(window.location.search);
