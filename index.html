@@ -1046,6 +1046,7 @@ nav.main {
   letter-spacing: 0.08em; text-align: center;
   text-transform: uppercase;
 }
+.order-mail-form{display:none;margin-top:12px;padding:16px;background:var(--soft);border:1px solid var(--line);border-radius:12px}.order-mail-form.on{display:grid;gap:9px}.order-mail-form label{display:grid;gap:5px;color:var(--muted);font-size:11px;font-weight:700}.order-mail-form input{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff;padding:11px 12px;font:600 13px/1.2 inherit;outline:none}.order-mail-form input:focus{border-color:var(--ink)}.order-mail-form button{border:0;border-radius:8px;background:var(--red);color:#fff;padding:13px;font:800 13px/1 inherit;cursor:pointer}.order-mail-form button:disabled{opacity:.65;cursor:wait}.order-mail-status{min-height:18px;margin:0;color:var(--muted);font-size:11px;line-height:1.45}.order-mail-status.success{color:#187c46}.order-mail-status.error{color:#b22126}.order-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important}
 
 @media (max-width: 640px) {
   .acc-models { padding: 0 20px 16px; }
@@ -1552,13 +1553,21 @@ footer { background: var(--ink); color: var(--white); padding: 80px 32px 40px; }
         <a id="omWa" href="#" target="_blank" rel="noopener" class="btn btn-wa">
           💬 Commander par WhatsApp
         </a>
-        <a id="omMail" href="#" class="btn btn-mail">
+        <button id="omMail" type="button" class="btn btn-mail" onclick="toggleOrderMailForm()">
           ✉️ Commander par mail
-        </a>
+        </button>
         <a href="#boutique" onclick="closeOrderModal()" class="btn btn-shop">
           📍 Voir en boutique (21 Rue Gambetta)
         </a>
       </div>
+      <form class="order-mail-form" id="orderMailForm" onsubmit="sendOrderMail(event)">
+        <label>Votre nom<input id="orderMailName" autocomplete="name" required></label>
+        <label>Votre e-mail<input id="orderMailEmail" type="email" autocomplete="email" required></label>
+        <label>Téléphone (facultatif)<input id="orderMailPhone" type="tel" autocomplete="tel"></label>
+        <input id="orderMailWebsite" tabindex="-1" autocomplete="off" aria-hidden="true" class="order-honeypot">
+        <button type="submit">Envoyer ma demande</button>
+        <p class="order-mail-status" id="orderMailStatus" role="status" aria-live="polite"></p>
+      </form>
       <div class="om-foot">// RÉPONSE EN MOINS DE 30 MIN EN HEURES OUVRÉES</div>
     </div>
   </div>
@@ -2382,6 +2391,10 @@ function clearAccModel(){
 
 // ====== ORDER MODAL ======
 var ORDER_EMAIL = 'contact@solution-phone.fr';
+var QUOTE_REQUEST_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/quote-request';
+var QUOTE_REQUEST_KEY = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
+var orderMailToken = '';
+var currentOrderRequest = '';
 
 function openOrderModal(cardEl){
   var data = {};
@@ -2411,10 +2424,9 @@ function openOrderModal(cardEl){
   var waText = 'Bonjour, je suis intéressé par cet accessoire : ' + data.n + ' (' + (data.b || '') + ')' + modelSuffix + '. Est-il disponible et à quel prix ?';
   document.getElementById('omWa').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(waText);
 
-  // Mail link
-  var mailSubject = 'Commande accessoire : ' + data.n;
-  var mailBody = 'Bonjour,\n\nJe suis intéressé par cet accessoire :\n\n• ' + data.n + '\n• Marque : ' + (data.b || '') + (currentAccModel !== 'all' ? '\n• Pour : ' + (modelLabels[currentAccModel] || currentAccModel) : '') + '\n\nPourriez-vous me confirmer la disponibilité et le prix ?\n\nMerci.';
-  document.getElementById('omMail').href = 'mailto:' + ORDER_EMAIL + '?subject=' + encodeURIComponent(mailSubject) + '&body=' + encodeURIComponent(mailBody);
+  currentOrderRequest = 'Demande accessoire · ' + data.n + ' · Marque : ' + (data.b || 'non précisée') + (currentAccModel !== 'all' ? ' · Pour : ' + (modelLabels[currentAccModel] || currentAccModel) : '') + ' · Merci de confirmer la disponibilité et le prix.';
+  document.getElementById('orderMailForm').classList.remove('on');
+  document.getElementById('orderMailStatus').textContent = '';
 
   document.getElementById('orderModal').classList.add('on');
   document.body.style.overflow = 'hidden';
@@ -2423,6 +2435,17 @@ function openOrderModal(cardEl){
 function closeOrderModal(){
   document.getElementById('orderModal').classList.remove('on');
   document.body.style.overflow = '';
+}
+function toggleOrderMailForm(){var form=document.getElementById('orderMailForm');form.classList.toggle('on');if(form.classList.contains('on'))document.getElementById('orderMailName').focus();}
+function sendOrderMail(event){
+  event.preventDefault();
+  var form=event.currentTarget,button=form.querySelector('button[type="submit"]'),status=document.getElementById('orderMailStatus');
+  var name=document.getElementById('orderMailName').value.trim(),email=document.getElementById('orderMailEmail').value.trim(),phone=document.getElementById('orderMailPhone').value.trim();
+  orderMailToken=orderMailToken||crypto.randomUUID();button.disabled=true;button.textContent='Envoi en cours…';status.className='order-mail-status';status.textContent='';
+  fetch(QUOTE_REQUEST_URL,{method:'POST',headers:{apikey:QUOTE_REQUEST_KEY,Authorization:'Bearer '+QUOTE_REQUEST_KEY,'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,phone:phone,request:currentOrderRequest,form_type:'main_quote',page:location.pathname,client_token:orderMailToken,website:document.getElementById('orderMailWebsite').value})})
+    .then(function(response){return response.json().catch(function(){return null;}).then(function(payload){if(!response.ok||!payload||!payload.received){var error=new Error(payload&&payload.error||'quote_failed');error.status=response.status;throw error;}return payload;});})
+    .then(function(payload){orderMailToken='';button.textContent='Demande reçue';status.textContent='Demande reçue ('+payload.reference+'). L’équipe vous répond par e-mail.';status.className='order-mail-status success';window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'demande_accessoire_email_envoyee',reference:payload.reference});})
+    .catch(function(error){button.disabled=false;button.textContent='Envoyer ma demande';status.textContent=error&&error.status===429?'Plusieurs demandes ont déjà été envoyées. Réessayez plus tard ou utilisez WhatsApp.':'L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';status.className='order-mail-status error';});
 }
 
 // Fermeture par touche Échap
