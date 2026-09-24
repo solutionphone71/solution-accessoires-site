@@ -1,0 +1,6 @@
+# GitHub Pages : fichiers de travail à ne pas publier
+exclude:
+  - AGENTS.md
+  - CLAUDE.md
+  - README.md
+  - scripts
