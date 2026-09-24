@@ -74,7 +74,7 @@
 <link rel="icon" href="/img/logo-ui.webp" type="image/webp">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="boutique.css?v=1">
-<link rel="stylesheet" href="accueil.css?v=4">
+<link rel="stylesheet" href="accueil.css?v=5">
 <script src="/menu-commun.js?v=1" data-site="acc"></script>
 </head>
 
@@ -153,7 +153,7 @@
     <label class="field">Mon téléphone
       <input id="accModel" list="accModelList" placeholder="Ex. iPhone 13, Galaxy S24" autocomplete="off">
       <datalist id="accModelList">
-        <option value="iPhone 16 Pro"><option value="iPhone 16"><option value="iPhone 15"><option value="iPhone 14"><option value="iPhone 13"><option value="iPhone 12"><option value="iPhone 11">
+        <option value="iPhone 17 Pro"><option value="iPhone 17"><option value="iPhone Air"><option value="iPhone 16e"><option value="iPhone 16 Pro"><option value="iPhone 16"><option value="iPhone 15"><option value="iPhone 14"><option value="iPhone 13"><option value="iPhone 12"><option value="iPhone 11">
         <option value="Galaxy S25"><option value="Galaxy S24"><option value="Galaxy A55"><option value="Galaxy A35"><option value="Galaxy A15"><option value="Xiaomi 15"><option value="Redmi 13C">
       </datalist>
     </label>
@@ -821,22 +821,41 @@ function normModel(s){
     .replace(/iphone\s*([a-z0-9]+)\s*\/\s*([a-z0-9]+)/g, 'iphone $1 iphone $2')
     .replace(/[’'"]/g,' ').replace(/\s+/g,' ').trim();
 }
+// Famille d'un nom (produit ou téléphone saisi)
 function family(s){
-  if(/iphone/.test(s)) return 'apple';
-  if(/galaxy(?!\s*buds)|samsung(?!\s*galaxy\s*buds)|\b[saz]\d{2}\b/.test(s) && !/buds/.test(s)) return 'samsung';
+  if(/buds/.test(s)) return '';
+  if(/iphone|ipad/.test(s)) return 'apple';
+  if(/galaxy|samsung/.test(s)) return 'samsung';
   if(/redmi|xiaomi|poco/.test(s)) return 'xiaomi';
   if(/pixel/.test(s)) return 'google';
+  if(/oppo|oneplus|huawei|honor|motorola|\bmoto\b|nothing|sony|xperia|nokia|realme|vivo|crosscall|wiko/.test(s)) return 'autre';
+  if(/\bs\d{2}\b|\bz\s*(flip|fold)/.test(s)) return 'samsung';
+  if(/^(1[0-9]e?|se[0-9]?|xr|xs|x)(\s|$)/.test(s)) return 'apple';
   return '';
+}
+// Famille d'un produit : son nom, et pour les coques la mention « MagSafe » / « Visuel iPhone »
+function productFamily(p, cat){
+  var n = normModel(p.name), f = family(n);
+  if(!f && /lightning/.test(n)) f = 'apple';
+  if(!f && cat === 'coques' && (/magsafe/.test(n) || /visuel iphone/i.test(p.note || ''))) f = 'apple';
+  return f;
 }
 function modelCore(s){ return s.replace(/\b(apple|samsung|galaxy|xiaomi)\b/g,'').replace(/\s+/g,' ').trim(); }
 function escapeRx(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
-function isCompatible(p, userModel){
+// Avec un modèle saisi : seuls les produits dont le nom correspond au modèle, ou les produits universels.
+function isCompatible(p, userModel, cat){
   var m = normModel(userModel);
   if(!m) return true;
   var n = normModel(p.name);
-  var pf = family(n), uf = family(m);
-  if(!pf) return true;                 // produit universel ou modèle à préciser
-  if(uf && pf !== uf) return false;    // autre marque de téléphone
+  var pf = productFamily(p, cat);
+  if(!pf){
+    // Coques et verres sont propres à un modèle : sans indication, on ne les propose pas,
+    // sauf les verres trempés et l'hydrogel découpés en boutique pour tous les modèles.
+    if(cat === 'coques') return false;
+    if(cat === 'verres') return /^verre trempe (classique|premium)$|hydrogel/.test(deaccent(n));
+    return true;
+  }
+  if(pf !== family(m)) return false;
   var core = modelCore(m);
   if(!core || !/\d/.test(core)) return true;
   var specific = new RegExp('(iphone\\s*(\\d+|x[rs]?|se)|\\b[saz]\\d{2}|redmi|pixel\\s*\\d)').test(n);
@@ -857,9 +876,9 @@ function catOf(p){
 }
 function waReserve(p){
   var model = document.getElementById('accModel').value.trim();
-  return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent('Bonjour, je souhaite réserver : ' + p.name + (p.price ? ' (' + p.price + ' €)' : '') + (model ? ' pour mon ' + model : '') + '. Est-il disponible ?');
+  return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent('Bonjour Solution Accessoires, je souhaite réserver : ' + p.name + (model ? ' · pour ' + model : '') + (p.price ? ' · ' + p.price + '\u00a0€' : '') + '.');
 }
-function priceHtml(p){ return p.price ? '<p class="pprice">' + p.price + ' €</p>' : '<p class="pprice ask">Prix en boutique</p>'; }
+function priceHtml(p){ return p.price ? '<p class="pprice">' + p.price + '\u00a0€</p>' : '<p class="pprice ask">Prix en boutique · réponse rapide sur WhatsApp</p>'; }
 
 function productCard(p, cat){
   var art = document.createElement('article');
@@ -891,7 +910,7 @@ function currentList(){
   } else {
     list = (CATALOGUE[accCat]||[]).map(function(p){ return {p:p, cat:accCat}; });
   }
-  list = list.filter(function(x){ return isCompatible(x.p, model); });
+  list = list.filter(function(x){ return isCompatible(x.p, model, x.cat); });
   var showCase = !accQuery && accCat === 'coques';
   document.getElementById('caseFilters').hidden = !showCase;
   if(showCase){
@@ -914,7 +933,7 @@ function renderAccessoires(){
   var grid = document.getElementById('accGrid');
   grid.replaceChildren();
   if(!list.length){
-    grid.innerHTML = '<p class="empty">Aucun produit pour ce choix. Essayez un autre mot ou demandez-nous au 06 02 84 99 53.</p>';
+    grid.innerHTML = '<p class="empty">Aucun produit pour ce choix. Essayez un autre mot ou demandez-nous au <a href="tel:+33602849953">06\u00a002\u00a084\u00a099\u00a053</a>.</p>';
   } else {
     list.slice(0, accLimit).forEach(function(x){ grid.appendChild(productCard(x.p, x.cat)); });
   }
@@ -976,7 +995,7 @@ function openOrderModal(p, cat, trigger){
   document.getElementById('omName').textContent = p.name;
   document.getElementById('omBrand').textContent = productNote(cat, p);
   var price = document.getElementById('omPrice');
-  price.textContent = p.price ? p.price + ' €' : 'Prix en boutique · confirmé sur WhatsApp';
+  price.textContent = p.price ? p.price + '\u00a0€' : 'Prix en boutique · réponse rapide sur WhatsApp';
   price.className = 'om-price' + (p.price ? '' : ' ask');
 
   var modelBlock = document.getElementById('omModel');
@@ -1028,7 +1047,7 @@ renderAccessoires();
   var modelIn=document.getElementById('protectModel'),acc=document.getElementById('accModel');
   function row(p,cat){
     var b=document.createElement('button');b.type='button';b.className='protect-item';
-    b.innerHTML='<span class="protect-name">'+escapeHtml(p.name)+'</span><span class="protect-note">'+escapeHtml(productNote(cat,p))+'</span><b>'+(p.price?escapeHtml(String(p.price))+' €':'Prix en boutique')+'</b>';
+    b.innerHTML='<span class="protect-name">'+escapeHtml(p.name)+'</span><span class="protect-note">'+escapeHtml(productNote(cat,p))+'</span><b>'+(p.price?escapeHtml(String(p.price))+'\u00a0€':'Prix en boutique')+'</b>';
     b.addEventListener('click',function(){acc.value=modelIn.value;dlg.close();openOrderModal(p,cat,open);});
     return b;
   }
@@ -1038,7 +1057,7 @@ renderAccessoires();
     (CATALOGUE.verres||[]).filter(function(p){return p.price;}).forEach(function(p){glass.appendChild(row(p,'verres'));});
     (CATALOGUE.hydrogel||[]).forEach(function(p){hydro.appendChild(row(p,'hydrogel'));});
     var m=modelIn.value.trim();
-    document.getElementById('protectWa').href='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Bonjour, je voudrais protéger l’écran de mon '+(m||'téléphone')+'. Verre trempé ou hydrogel : que me conseillez-vous ?');
+    document.getElementById('protectWa').href='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Bonjour Solution Accessoires, je souhaite un conseil pour protéger l’écran'+(m?' de mon '+m:' de mon téléphone')+' : verre trempé ou hydrogel.');
   }
   open.addEventListener('click',function(){modelIn.value=acc.value;fill();dlg.showModal();});
   modelIn.addEventListener('input',fill);

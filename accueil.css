@@ -269,3 +269,10 @@ button.fact-protect:focus-visible { outline: 3px solid #0071e3; outline-offset: 
 .grades p { margin-top: 10px; font-size: 12px; color: var(--muted); }
 .empty a { color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
 @media (max-width: 640px) { .grades dl { grid-template-columns: 1fr; } }
+
+/* Accessibilité : champs à 16 px (pas de zoom forcé sur iPhone), liens tactiles ≥ 44 px */
+.field input, .field select { font-size: 16px; }
+.protect-foot a { display: inline-flex; align-items: center; min-height: 44px; }
+.order-rgpd { margin: 2px 0 0; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.order-rgpd a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 2px; }
+.pcard .pprice.ask { line-height: 1.3; }
