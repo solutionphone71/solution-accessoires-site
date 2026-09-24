@@ -111,3 +111,16 @@ button, input, select { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* ---------- Barre de contact fixe en bas (mobile) ---------- */
+.sa-contact { display: none; }
+@media (max-width: 899.98px) {
+  .sa-contact { position: fixed; left: 0; right: 0; bottom: 0; z-index: 150; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: rgba(255,255,255,.97); border-top: 1px solid var(--line); box-shadow: 0 -6px 20px rgba(0,0,0,.06); }
+  .sa-contact a { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50px; padding: 4px 6px; border-radius: 12px; border: 1px solid var(--line-2); background: #fff; color: var(--ink); font-size: 14px; font-weight: 750; line-height: 1.15; text-align: center; }
+  .sa-contact small { font-size: 11px; font-weight: 600; white-space: nowrap; opacity: .9; }
+  .sa-contact .sa-c-tel { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .sa-contact .sa-c-wa { background: #0f7a3d; border-color: #0f7a3d; color: #fff; }
+  .sa-contact a:focus-visible { outline: 3px solid #0071e3; outline-offset: 2px; }
+  /* Si le menu commun ne s'est pas chargé, on garde de la place sous le contenu */
+  html:not(.mc-js) body { padding-bottom: 80px; }
+}
