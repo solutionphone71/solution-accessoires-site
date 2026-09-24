@@ -206,7 +206,8 @@
       <button class="tab active" data-cat="iphone">iPhone <span class="tab-n" id="nIphone">0</span></button>
       <button class="tab" data-cat="samsung">Samsung <span class="tab-n" id="nSamsung">0</span></button>
       <button class="tab" data-cat="autre">Autres marques <span class="tab-n" id="nAutre">0</span></button>
-      <button class="tab" data-cat="neuf">Neufs <span class="tab-n" id="nNeuf">0</span></button>
+      <button class="tab" data-cat="tablette" hidden>Tablettes <span class="tab-n" id="nTablette">0</span></button>
+      <button class="tab" data-cat="neuf" hidden>Neufs <span class="tab-n" id="nNeuf">0</span></button>
     </div>
     <label class="field">Trier
       <select id="sortSel">
@@ -220,8 +221,18 @@
   </div>
 
   <div class="filters" id="filters"></div>
-  <div id="productsWrap"></div>
-  <p class="note">Touchez une ligne pour réserver le téléphone sur WhatsApp. L'équipe confirme la disponibilité.</p>
+  <div id="productsWrap"><p class="empty">Chargement du stock…</p></div>
+  <p class="note">Touchez une ligne pour réserver le téléphone sur WhatsApp : il est mis de côté 48 h. L’équipe confirme la disponibilité.</p>
+  <div class="grades" aria-labelledby="grades-title">
+    <h3 id="grades-title">Que veulent dire les grades ?</h3>
+    <dl>
+      <div><dt>A+</dt><dd>Excellent état : très peu de traces visibles.</dd></div>
+      <div><dt>A</dt><dd>Très bon état : légères marques d’usage possibles.</dd></div>
+      <div><dt>B</dt><dd>Bon état : marques visibles, décrites avant la vente.</dd></div>
+      <div><dt>C</dt><dd>État correct : marques d’usage bien visibles, décrites avant la vente.</dd></div>
+    </dl>
+    <p>Quel que soit le grade, chaque téléphone est contrôlé sur 30 points et garanti 12 mois. Le pourcentage de batterie est affiché quand il a été mesuré.</p>
+  </div>
 </section>
 
 <!-- ============================ GARANTIE ============================ -->
@@ -417,26 +428,10 @@ var SU = 'https://kdvxcnjfrmvlnrymfyug.supabase.co';
 var SK = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
 var WHATSAPP = '33783921884';
 
-// ====== DEMO DATA (fallback si Supabase vide) ======
-var DEMO = [
-  {brand:"iphone", condition:"reconditionne", model:"iPhone 15 Pro", storage:"256 Go", color:"Titane Naturel", color_hex:"#c5b9a5", grade:"A+", price:899, battery_pct:100, sold:false},
-  {brand:"iphone", condition:"reconditionne", model:"iPhone 14",     storage:"128 Go", color:"Minuit",         color_hex:"#2c2c2e", grade:"A",  price:549, battery_pct:95,  sold:false},
-  {brand:"iphone", condition:"reconditionne", model:"iPhone 13 Pro", storage:"256 Go", color:"Graphite",       color_hex:"#54524f", grade:"A",  price:649, battery_pct:92,  sold:false},
-  {brand:"iphone", condition:"reconditionne", model:"iPhone 13",     storage:"128 Go", color:"Bleu",           color_hex:"#a8c7d9", grade:"A",  price:469, battery_pct:100, sold:false},
-  {brand:"iphone", condition:"reconditionne", model:"iPhone 12",     storage:"64 Go",  color:"Blanc",          color_hex:"#f5f5f7", grade:"B",  price:349, battery_pct:88,  sold:false},
-  {brand:"iphone", condition:"reconditionne", model:"iPhone 11",     storage:"64 Go",  color:"Violet",         color_hex:"#d1cddb", grade:"B",  price:289, battery_pct:85,  sold:false},
-  {brand:"iphone", condition:"reconditionne", model:"iPhone SE 2022",storage:"64 Go",  color:"Noir",           color_hex:"#1d1d1f", grade:"A+", price:259, battery_pct:100, sold:false},
-  {brand:"samsung", condition:"reconditionne", model:"Galaxy S23 Ultra", storage:"256 Go", color:"Noir Fantôme", color_hex:"#1d1d1f", grade:"A+", price:749, battery_pct:98, sold:false},
-  {brand:"samsung", condition:"reconditionne", model:"Galaxy S22",        storage:"128 Go", color:"Vert",          color_hex:"#4b5945", grade:"A",  price:429, battery_pct:90, sold:false},
-  {brand:"samsung", condition:"reconditionne", model:"Galaxy A54",        storage:"128 Go", color:"Lilas",         color_hex:"#c9b5d4", grade:"A",  price:299, battery_pct:95, sold:false},
-  {brand:"autre", condition:"reconditionne", model:"Xiaomi Redmi Note 12 Pro", storage:"256 Go", color:"Bleu",  color_hex:"#3a5b8c", grade:"A", price:239, battery_pct:92, sold:false},
-  {brand:"autre", condition:"reconditionne", model:"Google Pixel 7",            storage:"128 Go", color:"Noir", color_hex:"#1d1d1f", grade:"A+", price:349, battery_pct:100, sold:false},
-  {brand:"iphone",  condition:"neuf", model:"iPhone 15",        storage:"128 Go", color:"Bleu",     color_hex:"#b8cee0", price:829, sold:false},
-  {brand:"samsung", condition:"neuf", model:"Galaxy A15",        storage:"128 Go", color:"Noir",     color_hex:"#1d1d1f", price:199, sold:false},
-  {brand:"autre",   condition:"neuf", model:"Xiaomi Redmi 13C",  storage:"128 Go", color:"Vert",     color_hex:"#98b39e", price:149, sold:false}
-];
-
+// Pas de téléphones de démonstration : si la base ne répond pas, un message
+// invite à appeler la boutique (aucun faux téléphone affiché).
 var allItems = [];
+var stockState = 'loading'; // loading | ok | indisponible
 var currentCat = 'iphone';
 var currentSeries = 'all';
 var currentSort = 'series';
@@ -456,55 +451,133 @@ function loadStock(){
       var recon = (res[0]||[]).map(function(p){ return normalize(p, 'reconditionne'); });
       var neufs = (res[1]||[]).map(function(p){ return normalize(p, 'neuf'); });
       var items = recon.concat(neufs).filter(function(i){ return i.price > 0 && i.model; });
-      if(!items.length){
-        console.info('[stock] aucune donnée en base, fallback démo');
-        allItems = DEMO;
-      } else {
-        allItems = items;
-      }
+      if(items.length){ allItems = items; stockState = 'ok'; }
+      else if(!allItems.length){ stockState = 'indisponible'; }
       render();
     });
 }
 
-function normalize(p, cond){
-  var model = (p.modele || '').trim();
-  var brand = 'autre';
-  if(/iphone/i.test(model)) brand = 'iphone';
-  else if(/^(1[0-6]|SE|XR|XS|X\b|[7-9]\b)\s*(Pro|Plus|Max|mini)?/i.test(model)) brand = 'iphone';
-  else if(/samsung|galaxy/i.test(model)) brand = 'samsung';
-  var s = p.stockage;
-  var storage = '';
-  if(s){
-    var str = String(s).trim();
-    if(/go|to/i.test(str)) storage = str;
-    else if(Number(str) >= 1000) storage = (Number(str)/1000) + ' To';
-    else storage = str + ' Go';
-  }
-  return {
-    brand: brand,
-    condition: cond,
-    model: model,
-    storage: storage,
-    color: p.couleur || '',
-    color_hex: colorToHex(p.couleur),
-    grade: (cond === 'neuf') ? null : (p.grade || null),
-    price: Number(p.vente) || 0,
-    battery_pct: (cond === 'neuf') ? null : (p.batterie ? Number(p.batterie) : null),
-    image_url: p.photo_face || p.photo_dos || '',
-    sold: false
-  };
+// ====== NORMALISATION DES NOMS (affichage seulement, rien n'est écrit en base) ======
+// Règles reprises de solution-phone.fr/reconditionnes-v2.js :
+// « IPHONE 15 PROMAX » → « iPhone 15 Pro Max », « iPhone SE 3. Gen 5G 2022 » → « iPhone SE (2022) »,
+// « zflip 5 » → « Samsung Galaxy Z Flip5 », « NOTE 13 PRO 5G » → « Xiaomi Redmi Note 13 Pro 5G »,
+// « IPad 11th » → « iPad (11e génération) » (rangé dans « Tablettes »).
+function deaccent(s){ return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+function tokens(raw){
+  var s = deaccent(raw).toLowerCase()
+    .replace(/\+/g, ' plus ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\bpo\s*max\b/g, 'pro max')
+    .replace(/\bpromax\b/g, 'pro max')
+    .trim();
+  return s ? s.split(/\s+/) : [];
 }
-
+function cap(w){ return w ? w.charAt(0).toUpperCase() + w.slice(1) : w; }
+function without(list, drop){ return list.filter(function(t){ return drop.indexOf(t) < 0; }); }
+var IPHONE_START = /^(1[0-9]e?|se[0-9]?|xr|xs|x|[4-9]s?|[5]c)$/;
+function normalizeModel(raw){
+  var t = tokens(raw);
+  var has = function(w){ return t.indexOf(w) >= 0; };
+  var first = t[0] || '';
+  if (has('ipad')) return ipadName(without(t, ['ipad', 'apple']));
+  if (has('iphone') || IPHONE_START.test(first)) return iphoneName(without(t, ['iphone', 'apple']));
+  if (has('samsung') || has('galaxy') || /^(zflip\d*|zfold\d*|s\d{2})$/.test(first) || (first === 'z' && /^(flip|fold)/.test(t[1] || '')))
+    return samsungName(without(t, ['samsung', 'galaxy']));
+  if (has('redmi') || has('xiaomi') || has('poco') || (first === 'note' && /^1[1-9]$/.test(t[1] || '')))
+    return xiaomiName(without(t, ['xiaomi']));
+  if (has('pixel')) return pixelName(without(t, ['google', 'pixel']));
+  return genericName(t, raw);
+}
+function variantWord(w){ return ({ pro: 'Pro', max: 'Max', plus: 'Plus', mini: 'mini' })[w] || cap(w); }
+function iphoneName(rest){
+  var joined = ' ' + rest.join(' ') + ' ';
+  if (rest.some(function(w){ return /^se[0-9]?$/.test(w); })){
+    var label = 'iPhone SE', rank = 9.1;
+    if (/ (2022|se3|3|3e|3eme|3rd|5g) /.test(joined)) { label = 'iPhone SE (2022)'; rank = 9.3; }
+    else if (/ (2020|se2|2|2e|2eme|2nd) /.test(joined)) { label = 'iPhone SE (2020)'; rank = 9.2; }
+    else if (/ (2016|se1|1|1re|1ere|1st) /.test(joined)) { label = 'iPhone SE (2016)'; rank = 9.0; }
+    return { name: label, brand: 'iphone', family: 'iPhone SE', rank: rank };
+  }
+  rest = without(rest, ['5g', '4g']);
+  var gen = rest[0] || '';
+  var genLabel = ({ xr: 'XR', xs: 'XS', x: 'X', air: 'Air' })[gen] || gen;
+  var name = ['iPhone', genLabel].concat(rest.slice(1).map(variantWord)).join(' ').trim();
+  var rank = gen === 'xr' || gen === 'xs' ? 10.5 : gen === 'x' ? 10 : gen === 'air' ? 17.1 : parseFloat(gen) || 0;
+  var family = genLabel ? 'iPhone ' + (/^\d+e$/.test(gen) ? gen.replace(/e$/, '') : genLabel) : 'iPhone';
+  return { name: name, brand: 'iphone', family: family, rank: rank };
+}
+function samsungName(rest){
+  var s = ' ' + rest.join(' ') + ' ';
+  s = s.replace(/ z ?(flip|fold) ?(\d*) /g, function(m, kind, n){ return ' Z ' + cap(kind) + n + ' '; });
+  s = s.replace(/ zflip(\d*) /g, ' Z Flip$1 ').replace(/ zfold(\d*) /g, ' Z Fold$1 ');
+  var words = s.trim().split(/\s+/).filter(Boolean).map(function(w){
+    if (/^[a-z]\d+[a-z]?$/.test(w)) return w.toUpperCase();
+    if (w === '5g' || w === '4g') return w.toUpperCase();
+    if (w === 'fe') return 'FE';
+    if (w === 'ultra' || w === 'lite' || w === 'edge' || w === 'note') return cap(w);
+    if (w === 'plus') return '+';
+    return w.charAt(0) === w.charAt(0).toUpperCase() ? w : cap(w);
+  });
+  var letter = (words[0] || '').charAt(0);
+  return { name: ('Samsung Galaxy ' + words.join(' ')).replace(/ \+/g, '+').trim(), brand: 'samsung',
+    family: letter === 'S' ? 'Galaxy S' : letter === 'Z' ? 'Galaxy Z' : letter === 'A' ? 'Galaxy A' : 'Galaxy', rank: 0 };
+}
+function xiaomiName(rest){
+  if (rest[0] === 'note') rest = ['redmi'].concat(rest);
+  var words = rest.map(function(w){
+    if (w === '5g' || w === '4g') return w.toUpperCase();
+    if (w === 'poco') return 'POCO';
+    if (w === 'plus') return '+';
+    if (/^[a-z]\d+[a-z]?$/.test(w)) return w.toUpperCase();
+    return cap(w);
+  });
+  return { name: ('Xiaomi ' + words.join(' ')).replace(/ \+/g, '+'), brand: 'autre', family: 'Xiaomi', rank: 0 };
+}
+function pixelName(rest){
+  var words = rest.map(function(w){ return w === 'xl' ? 'XL' : w === '5g' ? '5G' : /^\d/.test(w) ? w : cap(w); });
+  return { name: ['Google Pixel'].concat(words).join(' '), brand: 'autre', family: 'Google Pixel', rank: 0 };
+}
+function ipadName(rest){
+  var genIdx = -1, genNum = '';
+  rest.forEach(function(w, i){
+    var m = /^(\d+)(th|e|eme|nd|rd|st|re|ere)$/.exec(w);
+    if (m && genIdx < 0) { genIdx = i; genNum = m[1]; }
+  });
+  var others = rest.filter(function(w, i){ return i !== genIdx && w !== 'gen' && w !== 'generation'; })
+    .map(function(w){ return ({ pro: 'Pro', air: 'Air', mini: 'mini' })[w] || (/^\d/.test(w) ? w : cap(w)); });
+  var name = ['iPad'].concat(others).join(' ');
+  if (genIdx >= 0) name += ' (' + genNum + (genNum === '1' ? 're' : 'e') + ' génération)';
+  return { name: name, brand: 'tablette', family: 'iPad', rank: 0 };
+}
+var BRAND_CASE = { oppo: 'Oppo', oneplus: 'OnePlus', huawei: 'Huawei', honor: 'Honor', motorola: 'Motorola', moto: 'Moto',
+  nothing: 'Nothing', sony: 'Sony', xperia: 'Xperia', nokia: 'Nokia', realme: 'realme', vivo: 'vivo', apple: 'Apple', google: 'Google' };
+function genericName(t, raw){
+  if (!t.length) return { name: String(raw || '').trim(), brand: 'autre', family: 'Autres', rank: 0 };
+  var words = t.map(function(w){
+    if (BRAND_CASE[w]) return BRAND_CASE[w];
+    if (w === '5g' || w === '4g') return w.toUpperCase();
+    if (/^[a-z]\d+[a-z]*$/.test(w)) return w.charAt(0).toUpperCase() + w.slice(1);
+    return /^\d/.test(w) ? w : cap(w);
+  });
+  return { name: words.join(' '), brand: 'autre', family: words[0], rank: 0 };
+}
+var COLOR_WORDS = { noire: 'noir', blanche: 'blanc', grise: 'gris', verte: 'vert', violette: 'violet', doree: 'or', dore: 'or' };
+function normalizeColor(c){
+  var s = String(c || '').trim().replace(/\s+/g, ' ');
+  if (!s) return '';
+  if (/product\s*\)?\s*red/i.test(s)) return '(PRODUCT)RED';
+  var low = s.toLowerCase();
+  var key = deaccent(low);
+  if (COLOR_WORDS[key]) low = COLOR_WORDS[key];
+  return low.charAt(0).toUpperCase() + low.slice(1);
+}
 function colorToHex(c){
   if(!c) return '';
   var map = {
-    'noir':'#1d1d1f','minuit':'#2c2c2e','graphite':'#54524f','space gray':'#3a3a3c','sidéral':'#3a3a3c',
-    'blanc':'#f5f5f7','argent':'#d9d9dc','silver':'#d9d9dc','nacré':'#ece8e1',
-    'or':'#e3c89d','gold':'#e3c89d','rose':'#f4c7c7','rose gold':'#e8b7a8',
-    'rouge':'#b8050f','red':'#b8050f','(product)red':'#b8050f',
-    'bleu':'#4c6fa1','bleu nuit':'#2a3a5c','bleu pacifique':'#2e4a6a','blue':'#4c6fa1',
-    'vert':'#4b5945','vert alpin':'#53624a','green':'#4b5945',
-    'violet':'#9a7fb3','mauve':'#c2a9d6','lilas':'#c9b5d4','purple':'#9a7fb3',
+    'noir':'#1d1d1f','minuit':'#2c2c2e','graphite':'#54524f','sidéral':'#3a3a3c',
+    'blanc':'#f5f5f7','argent':'#d9d9dc','lumière stellaire':'#ece8e1','sable':'#c9b79c',
+    'or':'#e3c89d','rose':'#f4c7c7','rouge':'#b8050f','(product)red':'#b8050f',
+    'bleu nuit':'#2a3a5c','bleu':'#4c6fa1','vert':'#4b5945','violet':'#9a7fb3','mauve':'#c2a9d6','lilas':'#c9b5d4',
     'titane naturel':'#c5b9a5','titane bleu':'#4c5a6a','titane blanc':'#e6e4df','titane noir':'#35352f',
     'jaune':'#f4d35e','orange':'#e08a3c','gris':'#8a8d8f','corail':'#ff7e67'
   };
@@ -512,6 +585,39 @@ function colorToHex(c){
   if(map[k]) return map[k];
   for(var key in map){ if(k.indexOf(key) >= 0) return map[key]; }
   return '';
+}
+function normalizeStorage(s){
+  if (s == null || s === '') return '';
+  var str = String(s).trim();
+  if (/go|gb/i.test(str)) return str.replace(/\s*(go|gb)$/i, ' Go');
+  if (/to|tb/i.test(str)) return str.replace(/\s*(to|tb)$/i, ' To');
+  var n = Number(str);
+  if (!n) return str;
+  return n >= 1000 ? Math.round(n / 1000) + ' To' : n + ' Go';
+}
+// Batterie affichée seulement entre 1 et 100 % ; 0, vide ou plus de 100 → « — »
+function normalizeBattery(b){
+  var n = Number(b);
+  return n >= 1 && n <= 100 ? Math.round(n) : null;
+}
+function normalize(p, cond){
+  var m = normalizeModel(p.modele);
+  var color = normalizeColor(p.couleur);
+  return {
+    brand: m.brand,
+    condition: cond,
+    model: m.name,
+    family: m.family,
+    rank: m.rank,
+    storage: normalizeStorage(p.stockage),
+    color: color,
+    color_hex: colorToHex(color),
+    grade: (cond === 'neuf') ? null : (String(p.grade || '').trim().toUpperCase() || null),
+    price: Number(p.vente) || 0,
+    battery_pct: (cond === 'neuf') ? null : normalizeBattery(p.batterie),
+    image_url: p.photo_face || p.photo_dos || '',
+    sold: false
+  };
 }
 
 // ====== RENDER ======
@@ -533,35 +639,7 @@ function sortItems(items){
   return sorted;
 }
 
-function detectSeries(model){
-  var m = model||'';
-  if(/iPhone\s*17|^17\s*(Pro|Plus|Air)/i.test(m)) return 'iPhone 17';
-  if(/iPhone\s*16|^16\s*(Pro|Plus|mini)/i.test(m)) return 'iPhone 16';
-  if(/iPhone\s*15|^15\s*(Pro|Plus|mini)/i.test(m)) return 'iPhone 15';
-  if(/iPhone\s*14|^14\s*(Pro|Plus|mini)/i.test(m)) return 'iPhone 14';
-  if(/iPhone\s*13|^13\s*(Pro|Max|mini)/i.test(m)) return 'iPhone 13';
-  if(/iPhone\s*12|^12\s*(Pro|Max|mini)/i.test(m)) return 'iPhone 12';
-  if(/iPhone\s*11|^11\s*(Pro|Max)/i.test(m)) return 'iPhone 11';
-  if(/iPhone\s*SE|^SE\b/i.test(m)) return 'iPhone SE';
-  if(/iPhone\s*XR|^XR\b/i.test(m)) return 'iPhone XR';
-  if(/iPhone\s*XS|^XS\b/i.test(m)) return 'iPhone XS';
-  if(/iPhone\s*X\b|^X\b/i.test(m)) return 'iPhone X';
-  if(/iPhone\s*8|^8\s*(Plus)?$/i.test(m)) return 'iPhone 8';
-  if(/iPhone\s*7|^7\s*(Plus)?$/i.test(m)) return 'iPhone 7';
-  if(/iPhone/i.test(m)) return 'iPhone';
-  if(/Galaxy\s*S2[0-5]|S2[0-5]|Ultra/i.test(m)) return 'Galaxy S';
-  if(/Galaxy\s*A|A\d{2}/i.test(m)) return 'Galaxy A';
-  if(/Galaxy\s*Z|Z\s*(Fold|Flip)/i.test(m)) return 'Galaxy Z';
-  if(/Samsung|Galaxy/i.test(m)) return 'Samsung';
-  if(/Redmi|POCO|Xiaomi/i.test(m)) return 'Xiaomi';
-  if(/Pixel/i.test(m)) return 'Pixel';
-  if(/Huawei|Honor/i.test(m)) return 'Huawei';
-  if(/Oppo|OnePlus/i.test(m)) return 'Oppo/OnePlus';
-  if(/Motorola|Moto/i.test(m)) return 'Motorola';
-  if(/Sony|Xperia/i.test(m)) return 'Sony';
-  if(/Nothing/i.test(m)) return 'Nothing';
-  return 'Autre';
-}
+function detectSeries(item){ return item.family || 'Autres'; }
 
 function escapeHtml(s){
   return String(s||'').replace(/[&<>"']/g, function(c){
@@ -583,33 +661,26 @@ function optimizeImageUrl(url, width){
 }
 
 // ====== LISTE ALIGNÉE DES TÉLÉPHONES (une ligne par appareil) ======
-// Mise en forme de l'affichage uniquement (les données Supabase ne sont pas modifiées)
-function prettyModel(m){
-  return String(m||'').toLowerCase().replace(/\s+/g,' ').trim()
-    .replace(/\bpromax\b/g,'pro max')
-    .replace(/\b([a-z])/g, function(c){ return c.toUpperCase(); })
-    .replace(/\bIphone\b/g,'iPhone').replace(/\b(Se|Xr|Xs)\b/g, function(w){ return w.toUpperCase(); })
-    .replace(/\bFe\b/g,'FE').replace(/\b([SAZ])(\d)/g,'$1$2');
-}
-function prettyColor(c){ c = String(c||'').trim().toLowerCase(); return c ? c.charAt(0).toUpperCase() + c.slice(1) : ''; }
+function euro(n){ return n + ' €'; }
 function rowHtml(item){
   var isNeuf = (item.condition||'').toLowerCase() === 'neuf';
   var img = item.image_url
-    ? '<img src="' + optimizeImageUrl(item.image_url, 160) + '" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'glyph\'}))">'
+    ? '<img src="' + optimizeImageUrl(item.image_url, 160) + '" alt="' + escapeHtml(item.model) + '" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'glyph\'}))">'
     : '<span class="glyph" aria-hidden="true"></span>';
   var dot = item.color_hex ? '<span class="color-dot" style="background:' + item.color_hex + '"></span>' : '';
   var state = isNeuf ? 'Neuf' : (item.grade ? 'Grade ' + escapeHtml(item.grade) : '—');
-  var batt = item.battery_pct ? '<span class="bl">Batterie </span>' + item.battery_pct + ' %' : (isNeuf ? '' : '—');
-  var sub = [item.storage, prettyColor(item.color)].filter(Boolean).map(escapeHtml).join(' · ');
-  var waMsg = encodeURIComponent('Bonjour, je suis intéressé par le ' + item.model + ' ' + (item.storage||'') + ' ' + (item.color||'') + ' à ' + item.price + '€. Est-il toujours disponible ?');
-  var label = 'Réserver le ' + item.model + ' ' + (item.storage||'') + ' à ' + item.price + ' euros sur WhatsApp';
+  var batt = isNeuf ? '' : (item.battery_pct != null ? '<span class="bl">Batterie </span>' + item.battery_pct + ' %' : '<span class="bl">Batterie </span>—');
+  var sub = [item.storage, item.color].filter(Boolean).map(escapeHtml).join(' · ');
+  var details = [item.model, item.storage, item.color, isNeuf ? 'neuf' : (item.grade ? 'grade ' + item.grade : ''), euro(item.price)].filter(Boolean).join(' · ');
+  var waMsg = encodeURIComponent('Bonjour Solution Accessoires, je souhaite réserver ce téléphone : ' + details + '.');
+  var label = 'Réserver sur WhatsApp : ' + details;
   return '<li><a class="prow plist-cols" href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + '">'
     + '<span class="p-img">' + img + '</span>'
-    + '<span class="p-model"><b>' + escapeHtml(prettyModel(item.model)) + '</b><span class="p-sub">' + sub + '</span></span>'
+    + '<span class="p-model"><b>' + escapeHtml(item.model) + '</b><span class="p-sub">' + sub + '</span></span>'
     + '<span class="p-storage">' + escapeHtml(item.storage || '—') + '</span>'
-    + '<span class="p-color">' + dot + escapeHtml(prettyColor(item.color) || '—') + '</span>'
+    + '<span class="p-color">' + dot + escapeHtml(item.color || '—') + '</span>'
     + '<span class="p-state"><span class="p-grade">' + state + '</span><span class="p-batt">' + batt + '</span></span>'
-    + '<span class="p-price">' + item.price + ' €</span>'
+    + '<span class="p-price">' + euro(item.price) + '</span>'
     + '<span class="p-cta">Réserver ↗</span>'
     + '</a></li>';
 }
@@ -619,16 +690,17 @@ function listHead(){
 }
 
 function renderSeriesFilters(catItems){
-  var series = {};
+  var series = {}, rank = {};
   catItems.forEach(function(i){
-    var s = detectSeries(i.model);
+    var s = detectSeries(i);
     series[s] = (series[s]||0)+1;
+    rank[s] = Math.max(rank[s]||0, i.rank||0);
   });
-  var keys = Object.keys(series).sort();
+  var keys = Object.keys(series).sort(function(a,b){ return (rank[b]-rank[a]) || a.localeCompare(b, 'fr'); });
   if(keys.length < 2){ document.getElementById('filters').innerHTML=''; return; }
   var html = '<button class="chip ' + (currentSeries==='all'?'active':'') + '" data-series="all">Tous (' + catItems.length + ')</button>';
   keys.forEach(function(s){
-    html += '<button class="chip ' + (currentSeries===s?'active':'') + '" data-series="' + s + '">' + s + ' (' + series[s] + ')</button>';
+    html += '<button class="chip ' + (currentSeries===s?'active':'') + '" data-series="' + escapeHtml(s) + '">' + escapeHtml(s) + ' (' + series[s] + ')</button>';
   });
   document.getElementById('filters').innerHTML = html;
   document.querySelectorAll('#filters .chip').forEach(function(btn){
@@ -639,11 +711,31 @@ function renderSeriesFilters(catItems){
   });
 }
 
+var CAT_IDS = { iphone: 'nIphone', samsung: 'nSamsung', autre: 'nAutre', tablette: 'nTablette', neuf: 'nNeuf' };
 function render(){
-  document.getElementById('nIphone').textContent  = itemsInCat('iphone').length;
-  document.getElementById('nSamsung').textContent = itemsInCat('samsung').length;
-  document.getElementById('nAutre').textContent   = itemsInCat('autre').length;
-  document.getElementById('nNeuf').textContent    = itemsInCat('neuf').length;
+  var wrap = document.getElementById('productsWrap');
+  if(stockState !== 'ok'){
+    document.getElementById('stockCount').textContent = '—';
+    document.getElementById('resultCount').textContent = '';
+    document.getElementById('filters').innerHTML = '';
+    wrap.innerHTML = stockState === 'loading'
+      ? '<p class="empty">Chargement du stock…</p>'
+      : '<p class="empty">Stock momentanément indisponible, appelez le <a href="tel:+33602849953">06 02 84 99 53</a>.</p>';
+    return;
+  }
+  var counts = {};
+  Object.keys(CAT_IDS).forEach(function(c){
+    counts[c] = itemsInCat(c).length;
+    document.getElementById(CAT_IDS[c]).textContent = counts[c];
+  });
+  // Onglets « Tablettes » et « Neufs » masqués s'ils sont vides
+  document.querySelectorAll('#tabs .tab').forEach(function(b){
+    if(b.dataset.cat === 'neuf' || b.dataset.cat === 'tablette') b.hidden = !counts[b.dataset.cat];
+  });
+  if(!counts[currentCat]){
+    var firstFull = Object.keys(CAT_IDS).filter(function(c){ return counts[c]; })[0];
+    if(firstFull){ currentCat = firstFull; currentSeries = 'all'; }
+  }
 
   var available = allItems.filter(function(i){ return !i.sold; });
   document.getElementById('stockCount').textContent = available.length;
@@ -658,30 +750,30 @@ function render(){
 
   var filtered = currentSeries === 'all'
     ? catItems
-    : catItems.filter(function(i){ return detectSeries(i.model) === currentSeries; });
+    : catItems.filter(function(i){ return detectSeries(i) === currentSeries; });
 
-  var wrap = document.getElementById('productsWrap');
   document.getElementById('resultCount').textContent = filtered.length + ' appareil' + (filtered.length>1?'s':'');
 
   if(!filtered.length){
-    wrap.innerHTML = '<p class="empty">Aucun modèle dans cette catégorie pour le moment. Passez-nous voir, on a souvent des arrivages.</p>';
+    wrap.innerHTML = '<p class="empty">Aucun modèle dans cette catégorie pour le moment. Passez nous voir, les arrivages sont fréquents.</p>';
     return;
   }
 
   var html = '<ul class="plist">' + listHead();
   if(currentSort==='series'){
-    var groups = {};
-    var order = [];
+    var groups = {}, order = [];
     filtered.forEach(function(item){
-      var s = detectSeries(item.model);
+      var s = detectSeries(item);
       if(!groups[s]){ groups[s] = []; order.push(s); }
       groups[s].push(item);
     });
+    var rankOf = function(s){ return groups[s].reduce(function(m,i){ return Math.max(m, i.rank||0); }, 0); };
+    order.sort(function(a,b){ return rankOf(b) - rankOf(a); });
     order.forEach(function(s){ groups[s].sort(function(a,b){ return a.price-b.price; }); });
     order.forEach(function(s){
       var items = groups[s];
       var minPrice = items.reduce(function(m,i){ return Math.min(m,i.price); }, Infinity);
-      html += '<li class="plist-group"><b>' + escapeHtml(s) + '</b><span>' + items.length + ' en stock · dès ' + minPrice + ' €</span></li>';
+      html += '<li class="plist-group"><b>' + escapeHtml(s) + '</b><span>' + items.length + ' en stock · dès ' + euro(minPrice) + '</span></li>';
       html += items.map(rowHtml).join('');
     });
   } else {

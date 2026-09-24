@@ -259,3 +259,13 @@ button.fact-protect:focus-visible { outline: 3px solid #0071e3; outline-offset: 
 .protect-foot a { color: #0066cc; }
 @media (max-width: 640px) { .protect-cols { grid-template-columns: 1fr; } }
 .protect { margin: auto; }
+
+/* Définition des grades, sous la liste du stock */
+.grades { margin-top: 18px; padding: 16px 18px; background: var(--soft); border-radius: 14px; }
+.grades h3 { font-size: 15px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; }
+.grades dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 20px; }
+.grades dl div { display: flex; gap: 10px; align-items: baseline; font-size: 13px; color: var(--ink-2); }
+.grades dt { flex: 0 0 30px; font-weight: 800; color: var(--ink); }
+.grades p { margin-top: 10px; font-size: 12px; color: var(--muted); }
+.empty a { color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 44px; }
+@media (max-width: 640px) { .grades dl { grid-template-columns: 1fr; } }
