@@ -224,3 +224,9 @@
   .order-card { max-height: calc(100vh - 20px); }
   .order-card .om-body { padding: 20px 18px 18px; }
 }
+/* Note Google cliquable */
+a.fact-link { color: inherit; text-decoration: none; }
+a.fact-link:hover > span:last-child { text-decoration: underline; }
+a.fact-link > span:last-child { color: #0066cc; }
+a.fact-link .fact-stars { color: #f5b100; font-size: .8em; letter-spacing: 1px; }
+a.fact-link:focus-visible { outline: 3px solid #0071e3; outline-offset: 3px; }

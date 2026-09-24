@@ -63,7 +63,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="img/logo-ui.webp" type="image/webp">
 <link rel="stylesheet" href="boutique.css?v=1">
-<link rel="stylesheet" href="accueil.css?v=1">
+<link rel="stylesheet" href="accueil.css?v=2">
 </head>
 
 <body>
@@ -110,7 +110,7 @@
 <div class="facts" aria-label="En bref">
   <div class="fact"><b>Pose incluse</b><span>Verre trempé posé, prix tout compris</span></div>
   <div class="fact"><b>12 mois</b><span>Garantie sur les reconditionnés</span></div>
-  <div class="fact"><b>5,0/5</b><span>20 avis Google</span></div>
+  <a class="fact fact-link" href="https://www.google.com/maps/search/?api=1&amp;query=Solution+Accessoires+21+Rue+Gambetta+Macon" target="_blank" rel="noopener"><b><span class="fact-stars" aria-hidden="true">★★★★★</span> 5,0/5</b><span>Voir nos avis Google ›</span></a>
   <div class="fact"><b>3 boutiques</b><span>Côte à côte, 21 Rue Gambetta</span></div>
 </div>
 
@@ -271,12 +271,7 @@
       <a href="https://www.google.com/maps/dir/?api=1&destination=21+Rue+Gambetta+71000+Macon" target="_blank" rel="noopener" class="btn btn-ink">Itinéraire</a>
     </div>
     <div class="map">
-      <iframe
-        src="https://maps.google.com/maps?q=21%20rue%20gambetta%2071000%20macon&t=&z=16&ie=UTF8&iwloc=&output=embed"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Solution Accessoires - 21 Rue Gambetta, 71000 Mâcon"></iframe>
+      <div class="sp-map" data-map-src="https://maps.google.com/maps?q=Solution+Accessoires,+21+Rue+Gambetta,+71000+M%C3%A2con&amp;z=17&amp;output=embed" data-map-title="Plan d’accès à Solution Accessoires, 21 rue Gambetta à Mâcon"><div class="sp-map-card"><b>21 rue Gambetta, 71000 Mâcon</b><span>Centre-ville · 3 boutiques côte à côte</span><div class="sp-map-actions"><button type="button" class="sp-map-load">Voir le plan</button><a href="https://www.google.com/maps/dir/?api=1&amp;destination=21+Rue+Gambetta+71000+Macon" target="_blank" rel="noopener">Itinéraire ›</a></div><small>Le plan est fourni par Google Maps, qui peut déposer des cookies.</small></div></div>
     </div>
   </div>
 </section>
@@ -899,5 +894,6 @@ document.addEventListener('keydown', function(e){
 renderAccessoires();
 </script>
 
+<script src="plan-acces.js?v=1" defer></script>
 </body>
 </html>
