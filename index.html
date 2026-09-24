@@ -63,7 +63,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="img/logo-ui.webp" type="image/webp">
 <link rel="stylesheet" href="boutique.css?v=1">
-<link rel="stylesheet" href="accueil.css?v=2">
+<link rel="stylesheet" href="accueil.css?v=3">
 </head>
 
 <body>
@@ -108,7 +108,7 @@
 </section>
 
 <div class="facts" aria-label="En bref">
-  <div class="fact"><b>Pose incluse</b><span>Verre trempé posé, prix tout compris</span></div>
+  <button type="button" class="fact fact-link fact-protect" id="protectOpen" aria-haspopup="dialog"><b>Protégez votre écran</b><span>Tous modèles · pose incluse ›</span></button>
   <div class="fact"><b>12 mois</b><span>Garantie sur les reconditionnés</span></div>
   <a class="fact fact-link" href="https://www.google.com/maps/search/?api=1&amp;query=Solution+Accessoires+21+Rue+Gambetta+Macon" target="_blank" rel="noopener"><b><span class="fact-stars" aria-hidden="true">★★★★★</span> 5,0/5</b><span>Voir nos avis Google ›</span></a>
   <div class="fact"><b>3 boutiques</b><span>Côte à côte, 21 Rue Gambetta</span></div>
@@ -279,6 +279,28 @@
 </main>
 
 <!-- ============================ FENÊTRE DE COMMANDE ============================ -->
+
+<dialog class="protect" id="protectModal" aria-labelledby="protectTitle">
+  <button type="button" class="protect-close" id="protectClose" aria-label="Fermer">×</button>
+  <p class="protect-kicker">Tous modèles de smartphone · pose incluse en boutique</p>
+  <h2 id="protectTitle">Protégez votre écran.</h2>
+  <label class="protect-model"><span>Mon téléphone (facultatif)</span><input id="protectModel" placeholder="Ex. iPhone 13, Galaxy S24" autocomplete="off"></label>
+  <div class="protect-cols">
+    <section class="protect-col" aria-labelledby="protectGlass">
+      <h3 id="protectGlass">Verre trempé</h3>
+      <p>Rigide, il encaisse les chocs et se change en quelques minutes.</p>
+      <div class="protect-list" id="protectGlassList"></div>
+      <button type="button" class="protect-more" id="protectGlassMore">Voir tous les verres trempés ›</button>
+    </section>
+    <section class="protect-col" aria-labelledby="protectHydro">
+      <h3 id="protectHydro">Hydrogel · 5 qualités</h3>
+      <p>Film souple qui couvre tout l’écran, même incurvé, et efface les micro-rayures.</p>
+      <div class="protect-list" id="protectHydroList"></div>
+      <a class="protect-more" href="hydrogel.html">Tout savoir sur l’hydrogel ›</a>
+    </section>
+  </div>
+  <p class="protect-foot">Un doute sur le bon choix ? <a href="tel:+33602849953">06 02 84 99 53</a> · <a id="protectWa" target="_blank" rel="noopener">Demander conseil sur WhatsApp</a></p>
+</dialog>
 <div class="order-modal" id="orderModal" onclick="if(event.target===this)closeOrderModal()" role="dialog" aria-modal="true" aria-labelledby="omName">
   <div class="order-card">
     <button class="close-btn" onclick="closeOrderModal()" aria-label="Fermer">✕</button>
@@ -894,6 +916,37 @@ document.addEventListener('keydown', function(e){
 renderAccessoires();
 </script>
 
+<script>
+// ====== PROTÉGEZ VOTRE ÉCRAN : toutes les protections en un clic ======
+(function(){
+  var dlg=document.getElementById('protectModal'),open=document.getElementById('protectOpen');
+  if(!dlg||!open||typeof dlg.showModal!=='function'){if(open)open.addEventListener('click',function(){document.getElementById('hydrogel').scrollIntoView({behavior:'smooth'});});return;}
+  var modelIn=document.getElementById('protectModel'),acc=document.getElementById('accModel');
+  function row(p,cat){
+    var b=document.createElement('button');b.type='button';b.className='protect-item';
+    b.innerHTML='<span class="protect-name">'+escapeHtml(p.name)+'</span><span class="protect-note">'+escapeHtml(productNote(cat,p))+'</span><b>'+(p.price?escapeHtml(String(p.price))+' €':'Prix en boutique')+'</b>';
+    b.addEventListener('click',function(){acc.value=modelIn.value;dlg.close();openOrderModal(p,cat,open);});
+    return b;
+  }
+  function fill(){
+    var glass=document.getElementById('protectGlassList'),hydro=document.getElementById('protectHydroList');
+    glass.replaceChildren();hydro.replaceChildren();
+    (CATALOGUE.verres||[]).filter(function(p){return p.price;}).forEach(function(p){glass.appendChild(row(p,'verres'));});
+    (CATALOGUE.hydrogel||[]).forEach(function(p){hydro.appendChild(row(p,'hydrogel'));});
+    var m=modelIn.value.trim();
+    document.getElementById('protectWa').href='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent('Bonjour, je voudrais protéger l’écran de mon '+(m||'téléphone')+'. Verre trempé ou hydrogel : que me conseillez-vous ?');
+  }
+  open.addEventListener('click',function(){modelIn.value=acc.value;fill();dlg.showModal();});
+  modelIn.addEventListener('input',fill);
+  document.getElementById('protectClose').addEventListener('click',function(){dlg.close();});
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close();});
+  document.getElementById('protectGlassMore').addEventListener('click',function(){
+    acc.value=modelIn.value;dlg.close();
+    var btn=document.querySelector('#accCats .cat[data-cat="verres"]');if(btn)btn.click();
+    document.getElementById('accessoires').scrollIntoView({behavior:'smooth',block:'start'});
+  });
+})();
+</script>
 <script src="plan-acces.js?v=1" defer></script>
 </body>
 </html>
