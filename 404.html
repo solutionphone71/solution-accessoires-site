@@ -4,62 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>404 — Solution Accessoires</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Plus+Jakarta+Sans:wght@500;700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="/img/logo-ui.webp" type="image/webp">
+<link rel="stylesheet" href="/boutique.css?v=1">
 <style>
-:root { --red:#e30613; --ink:#0a0a0a; --white:#fff; --soft:#f5f5f7; }
-* { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background: var(--white); color: var(--ink);
-  min-height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  padding: 32px;
-}
-.wrap { max-width: 640px; text-align: center; }
-.tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px; color: var(--red);
-  letter-spacing: 0.2em; text-transform: uppercase;
-  margin-bottom: 24px;
-}
-h1 {
-  font-family: 'Anton', sans-serif;
-  font-size: clamp(80px, 18vw, 200px);
-  line-height: 0.9; text-transform: uppercase;
-  letter-spacing: 0.005em;
-  margin-bottom: 16px;
-}
-h1 em { font-style:normal; color: var(--red); }
-.sub {
-  font-family: 'Anton', sans-serif;
-  font-size: clamp(28px, 4vw, 48px);
-  line-height: 1; text-transform: uppercase;
-  margin-bottom: 32px;
-}
-.sub .red-bg {
-  background: var(--red); color: var(--white);
-  padding: 0 12px 6px; transform: rotate(-1deg); display: inline-block;
-}
-p { font-size: 17px; line-height: 1.5; color: #6e6e73; margin-bottom: 32px; }
-a {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--red); color: var(--white);
-  padding: 16px 32px; border-radius: 999px;
-  font-weight: 800; font-size: 14px; letter-spacing: 0.02em;
-  text-decoration: none;
-  box-shadow: 0 8px 24px -8px rgba(227,6,19,0.45);
-  transition: all 0.2s;
-}
-a:hover { background: #b8050f; transform: translateY(-2px); }
+.nf { max-width: 640px; margin: 0 auto; padding: 96px var(--gutter) 40px; text-align: center; }
+.nf p.eyebrow { margin-bottom: 12px; }
+.nf h1 { font-size: clamp(34px, 6vw, 56px); line-height: 1.05; letter-spacing: -.045em; font-weight: 800; }
+.nf .sub { font-size: 17px; color: var(--ink-2); margin: 16px auto 28px; max-width: 520px; }
+.nf .actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+@media (max-width: 640px) { .nf { padding-top: 64px; } .nf .actions .btn { width: 100%; } }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="tag">// 404 · PAGE INTROUVABLE</div>
-    <h1>OUPS,<br><em>404.</em></h1>
-    <div class="sub">CETTE PAGE EST <span class="red-bg">PARTIE EN BOUTIQUE.</span></div>
-    <p>Mais on a probablement ce que tu cherches. Reviens à l'accueil ou passe nous voir au 21 Rue Gambetta à Mâcon.</p>
-    <a href="/">← Retour à l'accueil</a>
-  </div>
+  <main class="nf">
+    <p class="eyebrow">Erreur 404 · page introuvable</p>
+    <h1>Cette page est partie en boutique.</h1>
+    <p class="sub">Mais on a probablement ce que tu cherches. Reviens à l'accueil ou passe nous voir au 21 Rue Gambetta à Mâcon.</p>
+    <div class="actions">
+      <a class="btn btn-red" href="/">← Retour à l'accueil</a>
+    </div>
+  </main>
 </body>
 </html>

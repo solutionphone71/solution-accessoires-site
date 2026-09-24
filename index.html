@@ -62,552 +62,27 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="img/logo-ui.webp" type="image/webp">
-
-<style>
-/* =====================================================================
-   Solution Accessoires — style « Boutique » (aligné sur solution-phone.fr/accessoires.html)
-   Clair façon Apple · rouge #e30613 · encre #1d1d1f · Plus Jakarta Sans
-   ===================================================================== */
-:root {
-  --red: #e30613;
-  --red-dark: #b8050f;
-  --red-deep: #a31b2a;
-  --red-soft: #fff5f2;
-  --ink: #1d1d1f;
-  --ink-2: #20252a;
-  --muted: #6e6e73;
-  --soft: #f5f5f7;
-  --line: #e8e8ed;
-  --card-line: #eeeeee;
-  --white: #ffffff;
-  --peach: #f4ded6;
-  --peach-ink: #421827;
-  --blue: #e8edf6;
-  --blue-ink: #172b4b;
-  --forest: #123d36;
-  --lime: #d6f499;
-  --green-wa: #1f8f4e;
-  --radius: 18px;
-  --shadow-card: 0 5px 22px rgba(23,33,42,.04);
-  --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
-  --wrap: 1240px;
-}
-*, *::before, *::after { box-sizing: border-box; }
-* { margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-html, body { max-width: 100%; overflow-x: clip; }
-body {
-  font-family: var(--font);
-  font-weight: 500;
-  color: var(--ink);
-  background: var(--white);
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-img { max-width: 100%; height: auto; display: block; }
-a { color: inherit; text-decoration: none; }
-button { font-family: inherit; }
-:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
-.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
-.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-deep); }
-.sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-
-/* ---------- Boutons ---------- */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 46px; padding: 12px 22px; border-radius: 999px;
-  font-weight: 700; font-size: 14px; line-height: 1.2;
-  border: 1px solid transparent; cursor: pointer; transition: transform .15s, background .15s, box-shadow .15s, border-color .15s;
-  text-align: center;
-}
-.btn:hover { transform: translateY(-1px); }
-.btn-red { background: var(--red); color: var(--white); box-shadow: 0 8px 20px -10px rgba(227,6,19,.6); }
-.btn-red:hover { background: var(--red-dark); }
-.btn-dark { background: var(--peach-ink); color: var(--white); }
-.btn-ink { background: var(--ink); color: var(--white); }
-.btn-ink:hover { background: #000; }
-.btn-light { background: rgba(255,255,255,.75); color: var(--ink); border-color: rgba(0,0,0,.08); }
-.btn-light:hover { background: var(--white); }
-.btn-outline { background: var(--white); color: var(--ink); border-color: #d2d2d7; }
-.btn-outline:hover { border-color: var(--ink); }
-.btn-large { min-height: 52px; padding: 14px 26px; font-size: 15px; }
-
-/* ---------- En-tête ---------- */
-.site-header {
-  position: sticky; top: 0; z-index: 60;
-  background: rgba(255,255,255,.9);
-  backdrop-filter: saturate(180%) blur(18px);
-  -webkit-backdrop-filter: saturate(180%) blur(18px);
-  box-shadow: 0 8px 28px rgba(0,0,0,.04);
-  border-bottom: 1px solid rgba(0,0,0,.05);
-}
-.hd-inner { max-width: var(--wrap); margin: 0 auto; padding: 10px 24px; display: flex; align-items: center; gap: 20px; }
-.brand { display: inline-flex; align-items: center; gap: 10px; min-width: 0; flex-shrink: 0; }
-.brand img { width: 38px; height: 38px; border-radius: 10px; background: var(--white); box-shadow: 0 2px 8px -2px rgba(0,0,0,.25); padding: 2px; flex-shrink: 0; }
-.brand-txt { display: flex; flex-direction: column; line-height: 1.1; min-width: 0; }
-.brand-txt strong { font-size: 17px; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
-.brand-txt strong em { font-style: normal; font-weight: 500; }
-.brand-txt small { font-size: 11px; color: var(--muted); font-weight: 500; white-space: nowrap; }
-.hd-nav { display: flex; align-items: center; gap: 6px; margin: 0 auto; }
-.hd-nav a { display: inline-flex; align-items: center; min-height: 40px; padding: 8px 12px; border-radius: 10px; font-size: 14px; font-weight: 600; color: #333; transition: background .15s, color .15s; white-space: nowrap; }
-.hd-nav a:hover { background: var(--soft); color: var(--ink); }
-/* Bouton « Boutique » en relief, repris du site principal */
-.hd-nav a.nav-boutique {
-  padding: 9px 17px; margin-bottom: 4px;
-  border: 1px solid #f06870; border-bottom-color: #ae1722; border-radius: 10px;
-  background: linear-gradient(155deg, #ed3847 0%, #cc1424 60%, #ae101d 100%);
-  color: #fff; font-weight: 750;
-  box-shadow: 0 4px 0 #800c17, 0 7px 12px #a10d2026, inset 0 1px 0 #ffffff55;
-  text-shadow: 0 1px 1px #65091355; transition: transform .16s, box-shadow .16s;
-}
-.hd-nav a.nav-boutique:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #800c17, 0 10px 16px #a10d2033, inset 0 1px 0 #ffffff55; background: linear-gradient(155deg, #ed3847 0%, #cc1424 60%, #ae101d 100%); color: #fff; }
-.hd-nav a.nav-boutique:active { transform: translateY(3px); box-shadow: 0 1px 0 #800c17, inset 0 1px 0 #ffffff33; }
-.hd-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.hd-phone { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--ink); border: 1px solid #d2d2d7; white-space: nowrap; }
-.hd-phone:hover { border-color: var(--ink); }
-.hd-phone .short { display: none; }
-.hd-phone .ico-tel { display: none; }
-.hd-wa { display: inline-flex; align-items: center; min-height: 44px; padding: 10px 17px; border-radius: 999px; background: var(--red); color: #fff; font-size: 13px; font-weight: 750; white-space: nowrap; }
-.hd-wa:hover { background: var(--red-dark); }
-
-/* ---------- Affiche (poster) ---------- */
-.poster-zone { max-width: var(--wrap); margin: 24px auto 0; padding: 0 24px; }
-.poster {
-  display: grid; grid-template-columns: 1.05fr 1fr; gap: 30px; align-items: center;
-  min-height: 460px; padding: 44px 48px; border-radius: var(--radius);
-  position: relative; isolation: isolate; overflow: hidden;
-}
-.poster-peach { background: var(--peach); color: var(--peach-ink); }
-.poster-blue { background: var(--blue); color: var(--blue-ink); }
-.poster-forest { background: var(--forest); color: #fff; }
-.poster .kicker { display: block; font-size: 10px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
-.poster h1, .poster h2 { font-size: clamp(32px, 3.6vw, 50px); line-height: 1.04; letter-spacing: -.05em; font-weight: 800; margin: 22px 0 16px; }
-.poster h1 em, .poster h2 em { font-style: normal; font-weight: 500; }
-.poster p { font-size: 15px; line-height: 1.65; max-width: 520px; }
-.poster p strong { font-weight: 800; }
-.offer { display: flex; align-items: center; gap: 14px; margin-top: 22px; }
-.offer strong { font-size: 40px; line-height: 1; font-weight: 800; letter-spacing: -.05em; white-space: nowrap; }
-.offer span { font-size: 10px; line-height: 1.6; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; border-left: 1px solid currentColor; padding-left: 14px; }
-.poster-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-.poster-visual { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; }
-.poster-visual::before { content: ''; position: absolute; width: 360px; height: 360px; max-width: 100%; aspect-ratio: 1; border-radius: 50%; background: #ffffff42; z-index: -1; }
-.poster-photo { width: 100%; max-width: 520px; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 50px -28px rgba(66,24,39,.55); transform: rotate(1.5deg); background: #fff; padding: 8px; }
-.poster-photo img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; }
-.poster-tag { display: block; margin-top: 14px; text-align: center; font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .8; }
-
-/* ---------- Encarts promo ---------- */
-.promos { max-width: var(--wrap); margin: 16px auto 0; padding: 0 24px; display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 16px; }
-.promo { display: flex; gap: 16px; align-items: center; padding: 20px 22px; border-radius: var(--radius); min-height: 150px; transition: transform .15s, box-shadow .15s; position: relative; overflow: hidden; }
-.promo:hover { transform: translateY(-2px); box-shadow: 0 16px 30px -22px rgba(0,0,0,.4); }
-.promo .kicker { display: block; font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; margin-bottom: 6px; }
-.promo strong { display: block; font-size: 19px; line-height: 1.2; letter-spacing: -.03em; font-weight: 800; }
-.promo small { display: block; margin-top: 6px; font-size: 13px; line-height: 1.45; }
-.promo .promo-link { display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 750; text-decoration: underline; text-underline-offset: 3px; }
-.promo-qr { background: var(--white); border: 2px solid var(--red); color: var(--ink); }
-.promo-qr .kicker { color: var(--red-deep); }
-.promo-qr strong .amount { color: var(--red); white-space: nowrap; }
-.promo-qr small { color: #4a4a4f; }
-.promo-qr .promo-link { color: var(--red-deep); }
-.promo-qr img { width: 118px; flex-shrink: 0; border-radius: 10px; border: 1px solid var(--line); }
-.promo-hydro { background: var(--blue); color: var(--blue-ink); }
-.promo-hydro .promo-price { font-size: 34px; font-weight: 800; letter-spacing: -.05em; line-height: 1; flex-shrink: 0; }
-.promo-hydro .promo-price small { display: block; margin: 0 0 2px; font-size: 12px; letter-spacing: 0; font-weight: 700; }
-.promo-casse { background: var(--forest); color: #fff; }
-.promo-casse img { width: 96px; height: 96px; object-fit: cover; border-radius: 12px; flex-shrink: 0; }
-.promo-casse .kicker { color: var(--lime); }
-.promo-casse .promo-link { color: var(--lime); }
-
-/* ---------- Rayons (catégories avec visuels) ---------- */
-.rayons { max-width: var(--wrap); margin: 56px auto 0; padding: 0 24px; }
-.block-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 22px; flex-wrap: wrap; }
-.block-head h2 { font-size: clamp(26px, 3vw, 34px); font-weight: 800; letter-spacing: -.035em; line-height: 1.1; margin-top: 8px; }
-.block-head h2 em { font-style: normal; color: var(--red); }
-.block-head .side { font-size: 14px; color: var(--muted); max-width: 420px; }
-.block-head .side strong { color: var(--ink); }
-.rayons-row { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 12px; }
-.rayon {
-  display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 10px;
-  padding: 12px 8px 14px; min-height: 150px;
-  background: var(--white); border: 1px solid var(--card-line); border-radius: 12px;
-  font-size: 13px; font-weight: 700; color: var(--ink); text-align: center; line-height: 1.25;
-  cursor: pointer; transition: border-color .15s, background .15s, transform .15s;
-}
-.rayon:hover { border-color: #c6444f; background: var(--red-soft); transform: translateY(-2px); }
-.rayon .rayon-img { width: 100%; aspect-ratio: 1; border-radius: 10px; background: #fafafa; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.rayon img { width: 86%; height: 86%; object-fit: contain; mix-blend-mode: multiply; }
-.rayon.is-strong { border-color: #c6444f; background: var(--red-soft); }
-
-/* ---------- Bandeau confiance ---------- */
-.trust { max-width: var(--wrap); margin: 48px auto 0; padding: 0 24px; }
-.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-.trust-item { background: var(--soft); border-radius: 16px; padding: 22px 20px; }
-.trust-item .num { font-size: 30px; font-weight: 800; letter-spacing: -.045em; line-height: 1; }
-.trust-item .num .red { color: var(--red); font-size: .62em; letter-spacing: 0; margin-left: 3px; font-weight: 700; }
-.trust-item .lbl { margin-top: 8px; font-size: 13px; color: var(--muted); font-weight: 600; }
-
-/* ---------- Deux rayons ---------- */
-.dual { max-width: var(--wrap); margin: 16px auto 0; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.dual-block { display: flex; flex-direction: column; padding: 34px 34px 30px; border-radius: var(--radius); min-height: 300px; transition: transform .15s; }
-.dual-block:hover { transform: translateY(-2px); }
-.dual-block.recond { background: var(--blue); color: var(--blue-ink); }
-.dual-block.access { background: var(--peach); color: var(--peach-ink); }
-.dual-block .num-tag { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-.dual-block .badge { background: rgba(255,255,255,.7); padding: 6px 12px; border-radius: 999px; letter-spacing: .06em; font-size: 11px; }
-.dual-block h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.05; letter-spacing: -.045em; font-weight: 800; margin: 26px 0 12px; }
-.dual-block h2 em { font-style: normal; font-weight: 500; display: block; }
-.dual-block p { font-size: 15px; line-height: 1.6; max-width: 460px; }
-.dual-block .cta-arrow { margin-top: auto; padding-top: 22px; font-weight: 750; font-size: 14px; }
-.dual-block .cta-arrow span { display: inline-block; transition: transform .15s; }
-.dual-block:hover .cta-arrow span { transform: translateX(4px); }
-
-/* ---------- En-têtes de section ---------- */
-.shop-section { max-width: var(--wrap); margin: 0 auto; padding: 80px 24px 0; scroll-margin-top: 120px; }
-.section-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 26px; }
-.section-header .eyebrow { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.section-header h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 800; letter-spacing: -.045em; line-height: 1.08; margin-top: 10px; }
-.section-header h2 em { font-style: normal; color: var(--red); }
-.section-header .right { font-size: 14px; color: var(--muted); text-align: right; line-height: 1.55; }
-@media (max-width: 1120px) { .section-header .right { text-align: left; } }
-.section-header .right strong { color: var(--ink); font-size: 16px; }
-.live-dot { display: inline-flex; align-items: center; gap: 6px; background: #e9f7ef; color: #16713f; padding: 4px 10px; border-radius: 999px; font-size: 10px; letter-spacing: .08em; }
-.live-dot::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #22a55b; animation: pulse 1.6s infinite; }
-@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
-
-/* ---------- Onglets marques + puces ---------- */
-.tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 0 6px; margin-bottom: 10px; }
-.tabs::-webkit-scrollbar, .filters::-webkit-scrollbar, .acc-models::-webkit-scrollbar { display: none; }
-.tab {
-  display: inline-flex; align-items: center; gap: 8px; min-height: 46px; padding: 10px 18px;
-  border-radius: 12px; border: 1px solid var(--card-line); background: var(--white);
-  font-size: 14px; font-weight: 700; color: var(--ink); cursor: pointer; white-space: nowrap; flex-shrink: 0;
-  transition: border-color .15s, background .15s;
-}
-.tab:hover { border-color: #c6444f; }
-.tab.active { background: var(--red-soft); border-color: #c6444f; color: var(--red-deep); }
-.tab .tab-n { background: var(--soft); color: var(--muted); border-radius: 999px; padding: 2px 8px; font-size: 12px; font-weight: 700; }
-.tab.active .tab-n { background: var(--red); color: #fff; }
-.filters { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 4px 0 10px; }
-.filters:empty { display: none; }
-.chip {
-  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 8px 16px;
-  border-radius: 999px; border: 1px solid #dddddd; background: var(--white);
-  font-size: 13px; font-weight: 600; color: #333; cursor: pointer; white-space: nowrap; flex-shrink: 0;
-  transition: border-color .15s, background .15s, color .15s;
-}
-.chip:hover { border-color: var(--ink); }
-.chip.active { background: var(--ink); border-color: var(--ink); color: #fff; }
-.chip .ic { color: var(--red); font-size: 9px; }
-
-/* ---------- Barre de tri ---------- */
-.sort-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: var(--soft); border-radius: 14px; padding: 10px 14px; margin: 6px 0 22px; }
-.sort-bar label { font-size: 12px; font-weight: 700; color: var(--muted); }
-.sort-bar select { min-height: 44px; border: 1px solid #dddddd; border-radius: 10px; background: var(--white); padding: 8px 12px; font: 600 14px var(--font); color: var(--ink); cursor: pointer; }
-.sort-bar select:focus { outline: 2px solid var(--ink); }
-.sort-bar .result-count { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: .06em; }
-
-/* ---------- Cartes produits (façon sf-card) ---------- */
-.series-group { margin-bottom: 38px; }
-.series-header { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 12px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
-.series-header h3 { font-size: 22px; font-weight: 800; letter-spacing: -.03em; }
-.series-header .series-count { font-size: 11px; font-weight: 700; color: #16713f; background: #e9f7ef; padding: 3px 9px; border-radius: 999px; letter-spacing: .04em; }
-.series-header .series-from { font-size: 12px; font-weight: 700; color: var(--muted); margin-left: auto; letter-spacing: .04em; }
-.pgrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-.card {
-  position: relative; display: flex; flex-direction: column;
-  background: var(--white); border: 1px solid var(--card-line); border-radius: 16px;
-  box-shadow: var(--shadow-card); padding: 14px 14px 16px; transition: box-shadow .2s, transform .2s, border-color .2s;
-}
-.card:hover { transform: translateY(-3px); box-shadow: 0 20px 36px -24px rgba(23,33,42,.35); border-color: #e2e2e2; }
-.card .grade { position: absolute; top: 22px; left: 22px; z-index: 2; font-size: 10px; font-weight: 800; letter-spacing: .06em; padding: 4px 9px; border-radius: 999px; background: #fff; border: 1px solid var(--line); }
-.card .grade.gA { color: #16713f; }
-.card .grade.gB { color: #8a5a00; }
-.card .grade.gC { color: var(--muted); }
-.card .grade.gN { background: var(--ink); color: #fff; border-color: var(--ink); }
-.card .ph { position: relative; aspect-ratio: 1; background: #fafafa; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
-.card .ph::before { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, #fafafa 30%, #f0f0f2 50%, #fafafa 70%); background-size: 200% 100%; animation: shimmer 1.3s infinite; }
-.card .ph.has-loaded::before { display: none; }
-.card .ph img { position: relative; width: 88%; height: 88%; object-fit: contain; opacity: 0; transition: opacity .3s, transform .3s; mix-blend-mode: multiply; }
-.card .ph img.loaded { opacity: 1; }
-.card:hover .ph img.loaded { transform: scale(1.03); }
-.card .ph:has(.noimg) { aspect-ratio: 4/3; background: linear-gradient(160deg, #f7f7f9, #eeeef2); }
-.card .ph .noimg { position: relative; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 12px; text-align: center; font-size: 13px; font-weight: 700; letter-spacing: -.01em; color: #8a8a90; }
-.card .ph .noimg::before { content: ''; width: 34px; height: 58px; border: 3px solid #c7c7cc; border-radius: 9px; box-shadow: inset 0 -6px 0 -3px #c7c7cc; }
-@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
-.card .kind { font-size: 11px; color: #72767a; font-weight: 600; }
-.card .model { font-size: 16px; font-weight: 700; letter-spacing: -.02em; line-height: 1.25; margin-top: 3px; color: var(--ink-2); }
-.card .meta { font-size: 12px; color: var(--muted); margin-top: 5px; line-height: 1.45; }
-.card .color-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; vertical-align: -1px; margin-right: 4px; border: 1px solid rgba(0,0,0,.15); }
-.card .price { font-size: 24px; font-weight: 800; letter-spacing: -.04em; margin-top: 10px; color: var(--ink-2); }
-.card .price small { font-size: 15px; font-weight: 700; }
-.card .cta {
-  display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: auto;
-  padding: 10px 12px; border-radius: 10px; background: var(--red-soft); color: var(--red-deep);
-  font-size: 13px; font-weight: 750; text-align: center; transition: background .15s, color .15s;
-}
-.card .price + .cta { margin-top: 12px; }
-.card .cta:hover { background: var(--red); color: #fff; }
-.card.sold { opacity: .55; }
-.empty { text-align: center; padding: 48px 20px; background: var(--soft); border-radius: 16px; }
-.empty h3 { font-size: 18px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 6px; }
-.empty p { color: var(--muted); font-size: 14px; }
-
-/* ---------- Accessoires ---------- */
-.acc-models-label { font-size: 12px; font-weight: 700; color: var(--muted); margin: 8px 0 6px; }
-.acc-models { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 4px 0 12px; }
-.acc-active-filter { display: none; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; background: var(--red-soft); color: var(--red-deep); border: 1px solid #f3c9c4; border-radius: 12px; padding: 8px 8px 8px 16px; margin-bottom: 16px; font-size: 14px; font-weight: 700; }
-.acc-active-filter.on { display: flex; }
-.acc-active-filter .clear { min-height: 44px; padding: 8px 14px; border-radius: 10px; border: 0; background: var(--white); color: var(--ink); font-weight: 700; font-size: 13px; cursor: pointer; }
-.acc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-@media (min-width: 640px) { .acc-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (min-width: 900px) { .acc-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (min-width: 1200px) { .acc-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
-.acc-card { position: relative; display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--card-line); border-radius: 16px; padding: 12px 12px 14px; box-shadow: var(--shadow-card); cursor: pointer; transition: transform .2s, box-shadow .2s; }
-.acc-card:hover { transform: translateY(-3px); box-shadow: 0 20px 36px -24px rgba(23,33,42,.35); }
-.acc-card .img-wrap { position: relative; aspect-ratio: 1; background: #fafafa; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-.acc-card .img-wrap::before { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, #fafafa 30%, #f0f0f2 50%, #fafafa 70%); background-size: 200% 100%; animation: shimmer 1.3s infinite; }
-.acc-card .img-wrap.has-loaded::before { display: none; }
-.acc-card .img-wrap img { position: relative; width: 90%; height: 90%; object-fit: contain; mix-blend-mode: multiply; opacity: 0; transition: opacity .3s, transform .3s; }
-.acc-card .img-wrap img.loaded { opacity: 1; }
-.acc-card:hover .img-wrap img.loaded { transform: scale(1.04); }
-.acc-card .badge-top { position: absolute; top: 20px; left: 20px; z-index: 2; background: var(--white); border: 1px solid var(--line); color: var(--red-deep); font-size: 10px; font-weight: 800; letter-spacing: .06em; padding: 3px 8px; border-radius: 999px; }
-.acc-card .order-hint { display: none; }
-.acc-card .info { padding-top: 12px; display: flex; flex-direction: column; flex: 1; }
-.acc-card .acc-brand { order: -1; font-size: 11px; color: #72767a; font-weight: 600; }
-.acc-card .acc-name { font-size: 14px; font-weight: 700; line-height: 1.3; letter-spacing: -.01em; margin-top: 3px; color: var(--ink-2); }
-.acc-card .acc-cta { display: flex; align-items: center; min-height: 36px; margin-top: auto; padding-top: 8px; font-size: 12px; font-weight: 750; color: var(--red-deep); }
-.acc-more { display: flex; align-items: center; gap: 22px; margin-top: 28px; padding: 26px 28px; border-radius: var(--radius); background: var(--peach); color: var(--peach-ink); flex-wrap: wrap; }
-.acc-more-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(255,255,255,.6); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; flex-shrink: 0; }
-.acc-more-text { flex: 1; min-width: 220px; }
-.acc-more-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-.acc-more h3 { font-size: 22px; font-weight: 800; letter-spacing: -.03em; line-height: 1.2; margin: 6px 0; }
-.acc-more h3 em { font-style: normal; font-weight: 500; }
-.acc-more p { font-size: 14px; line-height: 1.55; }
-.acc-more-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.btn-wa-light { background: var(--peach-ink); color: #fff; }
-.btn-shop-light { background: rgba(255,255,255,.7); color: var(--peach-ink); }
-.acc-disclaimer { margin-top: 16px; font-size: 13px; color: var(--muted); text-align: center; }
-
-/* ---------- Fenêtre de commande ---------- */
-.order-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(20,20,22,.45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.order-modal.on { display: flex; }
-.order-card { position: relative; width: 100%; max-width: 720px; max-height: calc(100vh - 40px); overflow: auto; background: var(--white); border-radius: 20px; display: grid; grid-template-columns: 1fr 1.15fr; box-shadow: 0 40px 80px -30px rgba(0,0,0,.5); animation: pop .22s ease-out; }
-@keyframes pop { from { transform: translateY(12px) scale(.98); opacity: 0; } to { transform: none; opacity: 1; } }
-.order-card .close-btn { position: absolute; top: 10px; right: 10px; z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--soft); font-size: 16px; cursor: pointer; }
-.order-card .close-btn:hover { background: var(--line); }
-.order-card .om-img { background: #fafafa; display: flex; align-items: center; justify-content: center; padding: 28px; }
-.order-card .om-img img { width: 100%; max-height: 300px; object-fit: contain; mix-blend-mode: multiply; }
-.order-card .om-body { padding: 28px 26px 24px; }
-.order-card .om-tag { font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-deep); }
-.order-card .om-name { font-size: 22px; font-weight: 800; letter-spacing: -.03em; line-height: 1.2; margin-top: 8px; padding-right: 30px; }
-.order-card .om-brand { font-size: 13px; color: var(--muted); margin-top: 4px; font-weight: 600; }
-.order-card .om-model { margin-top: 10px; font-size: 13px; background: var(--soft); border-radius: 8px; padding: 8px 10px; }
-.order-card .om-actions { display: grid; gap: 8px; margin-top: 18px; }
-.order-card .om-actions .btn { width: 100%; }
-.order-card .btn-wa { background: var(--red); color: #fff; }
-.order-card .btn-wa:hover { background: var(--red-dark); }
-.order-card .btn-mail { background: var(--ink); color: #fff; }
-.order-card .btn-shop { background: var(--white); color: var(--ink); border-color: #d2d2d7; }
-.order-card .om-foot { margin-top: 14px; font-size: 12px; color: var(--muted); }
-.order-mail-form{display:none;margin-top:12px;padding:16px;background:var(--soft);border:1px solid var(--line);border-radius:12px}.order-mail-form.on{display:grid;gap:9px}.order-mail-form label{display:grid;gap:5px;color:var(--muted);font-size:12px;font-weight:700}.order-mail-form input{width:100%;min-height:44px;border:1px solid #d2d2d7;border-radius:10px;background:#fff;padding:11px 12px;font:600 16px/1.2 var(--font);outline:none}.order-mail-form input:focus{border-color:var(--ink)}.order-mail-form button{min-height:46px;border:0;border-radius:999px;background:var(--red);color:#fff;padding:13px;font:750 14px/1 var(--font);cursor:pointer}.order-mail-form button:disabled{opacity:.65;cursor:wait}.order-mail-status{min-height:18px;margin:0;color:var(--muted);font-size:12px;line-height:1.45}.order-mail-status.success{color:#187c46}.order-mail-status.error{color:#b22126}.order-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important}
-
-/* ---------- Qualité (30 points) ---------- */
-.quality { max-width: var(--wrap); margin: 80px auto 0; padding: 0 24px; scroll-margin-top: 120px; }
-.quality-inner { background: var(--soft); border-radius: 24px; padding: 48px 44px; }
-.quality-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--red-deep); }
-.quality h2 { font-size: clamp(30px, 3.6vw, 46px); font-weight: 800; letter-spacing: -.045em; line-height: 1.05; margin: 10px 0 12px; }
-.quality h2 em { font-style: normal; color: var(--red); }
-.quality .lede { font-size: 16px; color: #4a4a4f; max-width: 620px; line-height: 1.6; }
-.q-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-top: 28px; }
-.q-item { background: var(--white); border-radius: 14px; padding: 16px 14px; display: flex; flex-direction: column; gap: 4px; }
-.q-item .ico { font-size: 20px; }
-.q-item b { font-size: 14px; font-weight: 800; letter-spacing: -.01em; }
-.q-item span:last-child { font-size: 12px; color: var(--muted); line-height: 1.4; }
-
-/* ---------- Engagements ---------- */
-.engagements { max-width: var(--wrap); margin: 0 auto; padding: 80px 24px 0; }
-.eng-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-.eng { border: 1px solid var(--card-line); border-radius: 16px; padding: 24px 22px; background: var(--white); box-shadow: var(--shadow-card); }
-.eng .ico { width: 42px; height: 42px; border-radius: 12px; background: var(--red-soft); color: var(--red); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; }
-.eng h3 { font-size: 20px; font-weight: 800; letter-spacing: -.03em; line-height: 1.15; margin: 16px 0 8px; }
-.eng p { font-size: 14px; color: #4a4a4f; line-height: 1.6; }
-.eng p b { color: var(--ink); }
-
-/* ---------- Boutique (adresse + carte) ---------- */
-.boutique { max-width: var(--wrap); margin: 0 auto; padding: 80px 24px 0; scroll-margin-top: 120px; }
-.boutique-inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 24px; background: var(--blue); color: var(--blue-ink); border-radius: 24px; padding: 40px; }
-.boutique-text h2 { font-size: clamp(28px, 3.4vw, 42px); font-weight: 800; letter-spacing: -.045em; line-height: 1.08; margin: 10px 0 24px; }
-.boutique-text h2 em { font-style: normal; font-weight: 500; }
-.boutique-text .eyebrow { color: var(--blue-ink); }
-.boutique-info { display: grid; gap: 14px; margin-bottom: 26px; }
-.bi-block { background: rgba(255,255,255,.7); border-radius: 14px; padding: 14px 16px; }
-.bi-block .lbl { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; opacity: .7; }
-.bi-block .val { font-size: 15px; font-weight: 600; margin-top: 4px; line-height: 1.5; word-break: break-word; }
-.bi-block .val a { text-decoration: underline; text-underline-offset: 3px; }
-.map-mock { position: relative; min-height: 380px; border-radius: 18px; overflow: hidden; background: #dfe5ef; }
-.map-mock iframe { border-radius: 18px !important; }
-
-/* ---------- Pied de page ---------- */
-footer { margin-top: 80px; background: var(--soft); color: var(--ink); }
-.partner-strip { max-width: var(--wrap); margin: 0 auto; padding: 28px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
-.partner-strip .text { display: flex; align-items: center; gap: 14px; }
-.partner-strip .ico { width: 44px; height: 44px; border-radius: 12px; background: var(--white); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
-.partner-strip .ico img { width: 36px; height: 36px; }
-.partner-strip .copy { font-size: 14px; color: #4a4a4f; line-height: 1.5; }
-.partner-strip .copy strong { color: var(--ink); }
-.partner-strip .copy .red { color: var(--red); }
-.partner-strip > a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 10px 18px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 750; }
-.footer-cols { max-width: var(--wrap); margin: 0 auto; padding: 40px 24px 28px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 28px; }
-.f-brand .logo { font-size: 18px; font-weight: 800; letter-spacing: -.02em; }
-.f-brand .logo .red { color: var(--red); }
-.f-brand p { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.6; max-width: 320px; }
-.f-col h4 { font-size: 12px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
-.f-col ul { list-style: none; }
-.f-col a { display: inline-flex; align-items: center; min-height: 36px; font-size: 13px; color: #4a4a4f; }
-.f-col a:hover { color: var(--red); }
-.footer-bottom { max-width: var(--wrap); margin: 0 auto; padding: 18px 24px 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
-.footer-bottom .legal { display: flex; gap: 14px; align-items: center; }
-.footer-bottom .legal a { text-decoration: underline; text-underline-offset: 3px; display: inline-flex; align-items: center; min-height: 36px; }
-
-
-/* Cibles tactiles ≥ 44 px */
-.brand { min-height: 44px; }
-.hd-nav a, .hd-nav a.nav-boutique { min-height: 44px; }
-.f-col a, .footer-bottom .legal a { min-height: 44px; }
-.bi-block .val a, .section-header .right a { display: inline-flex; align-items: center; min-height: 44px; }
-/* ---------- Apparition douce ---------- */
-.reveal { opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
-.reveal.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
-  .reveal { opacity: 1; transform: none; }
-}
-
-/* =========================== Responsive =========================== */
-@media (max-width: 1100px) {
-  .rayons-row { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  .pgrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .q-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  .eng-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .promos { grid-template-columns: 1fr 1fr; }
-  .promo-qr { grid-column: 1 / -1; }
-  .hd-phone .full { display: none; }
-  .hd-phone .short { display: inline; }
-}
-@media (max-width: 1120px) {
-  .hd-inner { flex-wrap: wrap; row-gap: 6px; padding: 8px 16px 6px; }
-  .hd-nav { order: 3; width: 100%; margin: 0; overflow-x: auto; scrollbar-width: none; padding: 2px 0 6px; gap: 4px; }
-  .hd-nav::-webkit-scrollbar { display: none; }
-  .hd-actions { margin-left: auto; }
-}
-@media (max-width: 900px) {
-  .poster { grid-template-columns: 1fr; padding: 32px 28px; gap: 24px; }
-  .poster-visual::before { width: 260px; height: 260px; }
-  .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .dual { grid-template-columns: 1fr; }
-  .boutique-inner { grid-template-columns: 1fr; padding: 28px; }
-  .map-mock { min-height: 300px; }
-  .footer-cols { grid-template-columns: 1fr 1fr; }
-  .f-brand { grid-column: 1 / -1; }
-  .order-card { grid-template-columns: 1fr; }
-  .order-card .om-img { padding: 18px; }
-  .order-card .om-img img { max-height: 170px; }
-}
-@media (max-width: 640px) {
-  .wrap, .poster-zone, .promos, .rayons, .trust, .dual, .shop-section, .quality, .engagements, .boutique { padding-left: 16px; padding-right: 16px; }
-  .brand img { width: 34px; height: 34px; }
-  .brand-txt strong { font-size: 14.5px; }
-  .brand-txt small { display: none; }
-  .hd-phone { width: 44px; height: 44px; padding: 0; justify-content: center; }
-  .hd-phone .short, .hd-phone .full { display: none; }
-  .hd-phone .ico-tel { display: block; }
-  .hd-inner { column-gap: 10px; }
-  .hd-nav a.nav-boutique { order: -1; }
-  .hd-wa { padding: 10px 14px; }
-  .hd-wa .arr { display: none; }
-  .hd-actions { gap: 6px; }
-  .poster-zone { margin-top: 14px; }
-  .poster { padding: 26px 20px 24px; min-height: 0; border-radius: 16px; }
-  .poster h1, .poster h2 { font-size: 33px; margin: 16px 0 12px; }
-  .poster p { font-size: 14px; }
-  .offer strong { font-size: 32px; }
-  .poster-cta .btn { width: 100%; }
-  .poster-photo { transform: none; }
-  .promos { grid-template-columns: 1fr; gap: 12px; }
-  .promo { min-height: 0; padding: 18px; }
-  .promo strong { font-size: 17px; }
-  .promo-qr { flex-direction: column; align-items: flex-start; }
-  .promo-qr img { width: 130px; }
-  .promo-casse img { width: 76px; height: 76px; }
-  .rayons { margin-top: 44px; }
-  .rayons-row { display: flex; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; gap: 10px; padding-bottom: 6px; margin-right: -16px; padding-right: 16px; }
-  .rayons-row::-webkit-scrollbar { display: none; }
-  .rayon { flex: 0 0 104px; scroll-snap-align: start; min-height: 0; }
-  .trust { margin-top: 36px; }
-  .trust-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .trust-item { padding: 16px 14px; }
-  .trust-item .num { font-size: 25px; }
-  .dual-block { padding: 26px 22px 22px; min-height: 0; }
-  .shop-section { padding-top: 60px; }
-  .section-header .right { text-align: left; }
-  .sort-bar .result-count { margin-left: 0; width: 100%; }
-  .pgrid, .acc-grid { gap: 10px; }
-  .card { padding: 10px 10px 12px; border-radius: 14px; }
-  .card .grade { top: 16px; left: 16px; font-size: 9px; padding: 3px 7px; }
-  .card .model { font-size: 14px; }
-  .card .ph .noimg { padding-top: 26px; font-size: 12px; }
-  .card .ph .noimg::before { width: 26px; height: 44px; border-radius: 7px; }
-  .card .price { font-size: 20px; }
-  .card .cta { font-size: 12px; padding: 8px; }
-  .acc-card { padding: 10px 10px 12px; }
-  .acc-card .badge-top { top: 16px; left: 16px; }
-  .acc-card .acc-name { font-size: 13px; }
-  .acc-more { padding: 22px 20px; }
-  .acc-more-actions, .acc-more-actions .btn { width: 100%; }
-  .quality { margin-top: 60px; }
-  .quality-inner { padding: 30px 18px; border-radius: 18px; }
-  .q-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .engagements, .boutique { padding-top: 60px; }
-  .eng-grid { grid-template-columns: 1fr; }
-  .boutique-inner { padding: 22px 16px; border-radius: 18px; }
-  .boutique-inner .btn { width: 100%; }
-  .map-mock { min-height: 260px; }
-  .partner-strip, .footer-cols, .footer-bottom { padding-left: 16px; padding-right: 16px; }
-  .partner-strip > a { width: 100%; justify-content: center; }
-  .order-modal { padding: 10px; align-items: flex-end; }
-  .order-card { max-height: calc(100vh - 20px); border-radius: 18px; }
-  .order-card .om-body { padding: 20px 18px 18px; }
-  .order-card .om-name { font-size: 19px; }
-}
-@media (max-width: 640px) {
-  .poster .kicker, .promo .kicker, .poster-tag, .offer span, .dual-block .num-tag, .live-dot, .acc-more-eyebrow, .quality-eyebrow, .order-card .om-tag, .acc-card .badge-top { font-size: 11px; }
-  .card .grade { font-size: 10px; }
-}
-@media (max-width: 360px) {
-  .hd-wa { font-size: 12px; padding: 10px 12px; }
-  .brand-txt strong { font-size: 14px; }
-}
-</style>
+<link rel="stylesheet" href="boutique.css?v=1">
+<link rel="stylesheet" href="accueil.css?v=1">
 </head>
 
 <body>
 
-<!-- EN-TÊTE -->
 <header class="site-header">
   <div class="hd-inner">
     <a href="./" class="brand" aria-label="Accueil Solution Accessoires">
-      <img src="img/logo-ui.webp" alt="" width="38" height="38">
+      <img src="img/logo-ui.webp" alt="" width="36" height="36">
       <span class="brand-txt"><strong>Solution <em>Accessoires</em></strong><small>Une boutique Solution Phone · Mâcon</small></span>
     </a>
     <nav class="hd-nav" aria-label="Navigation principale">
-      <a href="#reconditionnes">Reconditionnés</a>
       <a href="#accessoires">Accessoires</a>
-      <a href="/hydrogel.html">Hydrogel</a>
+      <a href="#reconditionnes">Reconditionnés</a>
+      <a href="#hydrogel">Hydrogel</a>
       <a href="#qualite">Garantie</a>
       <a href="#boutique" class="nav-boutique">Boutique</a>
     </nav>
     <div class="hd-actions">
-      <a href="tel:+33602849953" class="hd-phone" aria-label="Appeler le 06 02 84 99 53"><span class="full">06 02 84 99 53</span><span class="short">Appeler</span><svg class="ico-tel" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></a>
+      <a href="tel:+33602849953" class="hd-phone" aria-label="Appeler le 06 02 84 99 53"><span class="full">06 02 84 99 53</span><svg class="ico-tel" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></a>
       <a href="https://wa.me/33783921884" target="_blank" rel="noopener" class="hd-wa">WhatsApp<span class="arr">&nbsp;↗</span></a>
     </div>
   </div>
@@ -615,251 +90,213 @@ footer { margin-top: 80px; background: var(--soft); color: var(--ink); }
 
 <main>
 
-<!-- AFFICHE -->
-<div class="poster-zone">
-  <section class="poster poster-peach hero" aria-labelledby="hero-title">
-    <div class="poster-copy">
-      <span class="kicker">01 / Le plus gros stock de Mâcon · mis à jour en temps réel</span>
-      <h1 id="hero-title">Smartphones reconditionnés &amp; accessoires <em>à Mâcon.</em></h1>
-      <p class="hero-lede">
-        Votre magasin de téléphonie à Mâcon pour choisir un <strong>smartphone reconditionné</strong>, une coque, un chargeur ou une protection adaptée à votre modèle. Stock disponible en boutique, juste à côté de Solution Phone.
-      </p>
-      <div class="offer"><strong>12 mois</strong><span>Garantie incluse<br>sur les reconditionnés</span></div>
-      <div class="poster-cta">
-        <a href="#reconditionnes" class="btn btn-dark btn-large">Voir les reconditionnés →</a>
-        <a href="hydrogel.html" class="btn btn-light btn-large">Protection écran dès 10 €</a>
-      </div>
+<section class="hero" aria-labelledby="hero-title">
+  <div>
+    <p class="eyebrow">Solution Accessoires · 21 Rue Gambetta, Mâcon</p>
+    <h1 id="hero-title">Smartphones reconditionnés &amp; accessoires <span>à Mâcon.</span></h1>
+    <p class="hero-lede">
+      Votre magasin de téléphonie à Mâcon pour choisir un <strong>smartphone reconditionné</strong>, une coque, un chargeur ou une protection adaptée à votre modèle. Stock disponible en boutique, juste à côté de Solution Phone.
+    </p>
+    <div class="hero-cta">
+      <a href="#accessoires" class="btn btn-red">Voir les accessoires</a>
+      <a href="#reconditionnes" class="btn btn-outline">Voir les téléphones</a>
     </div>
-    <div class="poster-visual">
-      <div>
-        <div class="poster-photo">
-          <img src="boutique-solution-accessoires.jpg" alt="Solution Accessoires - Boutique au 21 Rue Gambetta à Mâcon : smartphones reconditionnés, neufs, et mur de coques" width="1448" height="1086" fetchpriority="high">
-        </div>
-        <span class="poster-tag">+100 smartphones reconditionnés · +5000 coques · 21 Rue Gambetta</span>
-      </div>
-    </div>
-  </section>
+  </div>
+  <div class="hero-photo">
+    <img src="boutique-solution-accessoires.jpg" alt="Solution Accessoires - Boutique au 21 Rue Gambetta à Mâcon : smartphones reconditionnés, neufs, et mur de coques" width="1448" height="1086" fetchpriority="high">
+  </div>
+</section>
+
+<div class="facts" aria-label="En bref">
+  <div class="fact"><b>Pose incluse</b><span>Verre trempé posé, prix tout compris</span></div>
+  <div class="fact"><b>12 mois</b><span>Garantie sur les reconditionnés</span></div>
+  <div class="fact"><b>5,0/5</b><span>20 avis Google</span></div>
+  <div class="fact"><b>3 boutiques</b><span>Côte à côte, 21 Rue Gambetta</span></div>
 </div>
 
-<!-- ENCARTS -->
-<section class="promos" aria-label="Offres du moment">
-  <a class="promo promo-qr" href="https://reparation-iphone-macon.fr/">
+<div class="qr">
+  <a href="https://reparation-iphone-macon.fr/">
     <img src="img/qualirepar-label-officiel.jpg" alt="Label QualiRépar" width="800" height="427" loading="lazy">
-    <div>
-      <span class="kicker">Bonus réparation</span>
-      <strong><span class="amount">−25 €</span> sur votre réparation iPhone · QualiRépar</strong>
-      <small>25 € déduits directement par Solution Phone.</small>
-      <span class="promo-link">Voir la réparation iPhone à Mâcon →</span>
-    </div>
+    <span class="qr-text">
+      <strong><em>−25 €</em> sur votre réparation iPhone · QualiRépar</strong>
+      <small>25 € déduits directement par Solution Phone. Réparé en moins d'une heure si la pièce est en stock.</small>
+    </span>
+    <span class="go">Réparation iPhone →</span>
   </a>
-  <a class="promo promo-hydro" href="hydrogel.html">
-    <span class="promo-price"><small>dès</small>10 €</span>
+</div>
+
+<!-- ============================ ACCESSOIRES ============================ -->
+<section id="accessoires" class="section" aria-labelledby="acc-title">
+  <div class="section-head">
     <div>
-      <span class="kicker">Protection écran</span>
-      <strong>Hydrogel découpé et posé en boutique.</strong>
-      <span class="promo-link">Voir les 5 formules →</span>
+      <p class="eyebrow">Accessoires</p>
+      <h2 id="acc-title">Choisissez un rayon.</h2>
     </div>
-  </a>
-  <a class="promo promo-casse" href="https://solution-phone.fr" target="_blank" rel="noopener">
-    <img src="facade-boutiques.JPG" alt="Façade des boutiques Solution Phone et Solution Accessoires à Mâcon" loading="lazy">
-    <div>
-      <span class="kicker">Message pour les casseurs</span>
-      <strong>Tel cassé ? C'est par ici que ça se passe.</strong>
-      <span class="promo-link">Solution Phone →</span>
+    <p>Conseil au <strong><a href="tel:+33602849953">06 02 84 99 53</a></strong></p>
+  </div>
+
+  <nav class="cats" id="accCats" aria-label="Rayons d'accessoires"></nav>
+
+  <div class="toolbar">
+    <label class="field">Mon téléphone
+      <input id="accModel" list="accModelList" placeholder="Ex. iPhone 13, Galaxy S24" autocomplete="off">
+      <datalist id="accModelList">
+        <option value="iPhone 16 Pro"><option value="iPhone 16"><option value="iPhone 15"><option value="iPhone 14"><option value="iPhone 13"><option value="iPhone 12"><option value="iPhone 11">
+        <option value="Galaxy S25"><option value="Galaxy S24"><option value="Galaxy A55"><option value="Galaxy A35"><option value="Galaxy A15"><option value="Xiaomi 15"><option value="Redmi 13C">
+      </datalist>
+    </label>
+    <label class="field field-search">Rechercher
+      <input id="accSearch" type="search" placeholder="Chargeur, câble, MagSafe…">
+    </label>
+    <div class="case-filters" id="caseFilters">
+      <label class="field">Style
+        <select id="caseStyle"><option value="">Toutes les coques</option><option value="magsafe">MagSafe</option><option value="wallet">À rabat / portefeuille</option><option value="clear">Transparentes</option><option value="color">Couleurs &amp; motifs</option></select>
+      </label>
+      <label class="field">Marque
+        <select id="caseBrand"><option value="">Toutes les marques</option><option>COVERME</option><option>FAIRPLAY</option><option>RHINOSHIELD</option></select>
+      </label>
+      <label class="field">Trier
+        <select id="caseSort"><option value="">Notre sélection</option><option value="asc">Prix croissant</option><option value="desc">Prix décroissant</option></select>
+      </label>
     </div>
-  </a>
+  </div>
+
+  <p class="count" id="accCount" role="status"></p>
+  <div class="grid" id="accGrid"></div>
+  <div class="more"><button type="button" class="btn btn-outline" id="accMore">Voir plus de produits</button></div>
+  <p class="note" id="accNote">Visuels illustratifs. Compatibilité, coloris et prix confirmés par l'équipe avant votre passage.</p>
 </section>
 
-<!-- RAYONS -->
-<section class="rayons" aria-labelledby="rayons-title">
-  <div class="block-head">
+<!-- ============================ HYDROGEL ============================ -->
+<section id="hydrogel" class="section" aria-labelledby="hydro-title">
+  <div class="section-head">
     <div>
-      <p class="eyebrow">Les rayons</p>
-      <h2 id="rayons-title">À chacun son style.</h2>
+      <p class="eyebrow">Protection hydrogel · découpée et posée en boutique</p>
+      <h2 id="hydro-title">Cinq qualités. Pose incluse.</h2>
     </div>
-    <p class="side">Coques, protections, charge, audio : plus de 5000 références au 21 Rue Gambetta.</p>
+    <p><a class="link" href="hydrogel.html">Tout savoir sur l'hydrogel →</a></p>
   </div>
-  <div class="rayons-row">
-    <a class="rayon is-strong" href="#reconditionnes"><span class="rayon-img"><img src="img/iphone-reconditionne.jpg" alt="" loading="lazy"></span>Reconditionnés</a>
-    <button type="button" class="rayon" data-go-acc="coques"><span class="rayon-img"><img src="https://www.utopya.fr/media/catalog/product/cache/361213619c8483dcf525ed41a38dd6e5/1/-/1-weave-violetclair_2.jpg" alt="" loading="lazy"></span>Coques</button>
-    <button type="button" class="rayon" data-go-acc="verres"><span class="rayon-img"><img src="https://www.utopya.fr/media/catalog/product/cache/361213619c8483dcf525ed41a38dd6e5/9/9/999--antichoc-v2_1_5.jpg" alt="" loading="lazy"></span>Verres trempés</button>
-    <a class="rayon" href="hydrogel.html"><span class="rayon-img"><img src="https://www.utopya.fr/media/catalog/product/cache/361213619c8483dcf525ed41a38dd6e5/8/1/811--774871_1.jpg" alt="" loading="lazy"></span>Hydrogel</a>
-    <button type="button" class="rayon" data-go-acc="chargeurs"><span class="rayon-img"><img src="https://www.utopya.fr/media/catalog/product/cache/662ea76faaa51bafdb496e43b67d620b/9/5/958--monzachar_1.jpg" alt="" loading="lazy"></span>Chargeurs</button>
-    <button type="button" class="rayon" data-go-acc="cables"><span class="rayon-img"><img src="https://www.utopya.fr/media/catalog/product/cache/662ea76faaa51bafdb496e43b67d620b/c/a/caa001bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web.jpg" alt="" loading="lazy"></span>Câbles</button>
-    <button type="button" class="rayon" data-go-acc="audio"><span class="rayon-img"><img src="https://www.utopya.fr/media/catalog/product/cache/662ea76faaa51bafdb496e43b67d620b/9/0/902--twscaliforniablanc.jpg" alt="" loading="lazy"></span>Audio</button>
-    <button type="button" class="rayon" data-go-acc="batteries"><span class="rayon-img"><img src="https://www.utopya.fr/media/catalog/product/cache/662ea76faaa51bafdb496e43b67d620b/0/0/001-bpb011btbk.jpg" alt="" loading="lazy"></span>Batteries externes</button>
-    <button type="button" class="rayon" data-go-acc="supports"><span class="rayon-img"><img src="https://www.utopya.fr/media/catalog/product/cache/662ea76faaa51bafdb496e43b67d620b/1/3/135--556536.jpg" alt="" loading="lazy"></span>Supports</button>
-    <button type="button" class="rayon" data-go-acc="accessoires"><span class="rayon-img"><img src="https://www.utopya.fr/media/catalog/product/cache/662ea76faaa51bafdb496e43b67d620b/6/1/617--perla.jpg" alt="" loading="lazy"></span>Cordons &amp; sacoches</button>
-  </div>
-</section>
-
-<!-- CONFIANCE -->
-<section class="trust" aria-label="Nos chiffres">
-  <div class="trust-grid">
-    <div class="trust-item"><div class="num">5,0<span class="red">/5</span></div><div class="lbl">20 avis Google</div></div>
-    <div class="trust-item"><div class="num">12<span class="red">mois</span></div><div class="lbl">Garantie incluse</div></div>
-    <div class="trust-item"><div class="num">12<span class="red">ans</span></div><div class="lbl">Boutique à Mâcon</div></div>
-    <div class="trust-item"><div class="num">+100<span class="red">tél.</span></div><div class="lbl">En stock permanent</div></div>
-  </div>
-</section>
-
-<!-- DEUX RAYONS -->
-<section class="dual">
-  <a href="#reconditionnes" class="dual-block recond">
-    <div class="num-tag">
-      <span>02 / Reconditionnés</span>
-      <span class="badge">Dès 120 €</span>
-    </div>
-    <h2>Reconditionnés. <em>Garantis 12 mois.</em></h2>
-    <p>iPhone, Samsung, Pixel, Xiaomi. Testés 30 points, batterie certifiée, grade transparent. Stock mis à jour en temps réel.</p>
-    <div class="cta-arrow">Voir le stock <span>→</span></div>
-  </a>
-  <a href="#accessoires" class="dual-block access">
-    <div class="num-tag">
-      <span>03 / Accessoires</span>
-      <span class="badge">+5000 réfs</span>
-    </div>
-    <h2>Accessoires. <em>Sélectionnés.</em></h2>
-    <p>Coques, chargeurs, écouteurs, protections. FAIRPLAY, BELKIN, COVERME, RHINOSHIELD, OCADIA. Marques éprouvées.</p>
-    <div class="cta-arrow">Voir le catalogue <span>→</span></div>
-  </a>
+  <div class="grid hydro-grid" id="hydroGrid"></div>
 </section>
 
 <!-- ============================ RECONDITIONNÉS ============================ -->
-<section id="reconditionnes" class="shop-section">
-  <div class="section-header">
-    <div class="left">
-      <div class="eyebrow">
-        Reconditionnés
-        <span class="live-dot">Stock live</span>
-      </div>
-      <h2>Une seconde vie, <em>plus belle</em> que la première.</h2>
+<section id="reconditionnes" class="section" aria-labelledby="stock-title">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Stock en direct</p>
+      <h2 id="stock-title">Une seconde vie, plus belle que la première.</h2>
     </div>
-    <div class="right">
-      Mise à jour en temps réel<br>
-      <strong><span id="stockCount">—</span> appareils en stock</strong>
-    </div>
+    <p><strong><span id="stockCount">—</span> appareils</strong> en boutique · garantis 12 mois</p>
   </div>
 
-  <!-- Onglets marques -->
-  <div class="tabs" id="tabs" role="group" aria-label="Choisir une marque">
-    <button class="tab active" data-cat="iphone">iPhone <span class="tab-n" id="nIphone">0</span></button>
-    <button class="tab" data-cat="samsung">Samsung <span class="tab-n" id="nSamsung">0</span></button>
-    <button class="tab" data-cat="autre">Pixel · Xiaomi · Autres <span class="tab-n" id="nAutre">0</span></button>
-    <button class="tab" data-cat="neuf">Neufs <span class="tab-n" id="nNeuf">0</span></button>
+  <div class="phone-tools">
+    <div class="seg" id="tabs" role="group" aria-label="Choisir une marque">
+      <button class="tab active" data-cat="iphone">iPhone <span class="tab-n" id="nIphone">0</span></button>
+      <button class="tab" data-cat="samsung">Samsung <span class="tab-n" id="nSamsung">0</span></button>
+      <button class="tab" data-cat="autre">Autres marques <span class="tab-n" id="nAutre">0</span></button>
+      <button class="tab" data-cat="neuf">Neufs <span class="tab-n" id="nNeuf">0</span></button>
+    </div>
+    <label class="field">Trier
+      <select id="sortSel">
+        <option value="series">Par série</option>
+        <option value="price_asc">Prix croissant</option>
+        <option value="price_desc">Prix décroissant</option>
+        <option value="grade">Meilleur grade</option>
+      </select>
+    </label>
+    <span class="result-count" id="resultCount">—</span>
   </div>
 
-  <!-- Filtres séries dynamiques -->
   <div class="filters" id="filters"></div>
-
-  <!-- Tri -->
-  <div class="sort-bar">
-    <label for="sortSel">Trier par</label>
-    <select id="sortSel">
-      <option value="series">Par série</option>
-      <option value="price_asc">Prix croissant</option>
-      <option value="price_desc">Prix décroissant</option>
-      <option value="grade">Meilleur grade</option>
-    </select>
-    <span class="result-count" id="resultCount">— produits</span>
-  </div>
-
-  <!-- Grille produits -->
-  <div class="products-wrap" id="productsWrap"></div>
+  <div id="productsWrap"></div>
+  <p class="note">Touchez une ligne pour réserver le téléphone sur WhatsApp. L'équipe confirme la disponibilité.</p>
 </section>
 
-<!-- ============================ ACCESSOIRES ============================ -->
-<section id="accessoires" class="shop-section acc-section">
-  <div class="section-header">
-    <div class="left">
-      <div class="eyebrow">Accessoires</div>
-      <h2>On a tellement de stock qu'on peut pas <em>tout montrer</em>.</h2>
+<!-- ============================ GARANTIE ============================ -->
+<section id="qualite" class="section" aria-labelledby="q-title">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Le reconditionnement</p>
+      <h2 id="q-title">Testés sur 30 points.</h2>
     </div>
-    <div class="right">
-      Voici un aperçu — appelez-nous pour un besoin spécifique<br>
-      <strong><a href="tel:+33602849953">06 02 84 99 53</a></strong>
-    </div>
+    <p>Données 100 % effacées · garantie 12 mois</p>
   </div>
-
-  <!-- Catégories accessoires -->
-  <div class="filters" id="accCats" role="group" aria-label="Catégories d'accessoires">
-    <button class="chip active" data-acc="coques">Coques &amp; Étuis</button>
-    <button class="chip" data-acc="verres">Verres trempés</button>
-    <button class="chip" data-acc="chargeurs">Chargeurs</button>
-    <button class="chip" data-acc="batteries">Batteries externes</button>
-    <button class="chip" data-acc="cables">Câbles</button>
-    <button class="chip" data-acc="audio">Audio</button>
-    <button class="chip" data-acc="supports">Supports</button>
-    <button class="chip" data-acc="accessoires">Autres</button>
+  <div class="checks">
+    <div><b>Batterie</b><span>Capacité &gt; 85%</span></div>
+    <div><b>Écran</b><span>Tactile, pixels, vitre</span></div>
+    <div><b>Caméras</b><span>Photo, vidéo, AF</span></div>
+    <div><b>Audio</b><span>Haut-parleurs, micro</span></div>
+    <div><b>Réseaux</b><span>4G, 5G, Wi-Fi, BT</span></div>
+    <div><b>Boutons</b><span>Volume, vibreur</span></div>
+    <div><b>Capteurs</b><span>Face ID, Touch ID</span></div>
+    <div><b>Charge</b><span>Filaire et sans fil</span></div>
+    <div><b>Étanchéité</b><span>Joints inspectés</span></div>
+    <div><b>GPS</b><span>Précision testée</span></div>
+    <div><b>Châssis</b><span>Contrôle visuel</span></div>
+    <div><b>Reset</b><span>Données 100% effacées</span></div>
   </div>
-
-  <!-- Filtre par modèle -->
-  <div class="acc-models-label">Filtrer par modèle de smartphone</div>
-  <div class="acc-models" id="accModels">
-    <button class="chip active" data-model="all">Tous les modèles</button>
-    <button class="chip" data-model="iphone16pro"><span class="ic">●</span>iPhone 16 Pro</button>
-    <button class="chip" data-model="iphone16"><span class="ic">●</span>iPhone 16</button>
-    <button class="chip" data-model="iphone15"><span class="ic">●</span>iPhone 15</button>
-    <button class="chip" data-model="iphone14"><span class="ic">●</span>iPhone 14</button>
-    <button class="chip" data-model="iphone13"><span class="ic">●</span>iPhone 13</button>
-    <button class="chip" data-model="galaxy-s25"><span class="ic">●</span>Galaxy S25</button>
-    <button class="chip" data-model="galaxy-s24"><span class="ic">●</span>Galaxy S24</button>
-    <button class="chip" data-model="galaxy-a55"><span class="ic">●</span>Galaxy A55</button>
-    <button class="chip" data-model="galaxy-a15"><span class="ic">●</span>Galaxy A15</button>
-    <button class="chip" data-model="xiaomi15"><span class="ic">●</span>Xiaomi 15</button>
-    <button class="chip" data-model="redmi13c"><span class="ic">●</span>Redmi 13C</button>
-  </div>
-
-  <!-- Bandeau filtre actif -->
-  <div class="acc-active-filter" id="accActiveFilter">
-    <span>Filtré pour : <span id="accFilterLabel">—</span></span>
-    <button class="clear" onclick="clearAccModel()">✕ Tout afficher</button>
-  </div>
-
-  <!-- Grille accessoires -->
-  <div class="acc-grid" id="accGrid"></div>
-
-  <!-- Encart "plus en boutique" — adaptatif selon le filtre -->
-  <div class="acc-more">
-    <div class="acc-more-icon">+</div>
-    <div class="acc-more-text">
-      <div class="acc-more-eyebrow">En boutique</div>
-      <h3 id="accMoreTitle">Et plein d'autres pépites <em>en boutique.</em></h3>
-      <p id="accMoreText">+5000 références au mur, +100 smartphones reconditionnés, des modèles en exclusivité physique. Passe nous voir au 21 Rue Gambetta.</p>
-    </div>
-    <div class="acc-more-actions">
-      <a href="https://wa.me/33783921884?text=Bonjour%2C%20je%20cherche%20un%20accessoire%2C%20pouvez-vous%20m%27aider%20%3F" target="_blank" rel="noopener" class="btn btn-wa-light">
-        WhatsApp ↗
-      </a>
-      <a href="#boutique" class="btn btn-shop-light">Voir la boutique</a>
-    </div>
-  </div>
-
-  <p class="acc-disclaimer">
-    Cliquez sur un produit pour commander par WhatsApp ou par mail · Prix disponibles en boutique
-  </p>
 </section>
+
+<section class="section" aria-labelledby="p-title">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">La différence</p>
+      <h2 id="p-title">Conseillé. Garanti. Chez nous.</h2>
+    </div>
+  </div>
+  <div class="promises">
+    <div class="promise"><h3>SAV à Mâcon</h3><p>Un souci ? Vous poussez la porte du 21 Rue Gambetta.</p></div>
+    <div class="promise"><h3>Transfert inclus</h3><p>Contacts, photos, applis, WhatsApp : on migre tout en boutique.</p></div>
+    <div class="promise"><h3>Reprise directe</h3><p>Votre ancien smartphone déduit directement du prix.</p></div>
+    <div class="promise"><h3>Une équipe nommée</h3><p>Sébastien, Rahim, Raphaël et le stagiaire.</p></div>
+  </div>
+</section>
+
+<!-- ============================ BOUTIQUE ============================ -->
+<section id="boutique" class="section" aria-labelledby="b-title">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Notre boutique</p>
+      <h2 id="b-title">21 Rue Gambetta, au cœur de Mâcon.</h2>
+    </div>
+    <p>Solution Accessoires, Solution Phone et Solution Informatique : 3 boutiques côte à côte.</p>
+  </div>
+  <div class="store">
+    <div>
+      <dl class="store-info">
+        <div><dt>Adresse</dt><dd>21 Rue Gambetta<br>71000 Mâcon</dd></div>
+        <div><dt>Horaires</dt><dd>Mardi à samedi<br>10h00 — 12h00 / 14h00 — 19h00<br><span style="color:var(--muted)">Fermé dimanche et lundi</span></dd></div>
+        <div><dt>Contact</dt><dd><a href="mailto:contact@solution-phone.fr">contact@solution-phone.fr</a><br><a href="tel:+33602849953">06 02 84 99 53</a></dd></div>
+      </dl>
+      <a href="https://www.google.com/maps/dir/?api=1&destination=21+Rue+Gambetta+71000+Macon" target="_blank" rel="noopener" class="btn btn-ink">Itinéraire</a>
+    </div>
+    <div class="map">
+      <iframe
+        src="https://maps.google.com/maps?q=21%20rue%20gambetta%2071000%20macon&t=&z=16&ie=UTF8&iwloc=&output=embed"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Solution Accessoires - 21 Rue Gambetta, 71000 Mâcon"></iframe>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <!-- ============================ FENÊTRE DE COMMANDE ============================ -->
 <div class="order-modal" id="orderModal" onclick="if(event.target===this)closeOrderModal()" role="dialog" aria-modal="true" aria-labelledby="omName">
   <div class="order-card">
     <button class="close-btn" onclick="closeOrderModal()" aria-label="Fermer">✕</button>
-    <div class="om-img"><img id="omImg" src="" alt=""></div>
+    <div class="om-img"><img id="omImg" alt=""></div>
     <div class="om-body">
-      <div class="om-tag">Commande express</div>
       <div class="om-name" id="omName">—</div>
       <div class="om-brand" id="omBrand">—</div>
+      <div class="om-price" id="omPrice"></div>
       <div class="om-model" id="omModel" style="display:none">Pour : <b id="omModelLabel">—</b></div>
       <div class="om-actions">
-        <a id="omWa" href="#" target="_blank" rel="noopener" class="btn btn-wa">
-          Commander par WhatsApp
-        </a>
-        <button id="omMail" type="button" class="btn btn-mail" onclick="toggleOrderMailForm()">
-          Commander par mail
-        </button>
-        <a href="#boutique" onclick="closeOrderModal()" class="btn btn-shop">
-          Voir en boutique (21 Rue Gambetta)
-        </a>
+        <a id="omWa" href="#" target="_blank" rel="noopener" class="btn btn-red">Réserver sur WhatsApp</a>
+        <button id="omMail" type="button" class="btn btn-ink" onclick="toggleOrderMailForm()">Demander par e-mail</button>
+        <a href="#boutique" onclick="closeOrderModal()" class="btn btn-shop">Voir en boutique (21 Rue Gambetta)</a>
       </div>
       <form class="order-mail-form" id="orderMailForm" onsubmit="sendOrderMail(event)">
         <label>Votre nom<input id="orderMailName" autocomplete="name" required></label>
@@ -874,99 +311,15 @@ footer { margin-top: 80px; background: var(--soft); color: var(--ink); }
   </div>
 </div>
 
-<!-- QUALITÉ 30 POINTS -->
-<section id="qualite" class="quality">
-  <div class="quality-inner">
-    <div class="quality-eyebrow">Le process reconditionnement</div>
-    <h2>Testés sur <em>30 points</em>.</h2>
-    <p class="lede">
-      Chaque smartphone passe entre nos mains. Pas une étape négligée. Pas un détail oublié.
-      Pas de mystère sur l'état réel de l'appareil que tu reçois.
-    </p>
-
-    <div class="q-grid">
-      <div class="q-item"><span class="ico">🔋</span><b>Batterie</b><span>Capacité &gt; 85%</span></div>
-      <div class="q-item"><span class="ico">📱</span><b>Écran</b><span>Tactile, pixels, vitre</span></div>
-      <div class="q-item"><span class="ico">📸</span><b>Caméras</b><span>Photo, vidéo, AF</span></div>
-      <div class="q-item"><span class="ico">🔊</span><b>Audio</b><span>Haut-parleurs, micro</span></div>
-      <div class="q-item"><span class="ico">📡</span><b>Réseaux</b><span>4G, 5G, Wi-Fi, BT</span></div>
-      <div class="q-item"><span class="ico">🔘</span><b>Boutons</b><span>Volume, vibreur</span></div>
-      <div class="q-item"><span class="ico">📲</span><b>Capteurs</b><span>Face ID, Touch ID</span></div>
-      <div class="q-item"><span class="ico">🔌</span><b>Charge</b><span>Filaire et sans fil</span></div>
-      <div class="q-item"><span class="ico">🛡️</span><b>Étanchéité</b><span>Joints inspectés</span></div>
-      <div class="q-item"><span class="ico">📍</span><b>GPS</b><span>Précision testée</span></div>
-      <div class="q-item"><span class="ico">✨</span><b>Châssis</b><span>Contrôle visuel</span></div>
-      <div class="q-item"><span class="ico">🧹</span><b>Reset</b><span>Données 100% effacées</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ENGAGEMENTS -->
-<section class="engagements">
-  <div class="section-header">
-    <div class="left">
-      <div class="eyebrow">La différence</div>
-      <h2>Conseillé. Garanti. <em>Chez nous.</em></h2>
-    </div>
-  </div>
-
-  <div class="eng-grid">
-    <div class="eng"><div class="ico">✓</div><h3>SAV à Mâcon</h3><p>Pas de carton à expédier en Pologne. Un souci ? Tu pousses la porte du 21 Rue Gambetta. <b>Une garantie qu'on peut regarder dans les yeux.</b></p></div>
-    <div class="eng"><div class="ico">→</div><h3>Transfert inclus</h3><p>Contacts, photos, applis, <b>WhatsApp</b>. On migre tout depuis ton ancien tel, devant toi, en boutique. Trente minutes.</p></div>
-    <div class="eng"><div class="ico">↺</div><h3>Reprise directe</h3><p>On rachète ton ancien smartphone et on déduit sa valeur <b>directement du prix neuf</b>. Pas d'attente, pas de virement à relancer.</p></div>
-    <div class="eng"><div class="ico">★</div><h3>Une équipe nommée</h3><p>Sébastien, Rahim, Raphaël et le stagiaire. Pas de chatbot, pas de hotline. <b>Tu reviens, on te reconnaît.</b></p></div>
-  </div>
-</section>
-
-<!-- BOUTIQUE -->
-<section id="boutique" class="boutique">
-  <div class="boutique-inner">
-    <div class="boutique-text">
-      <div class="eyebrow">Notre boutique</div>
-      <h2>21 Rue Gambetta, <em>au cœur de Mâcon.</em></h2>
-
-      <div class="boutique-info">
-        <div class="bi-block"><div class="lbl">Adresse</div><div class="val">21 Rue Gambetta<br>71000 Mâcon</div></div>
-        <div class="bi-block"><div class="lbl">Horaires</div><div class="val">Mardi à samedi<br>10h00 — 12h00 / 14h00 — 19h00<br><span style="opacity:0.6">Fermé dimanche et lundi</span></div></div>
-        <div class="bi-block"><div class="lbl">Contact</div><div class="val"><a href="mailto:contact@solution-phone.fr">contact@solution-phone.fr</a><br><a href="tel:+33602849953">06 02 84 99 53</a></div></div>
-      </div>
-
-      <a href="https://www.google.com/maps/dir/?api=1&destination=21+Rue+Gambetta+71000+Macon" target="_blank" rel="noopener" class="btn btn-red btn-large">Itinéraire →</a>
-    </div>
-
-    <div class="map-mock">
-      <iframe
-        src="https://maps.google.com/maps?q=21%20rue%20gambetta%2071000%20macon&t=&z=16&ie=UTF8&iwloc=&output=embed"
-        width="100%" height="100%"
-        style="border:0; position:absolute; top:0; left:0; width:100%; height:100%;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Solution Accessoires - 21 Rue Gambetta, 71000 Mâcon"></iframe>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<!-- PIED DE PAGE -->
-<footer>
+<footer class="site-footer">
   <div class="partner-strip">
-    <div class="text">
-      <div class="ico"><img src="img/logo-ui.webp" alt="" width="36" height="36" loading="lazy"></div>
-      <div class="copy">
-        <strong>Besoin d'un expert smartphone ?</strong>
-        Notre boutique partenaire <strong class="red">Solution Phone</strong> est juste à côté. Votre expert depuis 12 ans à Mâcon.
-      </div>
-    </div>
-    <a href="https://solution-phone.fr" target="_blank" rel="noopener">
-      solution-phone.fr <span>→</span>
-    </a>
+    <p class="copy"><strong>Besoin d'un expert smartphone ?</strong> Notre boutique partenaire Solution Phone est juste à côté. Votre expert depuis 12 ans à Mâcon.</p>
+    <a href="https://solution-phone.fr" target="_blank" rel="noopener" class="btn btn-outline">solution-phone.fr →</a>
   </div>
 
   <div class="footer-cols">
     <div class="f-brand">
-      <div class="logo">Solution <span class="red">Accessoires</span></div>
+      <div class="logo">Solution <span>Accessoires</span></div>
       <p>Smartphones reconditionnés certifiés et accessoires sélectionnés. Une boutique indépendante à Mâcon depuis 2014.</p>
     </div>
     <div class="f-col">
@@ -1008,7 +361,7 @@ footer { margin-top: 80px; background: var(--soft); color: var(--ink); }
   </div>
 </footer>
 
-<!-- ============================ SCRIPTS ============================ -->
+<script src="catalogue.js?v=1"></script>
 <script>
 // ====== DÉTECTION GOOGLE ADS — MODE SAFE ======
 // Quand un visiteur arrive depuis Google Ads (gclid présent, ou utm_medium=cpc),
@@ -1200,39 +553,40 @@ function optimizeImageUrl(url, width){
   return url;
 }
 
-function cardHtml(item){
-  var gradeClass = 'gC';
-  if(item.condition==='neuf') gradeClass = 'gN';
-  else if(item.grade && item.grade.charAt(0)==='A') gradeClass = 'gA';
-  else if(item.grade==='B') gradeClass = 'gB';
-  
-  var imgBlock, phClass;
-  if(item.image_url){
-    imgBlock = '<img src="' + optimizeImageUrl(item.image_url, 600) + '" alt="' + escapeHtml(item.model) + '" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')" onerror="this.parentElement.classList.add(\'has-loaded\');this.style.display=\'none\'">';
-    phClass = 'ph';
-  } else {
-    imgBlock = '<div class="noimg">' + escapeHtml(item.model) + '</div>';
-    phClass = 'ph has-loaded';
-  }
-  var colorDot = item.color_hex ? '<span class="color-dot" style="background:' + item.color_hex + '"></span>' : '';
-  var battery = item.battery_pct ? ' · 🔋 ' + item.battery_pct + '%' : '';
+// ====== LISTE ALIGNÉE DES TÉLÉPHONES (une ligne par appareil) ======
+// Mise en forme de l'affichage uniquement (les données Supabase ne sont pas modifiées)
+function prettyModel(m){
+  return String(m||'').toLowerCase().replace(/\s+/g,' ').trim()
+    .replace(/\bpromax\b/g,'pro max')
+    .replace(/\b([a-z])/g, function(c){ return c.toUpperCase(); })
+    .replace(/\bIphone\b/g,'iPhone').replace(/\b(Se|Xr|Xs)\b/g, function(w){ return w.toUpperCase(); })
+    .replace(/\bFe\b/g,'FE').replace(/\b([SAZ])(\d)/g,'$1$2');
+}
+function prettyColor(c){ c = String(c||'').trim().toLowerCase(); return c ? c.charAt(0).toUpperCase() + c.slice(1) : ''; }
+function rowHtml(item){
   var isNeuf = (item.condition||'').toLowerCase() === 'neuf';
-  var badge = isNeuf
-    ? '<span class="grade gN">NEUF</span>'
-    : (item.grade ? '<span class="grade ' + gradeClass + '">GRADE ' + item.grade + '</span>' : '');
+  var img = item.image_url
+    ? '<img src="' + optimizeImageUrl(item.image_url, 160) + '" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement(\'span\'),{className:\'glyph\'}))">'
+    : '<span class="glyph" aria-hidden="true"></span>';
+  var dot = item.color_hex ? '<span class="color-dot" style="background:' + item.color_hex + '"></span>' : '';
+  var state = isNeuf ? 'Neuf' : (item.grade ? 'Grade ' + escapeHtml(item.grade) : '—');
+  var batt = item.battery_pct ? '<span class="bl">Batterie </span>' + item.battery_pct + ' %' : (isNeuf ? '' : '—');
+  var sub = [item.storage, prettyColor(item.color)].filter(Boolean).map(escapeHtml).join(' · ');
   var waMsg = encodeURIComponent('Bonjour, je suis intéressé par le ' + item.model + ' ' + (item.storage||'') + ' ' + (item.color||'') + ' à ' + item.price + '€. Est-il toujours disponible ?');
-  var kind = isNeuf ? 'Neuf' : 'Reconditionné · garanti 12 mois';
-  return '<article class="card' + (item.sold ? ' sold' : '') + '">'
-    + badge
-    + '<div class="' + phClass + '">' + imgBlock + '</div>'
-    + '<div class="kind">' + kind + '</div>'
-    + '<div class="model">' + escapeHtml(item.model) + '</div>'
-    + '<div class="meta">' + escapeHtml(item.storage || '') + (item.color ? ' · ' + colorDot + escapeHtml(item.color) : '') + battery + '</div>'
-    + '<div class="price">' + item.price + '<small>&nbsp;€</small></div>'
-    + (item.sold
-        ? '<span class="cta" style="background:#9ca3af;pointer-events:none">Vendu</span>'
-        : '<a class="cta" href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" target="_blank" rel="noopener">Réserver via WhatsApp →</a>')
-    + '</article>';
+  var label = 'Réserver le ' + item.model + ' ' + (item.storage||'') + ' à ' + item.price + ' euros sur WhatsApp';
+  return '<li><a class="prow plist-cols" href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + '">'
+    + '<span class="p-img">' + img + '</span>'
+    + '<span class="p-model"><b>' + escapeHtml(prettyModel(item.model)) + '</b><span class="p-sub">' + sub + '</span></span>'
+    + '<span class="p-storage">' + escapeHtml(item.storage || '—') + '</span>'
+    + '<span class="p-color">' + dot + escapeHtml(prettyColor(item.color) || '—') + '</span>'
+    + '<span class="p-state"><span class="p-grade">' + state + '</span><span class="p-batt">' + batt + '</span></span>'
+    + '<span class="p-price">' + item.price + ' €</span>'
+    + '<span class="p-cta">Réserver ↗</span>'
+    + '</a></li>';
+}
+
+function listHead(){
+  return '<li class="plist-head plist-cols" aria-hidden="true"><span></span><span>Modèle</span><span class="h-storage">Stockage</span><span class="h-color">Couleur</span><span class="h-grade">État</span><span class="h-batt">Batterie</span><span class="r">Prix</span><span class="h-cta"></span></li>';
 }
 
 function renderSeriesFilters(catItems){
@@ -1267,9 +621,10 @@ function render(){
 
   document.querySelectorAll('#tabs .tab').forEach(function(b){
     b.classList.toggle('active', b.dataset.cat === currentCat);
+    b.setAttribute('aria-pressed', String(b.dataset.cat === currentCat));
   });
 
-  var catItems = itemsInCat(currentCat);
+  var catItems = itemsInCat(currentCat).filter(function(i){ return !i.sold; });
   renderSeriesFilters(catItems);
 
   var filtered = currentSeries === 'all'
@@ -1277,13 +632,14 @@ function render(){
     : catItems.filter(function(i){ return detectSeries(i.model) === currentSeries; });
 
   var wrap = document.getElementById('productsWrap');
-  document.getElementById('resultCount').textContent = filtered.length + ' PRODUIT' + (filtered.length>1?'S':'');
+  document.getElementById('resultCount').textContent = filtered.length + ' appareil' + (filtered.length>1?'s':'');
 
   if(!filtered.length){
-    wrap.innerHTML = '<div class="empty"><h3>Aucun modèle dans cette catégorie pour le moment</h3><p>Passez-nous voir en boutique, on a souvent des arrivages.</p></div>';
+    wrap.innerHTML = '<p class="empty">Aucun modèle dans cette catégorie pour le moment. Passez-nous voir, on a souvent des arrivages.</p>';
     return;
   }
 
+  var html = '<ul class="plist">' + listHead();
   if(currentSort==='series'){
     var groups = {};
     var order = [];
@@ -1293,20 +649,16 @@ function render(){
       groups[s].push(item);
     });
     order.forEach(function(s){ groups[s].sort(function(a,b){ return a.price-b.price; }); });
-    var html = '';
     order.forEach(function(s){
       var items = groups[s];
       var minPrice = items.reduce(function(m,i){ return Math.min(m,i.price); }, Infinity);
-      html += '<div class="series-group">';
-      html += '<div class="series-header"><h3>'+escapeHtml(s)+'</h3><span class="series-count">'+items.length+' EN STOCK</span><span class="series-from">À PARTIR DE '+minPrice+' €</span></div>';
-      html += '<div class="pgrid">'+items.map(cardHtml).join('')+'</div>';
-      html += '</div>';
+      html += '<li class="plist-group"><b>' + escapeHtml(s) + '</b><span>' + items.length + ' en stock · dès ' + minPrice + ' €</span></li>';
+      html += items.map(rowHtml).join('');
     });
-    wrap.innerHTML = html;
   } else {
-    var sorted = sortItems(filtered);
-    wrap.innerHTML = '<div class="pgrid">'+sorted.map(cardHtml).join('')+'</div>';
+    html += sortItems(filtered).map(rowHtml).join('');
   }
+  wrap.innerHTML = html + '</ul>';
 }
 
 // Tabs
@@ -1330,366 +682,160 @@ setInterval(loadStock, 60000);
 
 
 // =====================================================
-// ============== ACCESSOIRES (depuis utopya) ===========
+// ====== CATALOGUE ACCESSOIRES (repris de la Boutique Solution Phone) ======
+// Données : catalogue.js (window.SA_CATALOGUE), généré depuis les fichiers Codex.
 // =====================================================
-var U = 'https://www.utopya.fr/media/catalog/product/cache/662ea76faaa51bafdb496e43b67d620b/';
+var CATALOGUE = window.SA_CATALOGUE || {};
+var CATS = [
+  ['coques','Coques'], ['verres','Verres trempés'], ['hydrogel','Hydrogel'], ['chargeurs','Chargeurs'],
+  ['cables','Câbles'], ['audio','Audio'], ['batteries','Batteries externes'], ['supports','Supports'],
+  ['accessoires','Cordons & accessoires']
+];
+var accCat = 'coques', accQuery = '', accLimit = 12;
+var PAGE = 12;
 
-var CHARGEURS = [
-  {img:U+'9/5/958--monzachar_1.jpg',name:'FAIRPLAY Chargeur 20W USB-C',brand:'FAIRPLAY'},
-  {img:U+'1/-/1--chargeur30wusbc.jpg',name:'FAIRPLAY Chargeur 30W USB-C',brand:'FAIRPLAY'},
-  {img:U+'0/4/04-0y7a0268.jpg',name:'FAIRPLAY Chargeur GaN 30W',brand:'FAIRPLAY'},
-  {img:U+'6/4/641--67w.jpg',name:'FAIRPLAY Chargeur GaN 67W',brand:'FAIRPLAY'},
-  {img:U+'6/3/636--100w.jpg',name:'FAIRPLAY Chargeur GaN 100W',brand:'FAIRPLAY'},
-  {img:U+'6/2/626--65w.jpg',name:'FAIRPLAY Chargeur 65W 3 ports',brand:'FAIRPLAY'},
-  {img:U+'9/1/917--new749-air--1zk0019k0445072612-_com-prevue_.jpg',name:'FAIRPLAY Chargeur 45W Blanc',brand:'FAIRPLAY'},
-  {img:U+'9/2/921--chargeurfp45wblack.jpg',name:'FAIRPLAY Chargeur 45W Noir',brand:'FAIRPLAY'},
-  {img:U+'3/8/387--charuniv90.jpg',name:'FAIRPLAY Chargeur Laptop 90W',brand:'FAIRPLAY'},
-  {img:U+'b/e/belkk13.jpeg',name:'BELKIN Chargeur Secteur 20W',brand:'BELKIN'},
-  {img:U+'b/e/belkk11.jpeg',name:'BELKIN Chargeur Secteur 25W',brand:'BELKIN'},
-  {img:U+'b/e/belkk12.jpeg',name:'BELKIN Chargeur Secteur 25W Noir',brand:'BELKIN'},
-  {img:U+'8/4/848--wca008kq1mwh-b6_1.jpg',name:'BELKIN Chargeur USB-C 30W',brand:'BELKIN'},
-  {img:U+'b/e/belkk.jpeg',name:'BELKIN Chargeur 30W + Câble',brand:'BELKIN'},
-  {img:U+'0/1/01-wch019kqwh.jpg',name:'BELKIN Chargeur GaN 50W Blanc',brand:'BELKIN'},
-  {img:U+'0/1/01-wch019kqbk.jpg',name:'BELKIN Chargeur GaN 50W Noir',brand:'BELKIN'},
-  {img:U+'0/1/01-wca013kqwh_front.jpg',name:'BELKIN Chargeur USB-C 45W Blanc',brand:'BELKIN'},
-  {img:U+'4/6/462--wca013kqbk.jpg',name:'BELKIN Chargeur USB-C 45W Noir',brand:'BELKIN'},
-  {img:U+'w/c/wca011kqwh.png',name:'BELKIN Chargeur USB-C 65W Blanc',brand:'BELKIN'},
-  {img:U+'0/1/01-wch020kqbk.jpg',name:'BELKIN Chargeur GaN 67W Noir',brand:'BELKIN'},
-  {img:U+'0/1/01-wch020kqwh.jpg',name:'BELKIN Chargeur GaN 67W Blanc',brand:'BELKIN'},
-  {img:U+'1/3/132--dftgyhj_1.jpg',name:'BELKIN Chargeur 3x USB-C 67W',brand:'BELKIN'},
-  {img:U+'5/6/563--inc016glbk.jpg',name:'BELKIN Chargeur USB-C 100W Laptop',brand:'BELKIN'},
-  {img:U+'8/1/814--belkin.jpg',name:'BELKIN Chargeur 42W Mixed',brand:'BELKIN'}
-];
-var BATTERIES = [
-  {img:U+'0/0/001-bpb011btbk.jpg',name:'BELKIN PowerBank 10 000mAh 15W',brand:'BELKIN'},
-  {img:U+'0/0/000-bpb011btbl.jpg',name:'BELKIN PowerBank 10 000mAh Bleu',brand:'BELKIN'},
-  {img:U+'0/0/000-bpb012btbk.jpg',name:'BELKIN PowerBank 20 000mAh 15W',brand:'BELKIN'},
-  {img:U+'0/0/001-bpb012btbl00.jpg',name:'BELKIN PowerBank 20 000mAh Bleu',brand:'BELKIN'},
-  {img:U+'5/4/548--bpb016btbk.jpg',name:'BELKIN PowerBank 26 000mAh 32W',brand:'BELKIN'},
-  {img:U+'0/0/001-bpb021hqbl.jpg',name:'BELKIN PowerBank 10 000mAh 20W',brand:'BELKIN'},
-  {img:U+'0/0/001-bpb021hqpk.jpg',name:'BELKIN PowerBank 10 000mAh 20W Rose',brand:'BELKIN'},
-  {img:U+'5/4/546--bpb021hqbk.jpg',name:'BELKIN PowerBank 10 000mAh Noir',brand:'BELKIN'},
-  {img:U+'0/0/001-bpb024hqbl0.jpg',name:'BELKIN PowerBank 20 000mAh 30W Bleu',brand:'BELKIN'},
-  {img:U+'9/1/919--bpb024hqpk.jpg',name:'BELKIN PowerBank 20 000mAh Rose',brand:'BELKIN'}
-];
-var CABLES = [
-  {img:U+'c/a/caa001bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web.jpg',name:'BELKIN Câble Lightning 2m',brand:'BELKIN'},
-  {img:U+'l/d/ld0005699966_1.jpeg',name:'BELKIN Câble Lightning 1m Noir',brand:'BELKIN'},
-  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_5.jpg',name:'BELKIN Câble Tressé Lightning Noir',brand:'BELKIN'},
-  {img:U+'c/a/caa002bt0m-wht_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_3.jpg',name:'BELKIN Câble Tressé Lightning Blanc',brand:'BELKIN'},
-  {img:U+'c/a/caa002bt0m-blk_boostcharge_usb-a_to_ltgcable_gallery_shot_01_web_1.jpg',name:'BELKIN Câble Tressé Lightning 2m',brand:'BELKIN'},
-  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web_2.jpg',name:'BELKIN Câble USB-C 1m Noir',brand:'BELKIN'},
-  {img:U+'c/a/cab001bt0m-blk_boostcharge_usb-a_to_usb-c_gallery_shot_01_web.jpg',name:'BELKIN Câble USB-C 2m Noir',brand:'BELKIN'},
-  {img:U+'h/d/hdmi0018g-1m.jpeg',name:'BELKIN Câble HDMI 4K 1m',brand:'BELKIN'},
-  {img:U+'9/2/926--inz002bt2mbk.jpg',name:'BELKIN Câble Thunderbolt 4 2m',brand:'BELKIN'},
-  {img:U+'b/b/bblk1.jpeg',name:'BELKIN Câble DisplayPort 1.8m',brand:'BELKIN'}
-];
-var AUDIO = [
-  {img:U+'9/0/902--twscaliforniablanc.jpg',name:'FAIRPLAY CALIFORNIA TWS Blanc',brand:'FAIRPLAY'},
-  {img:U+'8/9/896--twscalifornianoir.jpg',name:'FAIRPLAY CALIFORNIA TWS Noir',brand:'FAIRPLAY'},
-  {img:U+'8/5/856--112403.jpg',name:'FAIRPLAY OREGON TWS Blanc',brand:'FAIRPLAY'},
-  {img:U+'8/6/861--112403_1.jpg',name:'FAIRPLAY OREGON TWS Noir',brand:'FAIRPLAY'},
-  {img:U+'_/5/_54a7842.jpg',name:'FAIRPLAY ALASKA TWS Noir',brand:'FAIRPLAY'},
-  {img:U+'h/e/he-0441-9.jpg',name:'FAIRPLAY ALASKA TWS Blanc',brand:'FAIRPLAY'},
-  {img:U+'_/5/_54a1923.jpg',name:'FAIRPLAY Écouteurs Jack 3.5mm',brand:'FAIRPLAY'},
-  {img:U+'_/5/_54a.jpg',name:'FAIRPLAY Écouteurs Lightning',brand:'FAIRPLAY'},
-  {img:U+'9/2/920--test.jpg',name:'FAIRPLAY Écouteurs USB-C',brand:'FAIRPLAY'},
-  {img:U+'1/3/133--f8z274bt.jpg',name:'BELKIN Répartiteur Audio Jack',brand:'BELKIN'}
-];
-var SUPPORTS = [
-  {img:U+'1/3/135--556536.jpg',name:'FAIRPLAY Support Voiture Magnétique',brand:'FAIRPLAY'},
-  {img:U+'2/8/286--support-ordi.jpg',name:'FAIRPLAY Support Ordinateur',brand:'FAIRPLAY'},
-  {img:U+'0/1/01-f7u017bt_.jpg',name:'BELKIN Support Voiture',brand:'BELKIN'},
-  {img:U+'1/-/1-avc024hqbk.jpg',name:'BELKIN Adaptateur HDMI sans Fil',brand:'BELKIN'},
-  {img:U+'3/7/372--bsv400ca2m.jpg',name:'BELKIN Multiprise Parafoudre 4',brand:'BELKIN'},
-  {img:U+'b/s/bsv603ca2m_angled_3.jpg',name:'BELKIN Multiprise Parafoudre 6',brand:'BELKIN'}
-];
-var ACCESSOIRES = [
-  {img:U+'6/1/617--perla.jpg',name:'FAIRPLAY Chaîne 120cm PERLA',brand:'FAIRPLAY'},
-  {img:U+'6/2/623--arla.jpg',name:'FAIRPLAY Chaîne 120cm ARLA',brand:'FAIRPLAY'},
-  {img:U+'6/2/629--ciala.jpg',name:'FAIRPLAY Chaîne 120cm CIALA',brand:'FAIRPLAY'},
-  {img:U+'6/3/635--flavia.jpg',name:'FAIRPLAY Chaîne 120cm FLAVIA',brand:'FAIRPLAY'},
-  {img:U+'1/0/100--luana_1.jpg',name:'FAIRPLAY Chaîne 120cm LUANA',brand:'FAIRPLAY'},
-  {img:U+'9/4/94-rer_22-aura.jpg',name:'FAIRPLAY Chaîne 120cm OLIVIA',brand:'FAIRPLAY'},
-  {img:U+'8/9/894--sac-fp.jpg',name:'FAIRPLAY Sac Multimédia',brand:'FAIRPLAY'},
-  {img:U+'2/m/2mma013hqbk.jpeg',name:'BELKIN Sacoche de Voyage',brand:'BELKIN'},
-  {img:U+'h/o/housse_belkin_ordinateur.jpg',name:'BELKIN Sacoche Laptop 13"',brand:'BELKIN'},
-  {img:U+'h/o/housse_belkin_ordinateur_1.jpg',name:'BELKIN Sacoche Laptop 14"',brand:'BELKIN'},
-  {img:U+'h/o/housse_belkin_ordinateur_2.jpg',name:'BELKIN Sacoche Laptop 11"',brand:'BELKIN'}
-];
-
-// COQUES iPhone
-var FP_IP = [
-  {img:U+'3/2/326--rigel_3.jpg',name:'FAIRPLAY RIGEL Folio MagSafe',brand:'FAIRPLAY'},
-  {img:U+'1/-/1--polarisv2mag_16.jpg',name:'FAIRPLAY POLARIS 2M MagSafe',brand:'FAIRPLAY'},
-  {img:U+'1/-/1--polarisv2_3_2.jpg',name:'FAIRPLAY POLARIS 2M',brand:'FAIRPLAY'},
-  {img:U+'1/-/1--gamma_4_1.jpg',name:'FAIRPLAY GAMMA Folio',brand:'FAIRPLAY'},
-  {img:U+'6/3/639--pavonemag_15_17.jpg',name:'FAIRPLAY PAVONE MagSafe Noir',brand:'FAIRPLAY'},
-  {img:U+'1/_/1_11_2.jpg',name:'FAIRPLAY PAVONE Rose Pastel',brand:'FAIRPLAY'},
-  {img:U+'1/_/1_7_5.jpg',name:'FAIRPLAY PAVONE Rouge',brand:'FAIRPLAY'},
-  {img:U+'1/_/1_-pavone_1_noir_16_25.jpg',name:'FAIRPLAY PAVONE Noir',brand:'FAIRPLAY'},
-  {img:U+'1/-/1--pavone_rose_fushia_6_1.jpg',name:'FAIRPLAY PAVONE Rose Fuschia',brand:'FAIRPLAY'},
-  {img:U+'1/_/1_pavone_bleu_givre_6_1.jpg',name:'FAIRPLAY PAVONE Bleu Givré',brand:'FAIRPLAY'},
-  {img:U+'1/_/1_pavone_plum_2_1_1.jpg',name:'FAIRPLAY PAVONE Plum',brand:'FAIRPLAY'},
-  {img:U+'2/_/2_10_1_2_3.jpg',name:'FAIRPLAY CAPELLA iPhone 16',brand:'FAIRPLAY'},
-  {img:U+'2/_/2_10_1_2_4.jpg',name:'FAIRPLAY CAPELLA iPhone 16 Plus',brand:'FAIRPLAY'},
-  {img:U+'2/_/2_10_1_2_5.jpg',name:'FAIRPLAY CAPELLA iPhone 16 Pro',brand:'FAIRPLAY'}
-];
-var CM = [
-  {img:U+'0/1/01-gravity_magsafeviolet_3.jpg',name:'COVERME GRAVITY MagSafe Violet',brand:'COVERME'},
-  {img:U+'0/1/01-gravity_magsafenoir_3.jpg',name:'COVERME GRAVITY MagSafe Noir',brand:'COVERME'},
-  {img:U+'0/1/01-gravity_magsafebleu_3.jpg',name:'COVERME GRAVITY MagSafe Bleu',brand:'COVERME'},
-  {img:U+'0/1/01-gravity_magsafeblanc_3.jpg',name:'COVERME GRAVITY MagSafe Blanc',brand:'COVERME'},
-  {img:U+'o/n/onyxgris4_6.jpeg',name:'COVERME ONYX MagSafe Gris',brand:'COVERME'},
-  {img:U+'o/n/onyxgold4_9.jpeg',name:'COVERME ONYX MagSafe Gold',brand:'COVERME'},
-  {img:U+'c/o/copie_de_2phantom_3.jpeg',name:'COVERME PHANTOM Violet',brand:'COVERME'},
-  {img:U+'c/o/copie_de_5phantom_6.jpeg',name:'COVERME PHANTOM Bleu Roi',brand:'COVERME'},
-  {img:U+'c/o/copie_de_phantom_6.jpeg',name:'COVERME PHANTOM Noir',brand:'COVERME'},
-  {img:U+'1/-/1--walletbleu_10_1.jpg',name:'COVERME Étui Wallet Bleu',brand:'COVERME'},
-  {img:U+'1/-/1--walletmarron_1_4_1.jpg',name:'COVERME Étui Wallet Marron',brand:'COVERME'},
-  {img:U+'1/-/1--walletrouge_1_4_1.jpg',name:'COVERME Étui Wallet Rouge',brand:'COVERME'},
-  {img:U+'1/-/1--walletnoir_8_1.jpg',name:'COVERME Étui Wallet Noir',brand:'COVERME'},
-  {img:U+'0/1/01-cskinmagbleu00_1.jpg',name:'COVERME Skin MagSafe Bleu',brand:'COVERME'},
-  {img:U+'0/1/01-ckinmagpastel_5.jpg',name:'COVERME Skin MagSafe Rose',brand:'COVERME'},
-  {img:U+'0/1/01-ckinmaglilas_1_3.jpg',name:'COVERME Skin MagSafe Lilas',brand:'COVERME'},
-  {img:U+'0/0/001-chazebleu001-0000_5.jpg',name:'COVERME HAZE MagSafe Bleu',brand:'COVERME'},
-  {img:U+'0/0/0001-hazeviolet000_5.jpeg',name:'COVERME HAZE MagSafe Violet',brand:'COVERME'},
-  {img:U+'0/0/001-hazenoir00_5.jpeg',name:'COVERME HAZE MagSafe Noir',brand:'COVERME'},
-  {img:U+'9/0/908--coverme_10.jpg',name:'COVERME Coque Anneaux Clear',brand:'COVERME'},
-  {img:U+'_/5/_54a3748_2_5.jpg',name:'COVERME Coque TPU Clear',brand:'COVERME'}
-];
-var RS = [
-  {img:U+'v/1/v16mar013254f.jpeg',name:'RHINOSHIELD AirX MagSafe Gris',brand:'RHINOSHIELD'},
-  {img:U+'1/6/16mar013254e.jpeg',name:'RHINOSHIELD AirX MagSafe Noir',brand:'RHINOSHIELD'},
-  {img:U+'7/0/704--clearcasemag-ip16.jpg',name:'RHINOSHIELD Clear Case MagSafe',brand:'RHINOSHIELD'},
-  {img:U+'o/u/outremer_3.jpeg',name:'RHINOSHIELD SolidX MagSafe Bleu',brand:'RHINOSHIELD'},
-  {img:U+'0/-/0--solmagblanc_4.jpeg',name:'RHINOSHIELD SolidX MagSafe Blanc',brand:'RHINOSHIELD'},
-  {img:U+'0/-/0--solmagnoir_4.jpeg',name:'RHINOSHIELD SolidX MagSafe Noir',brand:'RHINOSHIELD'},
-  {img:U+'0/-/0--solmagveal_2_10.jpeg',name:'RHINOSHIELD SolidX MagSafe Vert',brand:'RHINOSHIELD'},
-  {img:U+'0/-/0--solmagbleugla_5.jpeg',name:'RHINOSHIELD SolidX MagSafe Glacier',brand:'RHINOSHIELD'},
-  {img:U+'6/9/697--4711502653248.jpg',name:'RHINOSHIELD SolidSuit Rose Sorbet',brand:'RHINOSHIELD'},
-  {img:U+'6/9/698--4711502653217.jpg',name:'RHINOSHIELD SolidSuit Bleu Océan',brand:'RHINOSHIELD'},
-  {img:U+'6/9/699--4711502653187.jpg',name:'RHINOSHIELD SolidSuit Gris',brand:'RHINOSHIELD'}
-];
-// COQUES Samsung
-var FP_PAVONE_SS = [
-  {img:U+'p/a/pavone_1_noir_14_28.jpg',name:'FAIRPLAY PAVONE Galaxy Noir',brand:'FAIRPLAY'},
-  {img:U+'1/_/1_pavone_rouge_mars_11_1.jpg',name:'FAIRPLAY PAVONE Galaxy Rouge',brand:'FAIRPLAY'},
-  {img:U+'1/-/1--pavone_rose_pastel_25.jpg',name:'FAIRPLAY PAVONE Galaxy Rose',brand:'FAIRPLAY'},
-  {img:U+'p/a/pavone_1_noir_15_27.jpg',name:'FAIRPLAY PAVONE S24+ Noir',brand:'FAIRPLAY'}
-];
-var CM_SS = [
-  {img:U+'1/-/1--walletbleu_3_4.jpg',name:'COVERME Étui Wallet Galaxy Bleu',brand:'COVERME'},
-  {img:U+'1/-/1--walletrouge_5_2.jpg',name:'COVERME Étui Wallet Galaxy Rouge',brand:'COVERME'},
-  {img:U+'1/-/1--walletnoir_12.jpg',name:'COVERME Étui Wallet Galaxy Noir',brand:'COVERME'},
-  {img:U+'o/n/onyxgris4_6.jpeg',name:'COVERME ONYX Gris Titane',brand:'COVERME'},
-  {img:U+'o/n/onyxgold4_9.jpeg',name:'COVERME ONYX Gold',brand:'COVERME'}
-];
-var CIRCLE_SS = [
-  {img:U+'9/6/963--tc-circle-blanc_17.jpg',name:'Coque Circle MagSafe Galaxy Blanc',brand:'Autres'},
-  {img:U+'9/6/964--tc-circle-violet_12.jpg',name:'Coque Circle MagSafe Galaxy Violet',brand:'Autres'},
-  {img:U+'9/6/965--tc-circle-rose_17.jpg',name:'Coque Circle MagSafe Galaxy Rose',brand:'Autres'},
-  {img:U+'9/6/966--tc-circle-noir_17.jpg',name:'Coque Circle MagSafe Galaxy Noir',brand:'Autres'}
-];
-// VERRES
-var FP_VERRE = [
-  {img:U+'8/1/811--774871_2_1.jpg',name:'OCADIA Hydrogel CRYSTAL',brand:'OCADIA'},
-  {img:U+'8/1/810--779811_1_1.jpg',name:'OCADIA Hydrogel OBSIDIAN',brand:'OCADIA'},
-  {img:U+'f/a/fairplay_14.jpg',name:'FAIRPLAY IMPACT Verre iPhone 15/16',brand:'FAIRPLAY'},
-  {img:U+'v/2/v2integral_2_4_1_1.jpg',name:'FAIRPLAY INTEGRAL Verre iPhone',brand:'FAIRPLAY'},
-  {img:U+'3/4/347--fairplay-privacy-_5_3.jpg',name:'FAIRPLAY PRIVACY Verre iPhone',brand:'FAIRPLAY'},
-  {img:U+'f/a/fairplay_16.jpg',name:'FAIRPLAY IMPACT Verre iPhone 15 Pro',brand:'FAIRPLAY'},
-  {img:U+'f/a/fairplay_12.jpg',name:'FAIRPLAY IMPACT Verre iPhone 14 Pro',brand:'FAIRPLAY'},
-  {img:U+'f/a/fairplay.jpg',name:'FAIRPLAY IMPACT Verre iPhone XR/11',brand:'FAIRPLAY'},
-  {img:U+'f/a/fairplay_5.jpg',name:'FAIRPLAY IMPACT Verre iPhone 12/12 Pro',brand:'FAIRPLAY'},
-  {img:U+'c/h/chatgpt_image_6_ao_t_2025_10_37_13.png',name:'BELKIN Protection Caméra iPhone',brand:'BELKIN'},
-  {img:U+'0/1/01-lpa01363m8-000.jpg',name:'RHINOSHIELD Protection Caméra Gris',brand:'RHINOSHIELD'},
-  {img:U+'0/1/01-lpa013634w-000.jpg',name:'RHINOSHIELD Protection Caméra Violet',brand:'RHINOSHIELD'},
-  {img:U+'0/1/01-lpa013634v-000.jpg',name:'RHINOSHIELD Protection Caméra Bleu',brand:'RHINOSHIELD'}
-];
-var VERRE_SS = [
-  {img:U+'f/a/fairplay_1_1.jpg',name:'FAIRPLAY IMPACT Verre Galaxy S25',brand:'FAIRPLAY'},
-  {img:U+'f/a/fairplay_48.jpg',name:'FAIRPLAY IMPACT Verre S25+',brand:'FAIRPLAY'},
-  {img:U+'f/a/fairplay_47.jpg',name:'FAIRPLAY IMPACT Verre S25 Ultra',brand:'FAIRPLAY'},
-  {img:U+'3/6/3667075118817-1.jpg',name:'FAIRPLAY INTEGRAL Verre S25+',brand:'FAIRPLAY'},
-  {img:U+'f/a/fairplay_36.jpg',name:'FAIRPLAY IMPACT Verre Galaxy A54',brand:'FAIRPLAY'},
-  {img:U+'f/a/fairplay_40.jpg',name:'FAIRPLAY IMPACT Verre Galaxy A35',brand:'FAIRPLAY'},
-  {img:U+'7/9/793--mobeen_10.jpg',name:'Verre Trempé Galaxy Full Cover',brand:'Autres'},
-  {img:U+'5/8/587--privacy_3.jpg',name:'Verre Trempé Galaxy Privacy',brand:'Autres'},
-  {img:U+'3/3/332--28962_1_4_29.jpg',name:'Verre Trempé Caméra Galaxy',brand:'Autres'}
-];
-
-var COQUES_IP = FP_IP.concat(CM).concat(RS);
-var COQUES_SS = FP_PAVONE_SS.concat(CM_SS).concat(CIRCLE_SS);
-var COQUES_ALL = COQUES_IP.concat(COQUES_SS);
-var VERRES_ALL = FP_VERRE.concat(VERRE_SS);
-
-var allAccessoires = {
-  coques: COQUES_ALL,
-  verres: VERRES_ALL,
-  chargeurs: CHARGEURS,
-  batteries: BATTERIES,
-  cables: CABLES,
-  audio: AUDIO,
-  supports: SUPPORTS,
-  accessoires: ACCESSOIRES
-};
-
-var currentAccCat = 'coques';
-var currentAccModel = 'all';
-
-// ====== MODEL FILTER (récupéré du fichier d'origine) ======
-function matchesModel(name, model){
-  if(!model || model === 'all') return true;
-  var n = (name || '').toLowerCase();
-  // produits universels (chargeurs USB-C génériques, câbles, audio sans modèle) → toujours visibles
-  var hasModelKw = /iphone|galaxy|note|redmi|xiaomi|pixel|ipad|airpods|watch/.test(n);
-  if(!hasModelKw) return true;
-  var map = {
-    'iphone16pro': /iphone\s*16\s*pro/,
-    'iphone16':    /iphone\s*16(?!\s*pro)/,
-    'iphone15':    /iphone\s*15/,
-    'iphone14':    /iphone\s*14/,
-    'iphone13':    /iphone\s*13/,
-    'iphone12':    /iphone\s*12/,
-    'iphone11':    /iphone\s*11|xr/,
-    'galaxy-s25':  /galaxy\s*s\s*25|s25/,
-    'galaxy-s24':  /galaxy\s*s\s*24|s24/,
-    'galaxy-a55':  /galaxy\s*a\s*55|a55/,
-    'galaxy-a15':  /galaxy\s*a\s*15|a15/,
-    'xiaomi15':    /xiaomi\s*15|mi\s*15/,
-    'redmi13c':    /redmi\s*13\s*c|13c/
-  };
-  var rx = map[model];
-  return rx ? rx.test(n) : true;
+// ---- Compatibilité : uniquement d'après le nom du produit (aucun champ de compatibilité dans les données) ----
+function normModel(s){
+  return String(s||'').toLowerCase()
+    .replace(/iphone\s*([a-z0-9]+)\s*\/\s*([a-z0-9]+)/g, 'iphone $1 iphone $2')
+    .replace(/[’'"]/g,' ').replace(/\s+/g,' ').trim();
+}
+function family(s){
+  if(/iphone/.test(s)) return 'apple';
+  if(/galaxy(?!\s*buds)|samsung(?!\s*galaxy\s*buds)|\b[saz]\d{2}\b/.test(s) && !/buds/.test(s)) return 'samsung';
+  if(/redmi|xiaomi|poco/.test(s)) return 'xiaomi';
+  if(/pixel/.test(s)) return 'google';
+  return '';
+}
+function modelCore(s){ return s.replace(/\b(apple|samsung|galaxy|xiaomi)\b/g,'').replace(/\s+/g,' ').trim(); }
+function escapeRx(s){ return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }
+function isCompatible(p, userModel){
+  var m = normModel(userModel);
+  if(!m) return true;
+  var n = normModel(p.name);
+  var pf = family(n), uf = family(m);
+  if(!pf) return true;                 // produit universel ou modèle à préciser
+  if(uf && pf !== uf) return false;    // autre marque de téléphone
+  var core = modelCore(m);
+  if(!core || !/\d/.test(core)) return true;
+  var specific = new RegExp('(iphone\\s*(\\d+|x[rs]?|se)|\\b[saz]\\d{2}|redmi|pixel\\s*\\d)').test(n);
+  if(!specific) return true;
+  var rx = new RegExp('(^|[^a-z0-9])' + escapeRx(core).replace(/ /g,'\\s*') + '(?!\\s*(pro|plus|max|ultra|fe|\\+|\\d))');
+  return rx.test(modelCore(n));
 }
 
-var modelLabels = {
-  'iphone16pro':'iPhone 16 Pro', 'iphone16':'iPhone 16', 'iphone15':'iPhone 15',
-  'iphone14':'iPhone 14', 'iphone13':'iPhone 13', 'iphone12':'iPhone 12', 'iphone11':'iPhone 11',
-  'galaxy-s25':'Galaxy S25', 'galaxy-s24':'Galaxy S24', 'galaxy-a55':'Galaxy A55', 'galaxy-a15':'Galaxy A15',
-  'xiaomi15':'Xiaomi 15', 'redmi13c':'Redmi 13C'
-};
+function productNote(cat, p){
+  if(cat === 'verres') return 'Pose incluse dans le prix';
+  if(cat === 'hydrogel') return (p.note||'').replace(/\s*·\s*1 protection posée/,'') + ' · pose incluse';
+  if(p.note) return 'Modèle à préciser';
+  return p.brand || '';
+}
+function catOf(p){
+  for(var i=0;i<CATS.length;i++){ if((CATALOGUE[CATS[i][0]]||[]).indexOf(p) >= 0) return CATS[i][0]; }
+  return '';
+}
+function waReserve(p){
+  var model = document.getElementById('accModel').value.trim();
+  return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent('Bonjour, je souhaite réserver : ' + p.name + (p.price ? ' (' + p.price + ' €)' : '') + (model ? ' pour mon ' + model : '') + '. Est-il disponible ?');
+}
+function priceHtml(p){ return p.price ? '<p class="pprice">' + p.price + ' €</p>' : '<p class="pprice ask">Prix en boutique</p>'; }
 
-var catLabels = {
-  'coques':'coques',
-  'verres':'verres trempés',
-  'chargeurs':'chargeurs',
-  'batteries':'batteries externes',
-  'cables':'câbles',
-  'audio':'écouteurs et casques',
-  'supports':'supports',
-  'accessoires':'accessoires'
-};
-
-function updateMoreMessage(){
-  var titleEl = document.getElementById('accMoreTitle');
-  var textEl = document.getElementById('accMoreText');
-  if(!titleEl || !textEl) return;
-  var cat = catLabels[currentAccCat] || 'accessoires';
-  var modelName = modelLabels[currentAccModel];
-
-  if(currentAccModel === 'all'){
-    titleEl.innerHTML = 'Et plein d\'autres ' + cat + ' <em>en boutique.</em>';
-    textEl.textContent = '+5000 références au mur, marques exclusives, modèles introuvables en ligne. Tu trouveras forcément ton bonheur au 21 Rue Gambetta.';
-  } else {
-    titleEl.innerHTML = 'D\'autres ' + cat + ' pour <em>' + modelName + '.</em>';
-    textEl.textContent = 'Et plein d\'autres modèles, marques et accessoires en boutique. Passe nous voir, on a probablement ce qu\'il te faut.';
-  }
+function productCard(p, cat){
+  var art = document.createElement('article');
+  art.className = 'pcard';
+  art.innerHTML = '<button type="button" class="pcard-main">'
+    + '<span class="pimg"><img src="' + escapeHtml(p.img) + '" alt="' + escapeHtml(p.name) + '" loading="lazy" decoding="async" width="240" height="240"></span>'
+    + '<span class="pname">' + escapeHtml(p.name) + '</span>'
+    + '<span class="pnote">' + escapeHtml(productNote(cat, p)) + '</span>'
+    + '</button>'
+    + priceHtml(p)
+    + '<a class="pwa" target="_blank" rel="noopener">Réserver sur WhatsApp</a>';
+  var img = art.querySelector('img');
+  img.addEventListener('error', function(){ img.style.visibility = 'hidden'; }, {once:true});
+  var wa = art.querySelector('.pwa');
+  wa.setAttribute('aria-label', 'Réserver sur WhatsApp : ' + p.name);
+  function refresh(){ wa.href = waReserve(p); }
+  refresh(); wa.addEventListener('click', refresh); wa.addEventListener('focus', refresh);
+  art.querySelector('.pcard-main').addEventListener('click', function(){ openOrderModal(p, cat, this); });
+  return art;
 }
 
-// SVG fallback per category
-function accFallback(cat, name, brand){
-  var bg = { coques:'#fff0f0', verres:'#eaf4ff', chargeurs:'#fff5e5', batteries:'#eaffea', cables:'#f3eafe', audio:'#ffe9f4', supports:'#eafcff', accessoires:'#f5f5f7' }[cat] || '#f5f5f7';
-  var ink = '#e30613';
-  var shape = '';
-  if(cat==='coques'){
-    shape = '<rect x="64" y="30" width="72" height="140" rx="18" fill="#fff" stroke="'+ink+'" stroke-width="3"/><rect x="78" y="44" width="44" height="80" rx="6" fill="'+bg+'"/><circle cx="82" cy="54" r="6" fill="'+ink+'" opacity=".2"/>';
-  } else if(cat==='verres'){
-    shape = '<rect x="58" y="26" width="84" height="148" rx="18" fill="#fff" stroke="#0071e3" stroke-width="3"/><rect x="72" y="42" width="56" height="116" rx="6" fill="#eaf4ff"/><path d="M82 70 l 14 14" stroke="#0071e3" stroke-width="2" opacity=".3"/>';
-  } else if(cat==='chargeurs'){
-    shape = '<rect x="60" y="40" width="80" height="120" rx="16" fill="#fff" stroke="'+ink+'" stroke-width="3"/><path d="M100 60 v40 l-16 28 h32 l-16 -28" stroke="#f5a623" stroke-width="3" fill="none" stroke-linejoin="round"/>';
-  } else if(cat==='batteries'){
-    shape = '<rect x="40" y="76" width="108" height="48" rx="8" fill="#fff" stroke="#10b981" stroke-width="3"/><rect x="148" y="92" width="12" height="16" rx="2" fill="#10b981"/><rect x="48" y="84" width="32" height="32" fill="#10b981"/>';
-  } else if(cat==='cables'){
-    shape = '<rect x="44" y="96" width="24" height="10" rx="2" fill="'+ink+'"/><path d="M68 101 C 100 80, 120 130, 156 101" stroke="#6b3fa0" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="148" y="96" width="16" height="10" rx="2" fill="'+ink+'"/>';
-  } else if(cat==='audio'){
-    shape = '<circle cx="76" cy="100" r="22" fill="#ff4d88" stroke="#fff" stroke-width="3"/><circle cx="124" cy="100" r="22" fill="#ff4d88" stroke="#fff" stroke-width="3"/>';
-  } else if(cat==='supports'){
-    shape = '<rect x="56" y="50" width="88" height="60" rx="6" fill="#fff" stroke="#0ea5b7" stroke-width="3"/>';
+function currentList(){
+  var model = document.getElementById('accModel').value;
+  var list;
+  if(accQuery){
+    var q = accQuery.toLowerCase();
+    list = [];
+    CATS.forEach(function(c){ (CATALOGUE[c[0]]||[]).forEach(function(p){ if(p.name.toLowerCase().indexOf(q) >= 0) list.push({p:p, cat:c[0]}); }); });
   } else {
-    shape = '<circle cx="100" cy="100" r="54" fill="#fff" stroke="'+ink+'" stroke-width="3"/>';
+    list = (CATALOGUE[accCat]||[]).map(function(p){ return {p:p, cat:accCat}; });
   }
-  var label = (brand||'').slice(0,16);
-  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="'+bg+'"/>'+shape+'<text x="100" y="188" text-anchor="middle" font-size="11" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" fill="#1d1d1f" letter-spacing="0.5">'+label+'</text></svg>';
-  return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  list = list.filter(function(x){ return isCompatible(x.p, model); });
+  var showCase = !accQuery && accCat === 'coques';
+  document.getElementById('caseFilters').hidden = !showCase;
+  if(showCase){
+    var style = document.getElementById('caseStyle').value, brand = document.getElementById('caseBrand').value, sort = document.getElementById('caseSort').value;
+    list = list.filter(function(x){
+      var n = x.p.name;
+      return (!brand || x.p.brand === brand) && (!style
+        || (style==='magsafe' && /magsafe/i.test(n))
+        || (style==='wallet' && /wallet|folio|rabat/i.test(n))
+        || (style==='clear' && /transparent|clear/i.test(n))
+        || (style==='color' && !/transparent|clear|wallet|folio/i.test(n)));
+    });
+    if(sort) list = list.slice().sort(function(a,b){ return a.p.price==null ? 1 : b.p.price==null ? -1 : sort==='asc' ? a.p.price-b.p.price : b.p.price-a.p.price; });
+  }
+  return list;
 }
 
 function renderAccessoires(){
+  var list = currentList();
   var grid = document.getElementById('accGrid');
-  var all = allAccessoires[currentAccCat] || [];
-  var products = all.filter(function(p){ return matchesModel(p.name, currentAccModel); });
-
-  // Update active filter banner
-  var banner = document.getElementById('accActiveFilter');
-  var label = document.getElementById('accFilterLabel');
-  if(currentAccModel !== 'all'){
-    banner.classList.add('on');
-    label.textContent = (modelLabels[currentAccModel] || currentAccModel) + ' · ' + products.length + ' produit' + (products.length>1?'s':'') + ' compatible' + (products.length>1?'s':'');
+  grid.replaceChildren();
+  if(!list.length){
+    grid.innerHTML = '<p class="empty">Aucun produit pour ce choix. Essayez un autre mot ou demandez-nous au 06 02 84 99 53.</p>';
   } else {
-    banner.classList.remove('on');
+    list.slice(0, accLimit).forEach(function(x){ grid.appendChild(productCard(x.p, x.cat)); });
   }
-
-  if(!products.length){
-    grid.innerHTML = '<div class="empty" style="grid-column:1/-1"><h3>Aucun accessoire pour ce filtre</h3><p>Essaie une autre catégorie ou désactive le filtre modèle.</p></div>';
-    return;
-  }
-  var html = products.map(function(p, i){
-    var fb = accFallback(currentAccCat, p.name, p.brand);
-    var badge = i < 6 ? '<span class="badge-top">⭐ TOP</span>' : '';
-    var pData = encodeURIComponent(JSON.stringify({n: p.name, b: p.brand, i: p.img}));
-    return '<article class="acc-card" data-product="' + pData + '" onclick="openOrderModal(this)">'
-      + badge
-      + '<span class="order-hint">💬 COMMANDER →</span>'
-      + '<div class="img-wrap"><img src="' + p.img + '" alt="' + escapeHtml(p.name) + '" loading="lazy" decoding="async" onload="this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')" onerror="this.onerror=null;this.src=\'' + fb + '\';this.classList.add(\'loaded\');this.parentElement.classList.add(\'has-loaded\')"></div>'
-      + '<div class="info">'
-      + '<div class="acc-name">' + escapeHtml(p.name) + '</div>'
-      + '<div class="acc-brand">' + escapeHtml(p.brand) + '</div>'
-      + '<span class="acc-cta">Demander le prix →</span>'
-      + '</div>'
-      + '</article>';
-  }).join('');
-  grid.innerHTML = html;
-  updateMoreMessage();
+  var shown = Math.min(accLimit, list.length);
+  var model = document.getElementById('accModel').value.trim();
+  document.getElementById('accCount').textContent = list.length
+    ? list.length + ' produit' + (list.length>1?'s':'') + (model ? ' pour ' + model : '') + ' · ' + shown + ' affiché' + (shown>1?'s':'')
+    : '';
+  document.getElementById('accMore').parentElement.hidden = list.length <= accLimit;
+  document.querySelectorAll('#accCats .cat').forEach(function(b){ b.setAttribute('aria-pressed', String(!accQuery && b.dataset.cat === accCat)); });
 }
 
-// Catégories accessoires
-document.querySelectorAll('#accCats .chip').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    document.querySelectorAll('#accCats .chip').forEach(function(c){ c.classList.remove('active'); });
-    btn.classList.add('active');
-    currentAccCat = btn.dataset.acc;
-    renderAccessoires();
+// Rayons illustrés (image = premier produit du rayon, comme sur la Boutique)
+(function buildCats(){
+  var nav = document.getElementById('accCats');
+  CATS.forEach(function(c){
+    var first = (CATALOGUE[c[0]]||[])[0];
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'cat'; b.dataset.cat = c[0];
+    b.innerHTML = '<span class="cat-img">' + (first ? '<img src="' + escapeHtml(first.img) + '" alt="" loading="lazy" width="120" height="120">' : '') + '</span>'
+      + '<span>' + escapeHtml(c[1]) + '</span><span class="cat-n">' + (CATALOGUE[c[0]]||[]).length + ' produits</span>';
+    b.addEventListener('click', function(){
+      if(c[0] === 'hydrogel'){ document.getElementById('hydrogel').scrollIntoView({behavior:'smooth', block:'start'}); return; }
+      accCat = c[0]; accQuery = ''; accLimit = PAGE;
+      document.getElementById('accSearch').value = '';
+      document.getElementById('caseStyle').value = ''; document.getElementById('caseBrand').value = ''; document.getElementById('caseSort').value = '';
+      renderAccessoires();
+    });
+    nav.appendChild(b);
   });
-});
+})();
 
-// Filtre modèle
-document.querySelectorAll('#accModels .chip').forEach(function(btn){
-  btn.addEventListener('click', function(){
-    document.querySelectorAll('#accModels .chip').forEach(function(c){ c.classList.remove('active'); });
-    btn.classList.add('active');
-    currentAccModel = btn.dataset.model;
-    renderAccessoires();
-  });
-});
+document.getElementById('accSearch').addEventListener('input', function(e){ accQuery = e.target.value.trim(); accLimit = PAGE; renderAccessoires(); });
+document.getElementById('accModel').addEventListener('input', function(){ accLimit = PAGE; renderAccessoires(); });
+document.getElementById('caseFilters').addEventListener('change', function(){ accLimit = PAGE; renderAccessoires(); });
+document.getElementById('accMore').addEventListener('click', function(){ accLimit += PAGE; renderAccessoires(); });
 
-function clearAccModel(){
-  currentAccModel = 'all';
-  document.querySelectorAll('#accModels .chip').forEach(function(c){ c.classList.remove('active'); });
-  var allBtn = document.querySelector('#accModels .chip[data-model="all"]');
-  if(allBtn) allBtn.classList.add('active');
-  renderAccessoires();
-}
+// Qualités hydrogel : une colonne par qualité
+(function buildHydro(){
+  var grid = document.getElementById('hydroGrid');
+  (CATALOGUE.hydrogel||[]).forEach(function(p){ grid.appendChild(productCard(p, 'hydrogel')); });
+})();
 
 // ====== ORDER MODAL ======
 var ORDER_EMAIL = 'contact@solution-phone.fr';
@@ -1698,45 +844,39 @@ var QUOTE_REQUEST_KEY = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
 var orderMailToken = '';
 var currentOrderRequest = '';
 
-function openOrderModal(cardEl){
-  var data = {};
-  try { data = JSON.parse(decodeURIComponent(cardEl.getAttribute('data-product'))); } catch(e){}
-  if(!data.n) return;
+var lastTrigger = null;
+function openOrderModal(p, cat, trigger){
+  if(!p || !p.name) return;
+  lastTrigger = trigger || null;
+  var model = document.getElementById('accModel').value.trim();
 
-  var modelSuffix = '';
-  if(currentAccModel !== 'all'){
-    modelSuffix = ' (pour ' + (modelLabels[currentAccModel] || currentAccModel) + ')';
-  }
-
-  // Fill modal
-  document.getElementById('omImg').src = data.i || '';
-  document.getElementById('omImg').alt = data.n;
-  document.getElementById('omName').textContent = data.n;
-  document.getElementById('omBrand').textContent = (data.b || '');
+  document.getElementById('omImg').src = p.img || '';
+  document.getElementById('omImg').alt = p.name;
+  document.getElementById('omName').textContent = p.name;
+  document.getElementById('omBrand').textContent = productNote(cat, p);
+  var price = document.getElementById('omPrice');
+  price.textContent = p.price ? p.price + ' €' : 'Prix en boutique · confirmé sur WhatsApp';
+  price.className = 'om-price' + (p.price ? '' : ' ask');
 
   var modelBlock = document.getElementById('omModel');
-  if(currentAccModel !== 'all'){
-    modelBlock.style.display = 'block';
-    document.getElementById('omModelLabel').textContent = modelLabels[currentAccModel] || currentAccModel;
-  } else {
-    modelBlock.style.display = 'none';
-  }
+  modelBlock.style.display = model ? 'block' : 'none';
+  document.getElementById('omModelLabel').textContent = model;
 
-  // WhatsApp link
-  var waText = 'Bonjour, je suis intéressé par cet accessoire : ' + data.n + ' (' + (data.b || '') + ')' + modelSuffix + '. Est-il disponible et à quel prix ?';
-  document.getElementById('omWa').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(waText);
+  document.getElementById('omWa').href = waReserve(p);
 
-  currentOrderRequest = 'Demande accessoire · ' + data.n + ' · Marque : ' + (data.b || 'non précisée') + (currentAccModel !== 'all' ? ' · Pour : ' + (modelLabels[currentAccModel] || currentAccModel) : '') + ' · Merci de confirmer la disponibilité et le prix.';
+  currentOrderRequest = 'Demande accessoire · ' + p.name + ' · Marque : ' + (p.brand || 'non précisée') + (p.price ? ' · Prix affiché : ' + p.price + ' €' : '') + (model ? ' · Pour : ' + model : '') + ' · Merci de confirmer la disponibilité et le prix.';
   document.getElementById('orderMailForm').classList.remove('on');
   document.getElementById('orderMailStatus').textContent = '';
 
   document.getElementById('orderModal').classList.add('on');
   document.body.style.overflow = 'hidden';
+  document.querySelector('#orderModal .close-btn').focus();
 }
 
 function closeOrderModal(){
   document.getElementById('orderModal').classList.remove('on');
   document.body.style.overflow = '';
+  if(lastTrigger) lastTrigger.focus();
 }
 function toggleOrderMailForm(){var form=document.getElementById('orderMailForm');form.classList.toggle('on');if(form.classList.contains('on'))document.getElementById('orderMailName').focus();}
 function sendOrderMail(event){
@@ -1757,35 +897,6 @@ document.addEventListener('keydown', function(e){
 
 // Init accessoires
 renderAccessoires();
-
-// Rayons (vignettes du haut) → ouvre la bonne catégorie d'accessoires
-document.querySelectorAll('.rayon[data-go-acc]').forEach(function(tile){
-  tile.addEventListener('click', function(){
-    var chip = document.querySelector('#accCats .chip[data-acc="' + tile.dataset.goAcc + '"]');
-    if(chip) chip.click();
-    var target = document.getElementById('accessoires');
-    if(target) target.scrollIntoView({behavior:'smooth', block:'start'});
-  });
-});
-document.querySelectorAll('.rayon img').forEach(function(img){
-  img.addEventListener('error', function(){ img.style.visibility = 'hidden'; }, {once:true});
-});
-
-// ====== REVEAL ======
-var io = new IntersectionObserver(function(entries){
-  entries.forEach(function(entry){
-    if(entry.isIntersecting){
-      entry.target.classList.add('in');
-      io.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.08 });
-
-document.querySelectorAll('.eng, .q-item, .trust-item').forEach(function(el, i){
-  el.classList.add('reveal');
-  el.style.transitionDelay = (i * 50) + 'ms';
-  io.observe(el);
-});
 </script>
 
 </body>
