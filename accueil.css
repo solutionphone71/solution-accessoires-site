@@ -258,3 +258,4 @@ button.fact-protect:focus-visible { outline: 3px solid #0071e3; outline-offset: 
 .protect-foot { margin: 16px 0 0; color: #6e6e73; font-size: 13px; }
 .protect-foot a { color: #0066cc; }
 @media (max-width: 640px) { .protect-cols { grid-template-columns: 1fr; } }
+.protect { margin: auto; }
