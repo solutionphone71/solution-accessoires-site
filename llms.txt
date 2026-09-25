@@ -18,6 +18,13 @@
 - Grades : A+ excellent état, A très bon état, B bon état, C état correct (marques décrites avant la vente)
 - Transfert de données dès 20 €
 
+## Rachat de smartphone, tablette et ordinateur
+- Rachat de smartphones, tablettes et ordinateurs d’occasion, même cassés (écran cassé, dos cassé, appareil qui ne s’allume plus)
+- Le client décrit son appareil en ligne (WhatsApp ou e-mail) et reçoit une offre de rachat ; l’offre définitive est confirmée après vérification en boutique, au 21 rue Gambetta
+- Paiement au choix : espèces (dans la limite légale de 1 000 €), virement ou bon d’achat en boutique
+- À prévoir : pièce d’identité, compte iCloud / Google (ou compte Apple, Microsoft, Google pour un ordinateur) retiré de l’appareil ; l’appareil doit appartenir au vendeur
+- Formulaire : https://solution-accessoires.fr/rachat-smartphone.html
+
 ## Protection d’écran hydrogel (pose incluse)
 - Saphir 10 € · Privacy Onyx 10 € · Crystal 20 € · Obsidian Privacy 20 € · ECOSHIELD 7H 30 €
 - Découpée sur mesure et posée en boutique en 5 minutes
@@ -35,5 +42,6 @@
 ## Pages
 - Accueil : https://solution-accessoires.fr/
 - Protection hydrogel : https://solution-accessoires.fr/hydrogel.html
+- Rachat de smartphone, tablette et ordinateur : https://solution-accessoires.fr/rachat-smartphone.html
 - Mentions légales & CGV : https://solution-phone.fr/cgv.html
 - Confidentialité : https://solution-phone.fr/politique-confidentialite.html
