@@ -456,6 +456,7 @@
 </footer>
 
 <script src="catalogue.js?v=1"></script>
+<script src="/quote-attempt.fcade1faf080.js"></script>
 <script>
 // ====== DÉTECTION GOOGLE ADS — MODE SAFE ======
 // Quand un visiteur arrive depuis Google Ads (gclid présent, ou utm_medium=cpc),
@@ -1034,8 +1035,9 @@ document.getElementById('accMore').addEventListener('click', function(){ accLimi
 // ====== ORDER MODAL ======
 var ORDER_EMAIL = 'contact@solution-phone.fr';
 var QUOTE_REQUEST_URL = 'https://kdvxcnjfrmvlnrymfyug.supabase.co/functions/v1/quote-request';
+var PUBLIC_QUOTE_SOURCE = 'v1'; // Bascule explicite et indépendante des autres flux publics.
+var V2_QUOTE_REQUEST_URL = 'https://vps-8066c206.vps.ovh.net/api/public/quote-request';
 var QUOTE_REQUEST_KEY = 'sb_publishable_3Mub3jSj8wUC8mfFtAuhdA_P4Ljnnhb';
-var orderMailToken = '';
 var currentOrderRequest = '';
 
 var lastTrigger = null;
@@ -1077,11 +1079,18 @@ function sendOrderMail(event){
   event.preventDefault();
   var form=event.currentTarget,button=form.querySelector('button[type="submit"]'),status=document.getElementById('orderMailStatus');
   var name=document.getElementById('orderMailName').value.trim(),email=document.getElementById('orderMailEmail').value.trim(),phone=document.getElementById('orderMailPhone').value.trim();
-  orderMailToken=orderMailToken||crypto.randomUUID();button.disabled=true;button.textContent='Envoi en cours…';status.className='order-mail-status';status.textContent='';
-  fetch(QUOTE_REQUEST_URL,{method:'POST',headers:{apikey:QUOTE_REQUEST_KEY,Authorization:'Bearer '+QUOTE_REQUEST_KEY,'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,phone:phone,request:currentOrderRequest,form_type:'main_quote',page:location.pathname,client_token:orderMailToken,website:document.getElementById('orderMailWebsite').value})})
-    .then(function(response){return response.json().catch(function(){return null;}).then(function(payload){if(!response.ok||!payload||!payload.received){var error=new Error(payload&&payload.error||'quote_failed');error.status=response.status;throw error;}return payload;});})
-    .then(function(payload){orderMailToken='';button.textContent='Demande reçue';status.textContent='Demande reçue ('+payload.reference+'). L’équipe vous répond par e-mail.';status.className='order-mail-status success';window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'demande_accessoire_email_envoyee',reference:payload.reference});})
-    .catch(function(error){button.disabled=false;button.textContent='Envoyer ma demande';status.textContent=error&&error.status===429?'Plusieurs demandes ont déjà été envoyées. Réessayez plus tard ou utilisez WhatsApp.':'L’envoi n’a pas abouti. Utilisez WhatsApp pour une réponse immédiate.';status.className='order-mail-status error';});
+  var payload={name:name,email:email,phone:phone,request:currentOrderRequest,form_type:'main_quote',page:location.pathname,website:document.getElementById('orderMailWebsite').value};
+  button.disabled=true;button.textContent='Envoi en cours…';status.className='order-mail-status';status.textContent='';
+  Promise.resolve().then(function(){
+    if(!window.SolutionPhoneQuoteAttempts)throw new Error('quote_helper_unavailable');
+    return window.SolutionPhoneQuoteAttempts.open().submit({slot:'accessoires/accueil/mail',defaultReceiver:PUBLIC_QUOTE_SOURCE,payload:payload,send:function(attempt){
+      var receiver=attempt.receiver;
+      if(receiver!=='v1'&&receiver!=='v2')throw new Error('quote_receiver_invalid');
+      return fetch(receiver==='v2'?V2_QUOTE_REQUEST_URL:QUOTE_REQUEST_URL,{method:'POST',headers:receiver==='v2'?{'Content-Type':'application/json'}:{apikey:QUOTE_REQUEST_KEY,Authorization:'Bearer '+QUOTE_REQUEST_KEY,'Content-Type':'application/json'},body:JSON.stringify(Object.assign({},attempt.payload,{client_token:attempt.clientToken}))})
+        .then(function(response){return response.json().catch(function(){return null;}).then(function(receipt){if(!response.ok||!receipt||receipt.received!==true){var error=new Error(receipt&&receipt.error||'quote_failed');error.status=response.status;throw error;}return receipt;});});
+    }});
+  }).then(function(receipt){button.textContent='Demande reçue';status.textContent='Demande reçue ('+receipt.reference+'). L’équipe vous répond par e-mail.';status.className='order-mail-status success';window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:'demande_accessoire_email_envoyee',reference:receipt.reference});})
+    .catch(function(error){button.disabled=false;button.textContent='Envoyer ma demande';var code=error&&error.code||error&&error.message;status.textContent=error&&error.status===429?'Trop de demandes ont été envoyées. Vérifiez leur réception auprès de la boutique avant de recommencer.':code==='quote_helper_unavailable'||code==='quote_storage_unavailable'?'Envoi impossible sur cet appareil. Contactez la boutique par téléphone ou WhatsApp.':code==='quote_in_flight'?'Envoi déjà en cours. Patientez avant de recommencer.':'La réception de cette demande n’est pas confirmée. Elle a peut-être été enregistrée : contactez la boutique avant tout nouvel envoi.';status.className='order-mail-status error';});
 }
 
 // Fermeture par touche Échap
