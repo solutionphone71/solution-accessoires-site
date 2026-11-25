@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Téléphone reconditionné et accessoires téléphone à Mâcon | Solution Accessoires</title>
-<meta name="description" content="Téléphones reconditionnés garantis 12 mois et accessoires téléphone à Mâcon : coques, chargeurs, verre trempé et hydrogel posés en boutique. Une boutique Solution Phone, 21 rue Gambetta.">
+<title>Smartphones Reconditionnés &amp; Accessoires Mâcon · 12 mois</title>
+<meta name="description" content="Smartphones reconditionnés garantis 12 mois, coques, chargeurs et pose Hydrogel dès 10 € au 21 rue Gambetta à Mâcon. Une boutique Solution Phone (5,0/5).">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://solution-accessoires.fr/">
 <meta name="theme-color" content="#ffffff">
@@ -340,7 +340,7 @@
   <div class="store">
     <div>
       <dl class="store-info">
-        <div><dt>Adresse</dt><dd>21 rue Gambetta<br>71000 Mâcon</dd></div>
+        <div><dt>Adresse</dt><dd>21 rue Gambetta<br>71000 Mâcon<br><span style="color:var(--muted)">Parkings Lamartine &amp; Saint-Pierre à 2 min · Accès 15 min Ain (01) &amp; Beaujolais</span></dd></div>
         <div><dt>Horaires</dt><dd>Mardi à samedi<br>10h–12h / 14h–19h<br><span style="color:var(--muted)">Fermé dimanche et lundi</span></dd></div>
         <div><dt>Paiement</dt><dd>Carte bancaire, espèces (1 000 € maximum), Apple Pay, virement<br><span style="color:var(--muted)">Pas de chèque ni de paiement en plusieurs fois</span></dd></div>
         <div><dt>Contact</dt><dd><a href="tel:+33602849953">06 02 84 99 53</a><br><a href="https://wa.me/33783921884?text=Bonjour%20Solution%20Accessoires%2C%20j%E2%80%99ai%20une%20question." target="_blank" rel="noopener">WhatsApp 07 83 92 18 84</a><br><a href="mailto:contact@solution-phone.fr">contact@solution-phone.fr</a></dd></div>
@@ -722,8 +722,8 @@ function rowHtml(item){
   var sub = [item.storage, item.color].filter(Boolean).map(escapeHtml).join(' · ');
   var details = [item.model, item.storage, item.color, isNeuf ? 'neuf' : (item.grade ? 'grade ' + item.grade : ''), euro(item.price)].filter(Boolean).join(' · ');
   var waMsg = encodeURIComponent('Bonjour Solution Accessoires, je souhaite réserver ce téléphone : ' + details + '.');
-  var label = 'Réserver sur WhatsApp : ' + details;
-  return '<li><a class="prow plist-cols" href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + '">'
+  var label = 'Réserver en boutique (WhatsApp ou e-mail) : ' + details;
+  return '<li><a class="prow plist-cols" href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" data-phone-details="' + escapeHtml(details) + '" data-phone-model="' + escapeHtml(item.model) + '" data-phone-price="' + escapeHtml(String(item.price)) + '" data-phone-img="' + escapeHtml(optimizeImageUrl(item.image_url, 320) || '') + '" data-phone-sub="' + escapeHtml([isNeuf ? 'Neuf' : (item.grade ? 'Grade ' + item.grade : 'Reconditionné'), item.storage, item.color, item.battery_pct != null ? 'Batterie ' + item.battery_pct + ' %' : ''].filter(Boolean).join(' · ')) + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + '">'
     + '<span class="p-img">' + img + '</span>'
     + '<span class="p-model"><b>' + escapeHtml(item.model) + '</b><span class="p-sub">' + sub + '</span></span>'
     + '<span class="p-storage">' + escapeHtml(item.storage || '—') + '</span>'
@@ -1094,6 +1094,33 @@ document.addEventListener('keydown', function(e){
 
 // Init accessoires
 renderAccessoires();
+
+document.getElementById('productsWrap').addEventListener('click', function(e){
+  var link = e.target.closest('a.prow[data-phone-details]');
+  if(!link) return;
+  e.preventDefault();
+  lastTrigger = link;
+  var name = link.getAttribute('data-phone-model') || 'Smartphone';
+  var sub = link.getAttribute('data-phone-sub') || 'Contrôlé 30 points · garanti 12 mois';
+  var price = link.getAttribute('data-phone-price') || '';
+  var img = link.getAttribute('data-phone-img') || 'boutique-solution-accessoires.webp';
+  var details = link.getAttribute('data-phone-details') || name;
+  document.getElementById('omImg').src = img;
+  document.getElementById('omImg').alt = name;
+  document.getElementById('omName').textContent = name;
+  document.getElementById('omBrand').textContent = sub + ' · Mis de côté 48 h';
+  var pEl = document.getElementById('omPrice');
+  pEl.textContent = price ? price + '\u00a0€' : 'Prix en boutique';
+  pEl.className = 'om-price';
+  document.getElementById('omModel').style.display = 'none';
+  document.getElementById('omWa').href = link.href;
+  currentOrderRequest = 'Réservation téléphone reconditionné (48 h) · ' + details + ' · Merci de confirmer sa mise de côté au 21 rue Gambetta.';
+  document.getElementById('orderMailForm').classList.remove('on');
+  document.getElementById('orderMailStatus').textContent = '';
+  document.getElementById('orderModal').classList.add('on');
+  document.body.style.overflow = 'hidden';
+  document.querySelector('#orderModal .close-btn').focus();
+});
 </script>
 
 <script>
@@ -1128,6 +1155,7 @@ renderAccessoires();
 })();
 </script>
 <script src="plan-acces.js?v=1" defer></script>
+<script src="/jason-widget.js?v=4" defer></script>
 <!-- Barre de contact fixe (mobile) -->
 <nav class="sa-contact" aria-label="Contacter Solution Accessoires">
   <a class="sa-c-tel" href="tel:+33602849953" aria-label="Appeler le 06 02 84 99 53">Appeler<small>06 02 84 99 53</small></a>

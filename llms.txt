@@ -1,26 +1,29 @@
 # Solution Accessoires
 
-> Boutique Solution Phone à Mâcon (21 rue Gambetta, 71000) : téléphones reconditionnés garantis 12 mois, accessoires téléphone (coques, chargeurs, câbles, audio) et protections d’écran posées en boutique (verre trempé, hydrogel). Solution Accessoires est un nom commercial d’EURL Solution Phone (RCS Mâcon 801 044 785).
+> Une boutique Solution Phone à Mâcon (21 rue Gambetta, 71000) : téléphones reconditionnés garantis 12 mois, accessoires téléphone (coques, chargeurs, câbles, audio), protections d’écran posées en boutique (verre trempé, hydrogel) et rachat cash d’appareils. Solution Accessoires est un nom commercial d’EURL Solution Phone (RCS Mâcon 801 044 785, depuis 2014).
 
-## Infos pratiques
+## Infos pratiques & Accès
 - Adresse : 21 rue Gambetta, 71000 Mâcon (3 boutiques côte à côte : Solution Phone, Solution Accessoires, Solution Informatique)
+- Stationnement à 2 min à pied : Parking Lamartine, Parking Saint-Pierre / Hôtel de Ville, Quais de Saône
+- Zone desservie (15–25 min) : Mâcon, Charnay-lès-Mâcon, Sancé, Crèches-sur-Saône, Hurigny, Cluny, Tournus (71) · Saint-Laurent-sur-Saône, Replonges, Feillens, Bâgé-Dommartin, Pont-de-Veyle (Ain 01) · Belleville-en-Beaujolais (69)
 - Horaires : mardi à samedi, 10h–12h et 14h–19h ; fermé dimanche et lundi
 - Téléphone : 06 02 84 99 53
 - WhatsApp : 07 83 92 18 84 (https://wa.me/33783921884)
 - E-mail : contact@solution-phone.fr
 - Paiement : carte bancaire, espèces (1 000 € maximum), Apple Pay, virement. Pas de chèque ni de paiement en plusieurs fois.
 - Avis Google : 5,0/5 · 20 avis Google
+- Assistant en ligne 24h/24 (« Demandez à Sébastien ») : disponibilité stock, réservation, rachat et envoi de photo.
 
 ## Téléphones reconditionnés
-- Stock réel affiché en direct sur https://solution-accessoires.fr/#reconditionnes
+- Stock réel affiché en direct sur https://solution-accessoires.fr/#reconditionnes (synchronisé avec la vitrine Solution Phone V2)
 - Contrôlés sur 30 points, garantis 12 mois (garantie commerciale, en plus des garanties légales)
-- Mis de côté 48 h sur réservation (WhatsApp)
+- Mis de côté 48 h sur réservation (WhatsApp ou e-mail direct depuis la fiche appareil)
 - Grades : A+ excellent état, A très bon état, B bon état, C état correct (marques décrites avant la vente)
 - Transfert de données dès 20 €
 
 ## Rachat de smartphone, tablette et ordinateur
 - Rachat de smartphones, tablettes et ordinateurs d’occasion, même cassés (écran cassé, dos cassé, appareil qui ne s’allume plus)
-- Le client décrit son appareil en ligne (WhatsApp ou e-mail) et reçoit une offre de rachat ; l’offre définitive est confirmée après vérification en boutique, au 21 rue Gambetta
+- Le client décrit son appareil en ligne (WhatsApp ou formulaire e-mail) et reçoit une offre de rachat ; l’offre définitive est confirmée après vérification en boutique, au 21 rue Gambetta
 - Paiement au choix : espèces (dans la limite légale de 1 000 €), virement ou bon d’achat en boutique
 - À prévoir : pièce d’identité, compte iCloud / Google (ou compte Apple, Microsoft, Google pour un ordinateur) retiré de l’appareil ; l’appareil doit appartenir au vendeur
 - Formulaire : https://solution-accessoires.fr/rachat-smartphone.html
@@ -34,10 +37,10 @@
 ## Verre trempé (pose incluse)
 - Classique 5 € · Premium 10 €
 
-## Réparation
-- La réparation de smartphone est assurée par l’atelier Solution Phone, juste à côté : https://solution-phone.fr/
-- Réparation iPhone : https://reparation-iphone-macon.fr/
-- Réparateur labellisé QualiRépar : 25 € déjà déduits des tarifs de réparation de smartphone (Bonus Réparation quand la réparation est éligible, offerts par Solution Phone sinon).
+## Réparation (boutiques voisines au 21 rue Gambetta)
+- Réparation tous smartphones & tablettes (Solution Phone, réparateur labellisé QualiRépar, 25 € déjà déduits) : https://solution-phone.fr/
+- Réparation iPhone dédiée : https://reparation-iphone-macon.fr/
+- Réparation PC, Mac, consoles PS5/Switch et trottinettes électriques (Solution Informatique) : https://solution-phone.fr/solution-informatique.html
 
 ## Pages
 - Accueil : https://solution-accessoires.fr/
