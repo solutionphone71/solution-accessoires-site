@@ -81,6 +81,28 @@
 .note { margin-top: 14px; font-size: 12px; color: var(--muted); }
 .empty { padding: 36px 16px; text-align: center; color: var(--muted); background: var(--soft); border-radius: 14px; grid-column: 1 / -1; }
 
+/* Téléphones : barre recherche, budget & simulateur reprise */
+.sa-phone-bar { display: grid; gap: 10px; margin-bottom: 14px; }
+.sa-phone-search-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.sa-phone-search { flex: 1 1 280px; min-height: 46px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 12px; font: inherit; font-size: 16px; color: var(--ink); background: #fff; }
+.sa-phone-search:focus { outline: 2px solid var(--ink); border-color: var(--ink); }
+.sa-budgets { display: flex; flex-wrap: wrap; gap: 6px; }
+.sa-budget { min-height: 40px; padding: 0 13px; border: 1px solid var(--line-2); border-radius: 999px; background: #fff; color: var(--ink-2); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.sa-budget:hover { border-color: var(--ink); }
+.sa-budget.active { background: var(--ink); border-color: var(--ink); color: #fff; font-weight: 700; }
+.sa-trade { background: var(--soft); border: 1px solid var(--line); border-radius: 14px; padding: 12px 15px; }
+.sa-trade-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.sa-trade-label { font-size: 13.5px; font-weight: 700; color: var(--ink); }
+.sa-trade-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.sa-trade-select { min-height: 40px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 10px; background: #fff; color: var(--ink); font: inherit; font-size: 16px; font-weight: 600; max-width: 100%; }
+.sa-trade-cond { display: inline-flex; padding: 3px; background: #e5e5ea; border-radius: 999px; gap: 2px; }
+.sa-cond-btn { min-height: 34px; padding: 0 11px; border: 0; border-radius: 999px; background: transparent; color: var(--ink-2); font: inherit; font-size: 12.5px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.sa-cond-btn.active { background: #fff; color: var(--ink); font-weight: 700; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.sa-trade-note { margin: 8px 0 0; font-size: 12px; line-height: 1.45; color: var(--muted); }
+.sa-trade-note a { color: var(--red-text); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.sa-trade-note strong { color: #147a40; font-weight: 700; }
+.p-net { display: block; margin-top: 2px; font-size: 11px; font-weight: 700; color: #147a40; letter-spacing: 0; white-space: nowrap; }
+
 /* Téléphones : segments + liste alignée */
 .seg { display: inline-flex; gap: 4px; padding: 4px; background: var(--soft); border-radius: 12px; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
 .seg::-webkit-scrollbar { display: none; }

@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<script>if(location.host&&location.host.indexOf("www.")===0){location.replace(location.protocol+"//"+location.host.substring(4)+location.pathname+location.search+location.hash);}</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Smartphones Reconditionnés &amp; Accessoires Mâcon · 12 mois</title>
 <meta name="description" content="Smartphones reconditionnés garantis 12 mois, coques, chargeurs et pose Hydrogel dès 10 € au 21 rue Gambetta à Mâcon. Une boutique Solution Phone (5,0/5).">
@@ -74,9 +75,11 @@
 <link rel="icon" href="/img/logo-ui.webp" type="image/webp">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="boutique.css?v=2">
-<link rel="stylesheet" href="accueil.css?v=6">
+<link rel="stylesheet" href="accueil.css?v=7">
 <link rel="stylesheet" href="boutiques.css?v=1">
-<script src="/menu-commun.js?v=4" data-site="acc"></script>
+<script src="/consent-tracking.js?v=3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-3QP90K1TLM");</script>
+<script src="/menu-commun.js?v=5" data-site="acc"></script>
 </head>
 
 <body>
@@ -200,6 +203,46 @@
       <h2 id="stock-title">Téléphones reconditionnés en stock à Mâcon.</h2>
     </div>
     <p><strong><span id="stockCount">—</span> appareils</strong> en boutique · garantis 12 mois</p>
+  </div>
+
+  <div class="sa-phone-bar" aria-label="Recherche, budget et reprise">
+    <div class="sa-phone-search-row">
+      <input type="search" id="phoneSearch" class="sa-phone-search" placeholder="Rechercher un modèle, une capacité ou couleur (ex. iPhone 14 Pro, S23, 256 Go…)" aria-label="Rechercher un téléphone reconditionné">
+      <div class="sa-budgets" id="phoneBudgets" role="group" aria-label="Filtrer par budget">
+        <button type="button" class="sa-budget active" data-budget="all" aria-pressed="true">Tous les prix</button>
+        <button type="button" class="sa-budget" data-budget="u250" aria-pressed="false">Moins de 250&nbsp;€</button>
+        <button type="button" class="sa-budget" data-budget="250-450" aria-pressed="false">250 à 450&nbsp;€</button>
+        <button type="button" class="sa-budget" data-budget="o450" aria-pressed="false">450&nbsp;€ et +</button>
+      </div>
+    </div>
+    <div class="sa-trade" id="saTradeBox" aria-label="Simulateur de reprise en déduction">
+      <div class="sa-trade-top">
+        <label class="sa-trade-label" for="saTradeModel">🔄 Simuler le prix avec reprise de mon ancien téléphone :</label>
+        <div class="sa-trade-controls">
+          <select id="saTradeModel" class="sa-trade-select">
+            <option value="">Aucune reprise sélectionnée</option>
+            <option value="ip11">iPhone 11 (~85 €)</option>
+            <option value="ip12">iPhone 12 (~125 €)</option>
+            <option value="ip12p">iPhone 12 Pro (~165 €)</option>
+            <option value="ip13">iPhone 13 (~180 €)</option>
+            <option value="ip13p">iPhone 13 Pro (~235 €)</option>
+            <option value="ip14">iPhone 14 (~230 €)</option>
+            <option value="ip14p">iPhone 14 Pro (~320 €)</option>
+            <option value="ip15">iPhone 15 (~330 €)</option>
+            <option value="ip15p">iPhone 15 Pro (~430 €)</option>
+            <option value="s22">Samsung Galaxy S22 (~130 €)</option>
+            <option value="s23">Samsung Galaxy S23 (~200 €)</option>
+            <option value="s24">Samsung Galaxy S24 (~290 €)</option>
+            <option value="a54">Samsung Galaxy A54 / A55 (~90 €)</option>
+          </select>
+          <div class="sa-trade-cond" id="saTradeCond" role="group" aria-label="État du téléphone repris">
+            <button type="button" class="sa-cond-btn active" data-cond="bon" aria-pressed="true">Bon état</button>
+            <button type="button" class="sa-cond-btn" data-cond="fissure" aria-pressed="false">Écran fissuré</button>
+          </div>
+        </div>
+      </div>
+      <p class="sa-trade-note" id="saTradeSummary">Estimation indicative déduite à l’affichage, confirmée en 10&nbsp;min en boutique (pièce d’identité requise). <a href="rachat-smartphone.html">Autre modèle à faire estimer →</a></p>
+    </div>
   </div>
 
   <div class="phone-tools">
@@ -487,6 +530,51 @@ var stockState = 'loading'; // loading | ok | indisponible
 var currentCat = 'iphone';
 var currentSeries = 'all';
 var currentSort = 'series';
+var currentBudget = 'all';
+var currentPhoneQuery = '';
+var currentTradeKey = '';
+var currentTradeCond = 'bon';
+
+var SA_TRADE_MODELS = {
+  ip11:  { label: 'iPhone 11', val: 85 },
+  ip12:  { label: 'iPhone 12', val: 125 },
+  ip12p: { label: 'iPhone 12 Pro', val: 165 },
+  ip13:  { label: 'iPhone 13', val: 180 },
+  ip13p: { label: 'iPhone 13 Pro', val: 235 },
+  ip14:  { label: 'iPhone 14', val: 230 },
+  ip14p: { label: 'iPhone 14 Pro', val: 320 },
+  ip15:  { label: 'iPhone 15', val: 330 },
+  ip15p: { label: 'iPhone 15 Pro', val: 430 },
+  s22:   { label: 'Samsung Galaxy S22', val: 130 },
+  s23:   { label: 'Samsung Galaxy S23', val: 200 },
+  s24:   { label: 'Samsung Galaxy S24', val: 290 },
+  a54:   { label: 'Samsung Galaxy A54 / A55', val: 90 }
+};
+
+function getSaTrade(){
+  var entry = currentTradeKey && SA_TRADE_MODELS[currentTradeKey];
+  if(!entry) return null;
+  var factor = currentTradeCond === 'fissure' ? 0.5 : 1;
+  return {
+    label: entry.label,
+    condLabel: currentTradeCond === 'fissure' ? 'écran fissuré' : 'bon état',
+    amount: Math.round((entry.val * factor) / 5) * 5
+  };
+}
+
+function matchesPhoneFilters(i){
+  if(currentBudget === 'u250' && i.price >= 250) return false;
+  if(currentBudget === '250-450' && (i.price < 250 || i.price > 450)) return false;
+  if(currentBudget === 'o450' && i.price <= 450) return false;
+  if(currentPhoneQuery){
+    var hay = deaccent([i.model, i.storage, i.color, i.grade, i.price].join(' ')).toLowerCase();
+    var qTokens = deaccent(currentPhoneQuery).toLowerCase().trim().split(/\s+/);
+    for(var k = 0; k < qTokens.length; k++){
+      if(qTokens[k] && hay.indexOf(qTokens[k]) === -1) return false;
+    }
+  }
+  return true;
+}
 
 function loadStock(){
   fetch(PUBLIC_CATALOG_URL + '?resource=stock')
@@ -672,6 +760,7 @@ function normalize(p, cond){
 // ====== RENDER ======
 function itemsInCat(cat){
   return allItems.filter(function(i){
+    if(!matchesPhoneFilters(i)) return false;
     if(cat === 'neuf') return (i.condition||'').toLowerCase() === 'neuf';
     if((i.condition||'').toLowerCase() === 'neuf') return false;
     return (i.brand||'').toLowerCase() === cat;
@@ -720,16 +809,20 @@ function rowHtml(item){
   var state = isNeuf ? 'Neuf' : (item.grade ? 'Grade ' + escapeHtml(item.grade) : '—');
   var batt = isNeuf ? '' : (item.battery_pct != null ? '<span class="bl">Batterie </span>' + item.battery_pct + ' %' : '<span class="bl">Batterie </span>—');
   var sub = [item.storage, item.color].filter(Boolean).map(escapeHtml).join(' · ');
-  var details = [item.model, item.storage, item.color, isNeuf ? 'neuf' : (item.grade ? 'grade ' + item.grade : ''), euro(item.price)].filter(Boolean).join(' · ');
+  var trade = getSaTrade();
+  var tradeText = trade ? 'reprise à estimer : ' + trade.label + ' (' + trade.condLabel + ', ~' + trade.amount + ' € indicatif)' : '';
+  var details = [item.model, item.storage, item.color, isNeuf ? 'neuf' : (item.grade ? 'grade ' + item.grade : ''), euro(item.price), tradeText].filter(Boolean).join(' · ');
   var waMsg = encodeURIComponent('Bonjour Solution Accessoires, je souhaite réserver ce téléphone : ' + details + '.');
   var label = 'Réserver en boutique (WhatsApp ou e-mail) : ' + details;
-  return '<li><a class="prow plist-cols" href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" data-phone-details="' + escapeHtml(details) + '" data-phone-model="' + escapeHtml(item.model) + '" data-phone-price="' + escapeHtml(String(item.price)) + '" data-phone-img="' + escapeHtml(optimizeImageUrl(item.image_url, 320) || '') + '" data-phone-sub="' + escapeHtml([isNeuf ? 'Neuf' : (item.grade ? 'Grade ' + item.grade : 'Reconditionné'), item.storage, item.color, item.battery_pct != null ? 'Batterie ' + item.battery_pct + ' %' : ''].filter(Boolean).join(' · ')) + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + '">'
+  var netVal = trade ? Math.max(0, item.price - trade.amount) : null;
+  var netBadge = trade ? '<span class="p-net">~' + euro(netVal) + ' reprise déduite</span>' : '';
+  return '<li><a class="prow plist-cols" href="https://wa.me/' + WHATSAPP + '?text=' + waMsg + '" data-phone-details="' + escapeHtml(details) + '" data-phone-model="' + escapeHtml(item.model) + '" data-phone-price="' + escapeHtml(String(item.price)) + '" data-phone-net="' + escapeHtml(netVal != null ? String(netVal) : '') + '" data-phone-img="' + escapeHtml(optimizeImageUrl(item.image_url, 320) || '') + '" data-phone-sub="' + escapeHtml([isNeuf ? 'Neuf' : (item.grade ? 'Grade ' + item.grade : 'Reconditionné'), item.storage, item.color, item.battery_pct != null ? 'Batterie ' + item.battery_pct + ' %' : ''].filter(Boolean).join(' · ')) + '" target="_blank" rel="noopener" aria-label="' + escapeHtml(label) + '">'
     + '<span class="p-img">' + img + '</span>'
     + '<span class="p-model"><b>' + escapeHtml(item.model) + '</b><span class="p-sub">' + sub + '</span></span>'
     + '<span class="p-storage">' + escapeHtml(item.storage || '—') + '</span>'
     + '<span class="p-color">' + dot + escapeHtml(item.color || '—') + '</span>'
     + '<span class="p-state"><span class="p-grade">' + state + '</span><span class="p-batt">' + batt + '</span></span>'
-    + '<span class="p-price">' + euro(item.price) + '</span>'
+    + '<span class="p-price">' + euro(item.price) + netBadge + '</span>'
     + '<span class="p-cta">Réserver ↗</span>'
     + '</a></li>';
 }
@@ -822,7 +915,9 @@ function render(){
     order.forEach(function(s){
       var items = groups[s];
       var minPrice = items.reduce(function(m,i){ return Math.min(m,i.price); }, Infinity);
-      html += '<li class="plist-group"><b>' + escapeHtml(s) + '</b><span>' + items.length + ' en stock · dès ' + euro(minPrice) + '</span></li>';
+      var t = getSaTrade();
+      var netLead = t ? ' · soit dès ~' + euro(Math.max(0, minPrice - t.amount)) + ' avec reprise' : '';
+      html += '<li class="plist-group"><b>' + escapeHtml(s) + '</b><span>' + items.length + ' en stock · dès ' + euro(minPrice) + netLead + '</span></li>';
       html += items.map(rowHtml).join('');
     });
   } else {
@@ -845,6 +940,66 @@ document.getElementById('sortSel').addEventListener('change', function(e){
   currentSort = e.target.value;
   render();
 });
+
+// Recherche, budget & reprise téléphones
+(function(){
+  var pSearch = document.getElementById('phoneSearch');
+  if(pSearch){
+    pSearch.addEventListener('input', function(){
+      currentPhoneQuery = pSearch.value || '';
+      currentSeries = 'all';
+      render();
+    });
+  }
+  var pBudgets = document.getElementById('phoneBudgets');
+  if(pBudgets){
+    pBudgets.addEventListener('click', function(e){
+      var b = e.target.closest('.sa-budget');
+      if(!b) return;
+      currentBudget = b.getAttribute('data-budget') || 'all';
+      currentSeries = 'all';
+      pBudgets.querySelectorAll('.sa-budget').forEach(function(el){
+        var on = el === b;
+        el.classList.toggle('active', on);
+        el.setAttribute('aria-pressed', String(on));
+      });
+      render();
+    });
+  }
+  function updateSaTradeSummary(){
+    var el = document.getElementById('saTradeSummary');
+    if(!el) return;
+    var t = getSaTrade();
+    if(!t){
+      el.innerHTML = 'Estimation indicative déduite à l’affichage, confirmée en 10&nbsp;min en boutique (pièce d’identité requise). <a href="rachat-smartphone.html">Autre modèle à faire estimer →</a>';
+    } else {
+      el.innerHTML = '<strong>−' + euro(t.amount) + ' estimés</strong> pour votre ' + escapeHtml(t.label) + ' (' + escapeHtml(t.condLabel) + ') déduits à titre indicatif ci-dessous · estimation définitive en 10&nbsp;min au 21 rue Gambetta. <a href="rachat-smartphone.html">Autre modèle →</a>';
+    }
+  }
+  var tModel = document.getElementById('saTradeModel');
+  if(tModel){
+    tModel.addEventListener('change', function(){
+      currentTradeKey = tModel.value || '';
+      updateSaTradeSummary();
+      render();
+    });
+  }
+  var tCond = document.getElementById('saTradeCond');
+  if(tCond){
+    tCond.addEventListener('click', function(e){
+      var b = e.target.closest('.sa-cond-btn');
+      if(!b) return;
+      currentTradeCond = b.getAttribute('data-cond') || 'bon';
+      tCond.querySelectorAll('.sa-cond-btn').forEach(function(el){
+        var on = el === b;
+        el.classList.toggle('active', on);
+        el.setAttribute('aria-pressed', String(on));
+      });
+      updateSaTradeSummary();
+      render();
+    });
+  }
+})();
 
 // ====== INIT RECONDITIONNÉS ======
 loadStock();
@@ -1103,6 +1258,7 @@ document.getElementById('productsWrap').addEventListener('click', function(e){
   var name = link.getAttribute('data-phone-model') || 'Smartphone';
   var sub = link.getAttribute('data-phone-sub') || 'Contrôlé 30 points · garanti 12 mois';
   var price = link.getAttribute('data-phone-price') || '';
+  var net = link.getAttribute('data-phone-net') || '';
   var img = link.getAttribute('data-phone-img') || 'boutique-solution-accessoires.webp';
   var details = link.getAttribute('data-phone-details') || name;
   document.getElementById('omImg').src = img;
@@ -1110,7 +1266,7 @@ document.getElementById('productsWrap').addEventListener('click', function(e){
   document.getElementById('omName').textContent = name;
   document.getElementById('omBrand').textContent = sub + ' · Mis de côté 48 h';
   var pEl = document.getElementById('omPrice');
-  pEl.textContent = price ? price + '\u00a0€' : 'Prix en boutique';
+  pEl.textContent = price ? (price + '\u00a0€' + (net !== '' ? ' · soit ~' + net + '\u00a0€ avec reprise' : '')) : 'Prix en boutique';
   pEl.className = 'om-price';
   document.getElementById('omModel').style.display = 'none';
   document.getElementById('omWa').href = link.href;
@@ -1163,6 +1319,7 @@ document.getElementById('productsWrap').addEventListener('click', function(e){
   <a class="sa-c-mail" href="mailto:contact@solution-phone.fr">E-mail<small>Nous écrire</small></a>
 </nav>
 <!-- menu-commun : liens du pied de page (HTML statique) -->
-<div id="mc-footer" role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung & Android</a></li><li><a href="https://solution-phone.fr/ecran-iphone-casse-macon.html">Écran cassé</a></li><li><a href="https://solution-phone.fr/remplacement-batterie-telephone-macon.html">Remplacement batterie</a></li><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/rachat-smartphone.html">Rachat smartphone, tablette, PC</a></li><li><a href="https://solution-accessoires.fr/">Accessoires · Solution Accessoires</a></li><li><a href="https://solution-accessoires.fr/hydrogel.html">Protection d’écran hydrogel</a></li><li><a href="https://solution-phone.fr/accessoires.html">Boutique en ligne</a></li><li><a href="https://solution-phone.fr/atelier.html">L’atelier Solution Phone</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Nos boutiques · horaires & plan</a></li><li><a href="https://reparation-iphone-macon.fr/qualirepar.html">QualiRépar −25 €</a></li><li><a href="https://solution-phone.fr/faq.html">Questions fréquentes</a></li><li><a href="https://solution-phone.fr/actualites.html">Conseils & actualités</a></li></ul></div></div>
+<div id="mc-footer" role="navigation" aria-label="Nos boutiques et services à Mâcon"><div class="mc-f-in"><p class="mc-f-title">Solution Phone, Solution Accessoires et Solution Informatique · 21 rue Gambetta, Mâcon</p><ul><li><a href="https://solution-phone.fr/">Accueil Solution Phone</a></li><li><a href="https://reparation-iphone-macon.fr/">Réparation iPhone</a></li><li><a href="https://solution-phone.fr/reparation-samsung.html">Réparation Samsung & Android</a></li><li><a href="https://solution-phone.fr/ecran-iphone-casse-macon.html">Écran cassé</a></li><li><a href="https://solution-phone.fr/remplacement-batterie-telephone-macon.html">Remplacement batterie</a></li><li><a href="https://solution-phone.fr/reconditionnes.html">Smartphones reconditionnés</a></li><li><a href="https://solution-accessoires.fr/rachat-smartphone.html">Rachat smartphone, tablette, PC</a></li><li><a href="https://solution-accessoires.fr/">Accessoires · Solution Accessoires</a></li><li><a href="https://solution-accessoires.fr/hydrogel.html">Protection d’écran hydrogel</a></li><li><a href="https://solution-phone.fr/accessoires.html">Boutique en ligne</a></li><li><a href="https://solution-phone.fr/atelier.html">L’atelier Solution Phone</a></li><li><a href="https://solution-phone.fr/magasin/macon/">Nos boutiques · horaires & plan</a></li><li><a href="https://reparation-iphone-macon.fr/qualirepar.html">QualiRépar −25 €</a></li><li><a href="https://solution-phone.fr/faq.html">Questions fréquentes</a></li><li><a href="https://solution-phone.fr/suivi-reparation.html">Suivre ma réparation</a></li><li><a href="https://solution-phone.fr/pro-entreprises-macon.html">Espace Pro</a></li><li><a href="https://solution-phone.fr/actualites.html">Conseils & actualités</a></li><li><a href="#" data-sp-consent-manage>Gérer mes cookies</a></li></ul></div></div>
+<script>document.addEventListener("click",function(e){var w=e.target.closest&&e.target.closest("a[href*=\"wa.me\"]");if(w){window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:"whatsapp_clicked",source:"solution_accessoires"});}var t=e.target.closest&&e.target.closest("a[href^=\"tel:\"]");if(t){window.dataLayer=window.dataLayer||[];window.dataLayer.push({event:"phone_clicked",source:"solution_accessoires"});}});</script>
 </body>
 </html>
